@@ -47,7 +47,7 @@ jobs:
                   echo "Versions match and are registered. Proceeding with release."
 
             - name: Install Dependencies
-              run: npm ci
+              run: npm install
 
             - name: Lint Code
               run: npm run lint
