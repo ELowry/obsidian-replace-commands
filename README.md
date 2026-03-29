@@ -17,6 +17,21 @@ Whether you need to quickly clean up messy OCR text, standardize markdown format
 - **Plaintext Escapes:** If you turn regex off, you can still search for `\n` (newlines) and `\t` (tabs) in plaintext mode.
 - **Easy Access:** Run your actions directly from the Obsidian Command Palette (`Ctrl/Cmd + P`), or add them to the right-click Editor Context Menu.
 
+## How to Use
+
+1. **Configure an Action:** - Go to **Settings -> Obsidian Replace Commands**.
+    - Click **Add new action** and give it a name (Example: "Fix spacing").
+    - Add your search and replace terms. Toggle "Use regex" if you are using regular expressions.
+2. **Apply to Text:**
+    - Open any note in Obsidian.
+    - **Targeted:** Highlight a specific block of text to only apply the replacement to your selection.
+    - **Document-wide:** Leave your cursor unselected to apply the replacement to the entire note.
+3. **Execute:**
+    - Right-click the editor and select your action from the **Custom replace** context menu.
+    - _Alternatively:_ Open the Command Palette (`Ctrl/Cmd + P`), type your action's name, and hit Enter.
+4. **Undo:**
+    - Made a mistake? Press `Ctrl/Cmd + Z` once to undo the entire action instantly.
+
 ## Installation
 
 _(Note: This plugin is currently in development and will be submitted to the Obsidian Community Directory soon.)_
