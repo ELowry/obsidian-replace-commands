@@ -1,9 +1,9 @@
 {
-	"id": "obsidian-replace-commands",
+	"id": "replace-commands",
 	"name": "Replace Commands",
 	"version": "0.1.0",
 	"minAppVersion": "1.7.2",
-	"description": "This Obsidian plugin allows you to write search/replace patterns to easily reuse on any selection/document.",
+	"description": "Preconfigure custom search and replace actions using plain text or regex to quickly modify selections or documents.",
 	"author": "Eric Lowry",
 	"authorUrl": "https://eric-lowry.com",
 	"fundingUrl": "https://buymeacoffee.com/ericlowry",

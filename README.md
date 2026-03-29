@@ -2,7 +2,7 @@
 
 ![License: 0-BSD](https://img.shields.io/badge/License-0--BSD-blue.svg)
 
-This Obsidian plugin allows you to write search/replace patterns to easily reuse on any selection or document.
+An Obsidian plugin that lets you preconfigure custom search and replace actions using plain text or regex to quickly modify selections or documents.
 
 Whether you need to quickly clean up messy OCR text, standardize markdown formatting, or chain complex regex replacements, this plugin lets you save those sequences as single-click actions.
 
@@ -19,7 +19,7 @@ Whether you need to quickly clean up messy OCR text, standardize markdown format
 
 ## How to Use
 
-1. **Configure an Action:** - Go to **Settings -> Obsidian Replace Commands**.
+1. **Configure an Action:** - Go to **Settings -> Replace Commands**.
     - Click **Add new action** and give it a name (Example: "Fix spacing").
     - Add your search and replace terms. Toggle "Use regex" if you are using regular expressions.
 2. **Apply to Text:**
@@ -34,14 +34,27 @@ Whether you need to quickly clean up messy OCR text, standardize markdown format
 
 ## Installation
 
-_(Note: This plugin is currently in development and will be submitted to the Obsidian Community Directory soon.)_
+### From the Community Plugins List (Recommended)
+
+1. Open Obsidian and navigate to **Settings → Community plugins**.
+2. If **Restricted mode** is enabled, click **Turn off** to allow third-party plugins.
+3. Click **Browse** and search for **Replace Commands**.
+4. Click **Install**, and then click **Enable**.
+
+### Manually installing the plugin
+
+To install the plugin manually from GitHub:
+
+1. Download the latest release from the [GitHub Releases page](https://github.com/ELowry/replace-commands/releases).
+2. Extract the files and copy `main.js`, `manifest.json`, and `styles.css` (if applicable) to your vault at `YourVaultFolder/.obsidian/plugins/replace-commands/`.
+3. Open Obsidian, go to **Settings → Community plugins**, and toggle on **Replace Commands**.
 
 ### Manually installing the plugin
 
 To install the plugin manually before it is available in the community store:
 
 1. Download the latest release from the GitHub repository.
-2. Copy over `main.js`, `manifest.json`, and `styles.css` (if applicable) to your vault at `VaultFolder/.obsidian/plugins/obsidian-replace-commands/`.
+2. Copy over `main.js`, `manifest.json`, and `styles.css` (if applicable) to your vault at `VaultFolder/.obsidian/plugins/replace-commands/`.
 3. Open Obsidian, go to **Settings > Community Plugins**, disable "Restricted mode", and toggle on **Replace Commands**.
 
 ## Development
