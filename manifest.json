@@ -1,11 +1,11 @@
 {
-	"id": "sample-plugin",
-	"name": "Sample Plugin",
-	"version": "1.0.0",
-	"minAppVersion": "0.15.0",
-	"description": "Demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"id": "obsidian-replace-commands",
+	"name": "Replace Commands",
+	"version": "0.1.0",
+	"minAppVersion": "1.7.2",
+	"description": "This Obsidian plugin allows you to write search/replace patterns to easily reuse on any selection/document.",
+	"author": "Eric Lowry",
+	"authorUrl": "https://eric-lowry.com",
+	"fundingUrl": "https://buymeacoffee.com/ericlowry",
 	"isDesktopOnly": false
 }

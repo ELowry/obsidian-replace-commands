@@ -1,90 +1,40 @@
-# Obsidian Sample Plugin
+# Replace Commands
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+![License: 0-BSD](https://img.shields.io/badge/License-0--BSD-blue.svg)
 
-This project uses TypeScript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in TypeScript Definition format, which contains TSDoc comments describing what it does.
+This Obsidian plugin allows you to write search/replace patterns to easily reuse on any selection or document.
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open modal (simple)" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+Whether you need to quickly clean up messy OCR text, standardize markdown formatting, or chain complex regex replacements, this plugin lets you save those sequences as single-click actions.
 
-## First time developing plugins?
+## Features
 
-Quick starting guide for new plugin devs:
+- **Custom Actions:** Create named actions (e.g., "Clean OCR", "Format Tables") that contain one or more search/replace rules.
+- **Sequential Processing:** Chain multiple rules together. They execute in order from top to bottom.
+- **Smart Targeting:** If you highlight text, the action only applies to your selection. If nothing is selected, it applies to the entire document.
+- **Single-Step Undo:** No matter how many rules are in your action, they are applied as a single atomic transaction. One press of `Ctrl+Z` undoes the entire operation.
+- **Regex & Capture Groups:** Full support for JavaScript Regular Expressions. Use capture groups (e.g., `$1`, `$2`) in your replacement strings.
+- **Custom Regex Flags:** easily add flags like `i` (case-insensitive) or `m` (multiline) to your regex rules.
+- **Plaintext Escapes:** If you turn regex off, you can still search for `\n` (newlines) and `\t` (tabs) in plaintext mode.
+- **Easy Access:** Run your actions directly from the Obsidian Command Palette (`Ctrl/Cmd + P`), or add them to the right-click Editor Context Menu.
 
-- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
-- Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
-- Install NodeJS, then run `npm i` in the command line under your repo folder.
-- Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
-- Reload Obsidian to load the new version of your plugin.
-- Enable plugin in settings window.
-- For updates to the Obsidian API run `npm update` in the command line under your repo folder.
+## Installation
 
-## Releasing new releases
+_(Note: This plugin is currently in development and will be submitted to the Obsidian Community Directory soon.)_
 
-- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
-- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments. Note: The manifest.json file must be in two places, first the root path of your repository and also in the release.
-- Publish the release.
+### Manually installing the plugin
 
-> You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
-> The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
+To install the plugin manually before it is available in the community store:
 
-## Adding your plugin to the community plugin list
+1. Download the latest release from the GitHub repository.
+2. Copy over `main.js`, `manifest.json`, and `styles.css` (if applicable) to your vault at `VaultFolder/.obsidian/plugins/obsidian-replace-commands/`.
+3. Open Obsidian, go to **Settings > Community Plugins**, disable "Restricted mode", and toggle on **Replace Commands**.
 
-- Check the [plugin guidelines](https://docs.obsidian.md/Plugins/Releasing/Plugin+guidelines).
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
+## Development
 
-## How to use
+If you want to build this plugin locally or contribute:
 
-- Clone this repo.
-- Make sure your NodeJS is at least v16 (`node --version`).
-- `npm i` or `yarn` to install dependencies.
-- `npm run dev` to start compilation in watch mode.
-
-## Manually installing the plugin
-
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
-
-## Improve code quality with eslint
-- [ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems. You can run ESLint against your plugin to find common bugs and ways to improve your code. 
-- This project already has eslint preconfigured, you can invoke a check by running`npm run lint`
-- Together with a custom eslint [plugin](https://github.com/obsidianmd/eslint-plugin) for Obsidan specific code guidelines.
-- A GitHub action is preconfigured to automatically lint every commit on all branches.
-
-## Funding URL
-
-You can include funding URLs where people who use your plugin can financially support it.
-
-The simple way is to set the `fundingUrl` field to your link in your `manifest.json` file:
-
-```json
-{
-    "fundingUrl": "https://buymeacoffee.com"
-}
-```
-
-If you have multiple URLs, you can also do:
-
-```json
-{
-    "fundingUrl": {
-        "Buy Me a Coffee": "https://buymeacoffee.com",
-        "GitHub Sponsor": "https://github.com/sponsors",
-        "Patreon": "https://www.patreon.com/"
-    }
-}
-```
-
-## API Documentation
-
-See https://docs.obsidian.md
+1. Clone this repo.
+2. Make sure your NodeJS is at least v16 (`node --version`).
+3. Run `npm i` or `yarn` to install dependencies.
+4. Run `npm run dev` to start compilation in watch mode.
+5. Place the project folder inside your `.obsidian/plugins/` directory to test it live in Obsidian.
