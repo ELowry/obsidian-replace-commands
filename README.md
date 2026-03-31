@@ -45,17 +45,9 @@ Whether you need to quickly clean up messy OCR text, standardize markdown format
 
 To install the plugin manually from GitHub:
 
-1. Download the latest release from the [GitHub Releases page](https://github.com/ELowry/replace-commands/releases).
+1. Download the latest release from the [GitHub Releases page](https://github.com/ELowry/obsidian-replace-commands/releases).
 2. Extract the files and copy `main.js`, `manifest.json`, and `styles.css` (if applicable) to your vault at `YourVaultFolder/.obsidian/plugins/replace-commands/`.
 3. Open Obsidian, go to **Settings → Community plugins**, and toggle on **Replace Commands**.
-
-### Manually installing the plugin
-
-To install the plugin manually before it is available in the community store:
-
-1. Download the latest release from the GitHub repository.
-2. Copy over `main.js`, `manifest.json`, and `styles.css` (if applicable) to your vault at `VaultFolder/.obsidian/plugins/replace-commands/`.
-3. Open Obsidian, go to **Settings > Community Plugins**, disable "Restricted mode", and toggle on **Replace Commands**.
 
 ## Development
 
