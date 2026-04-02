@@ -8,7 +8,7 @@ import { applyReplaceAction } from './engine';
  */
 export default class CustomReplacePlugin extends Plugin {
 	/** Stores the plugin configuration. */
-	settings: CustomReplaceSettings;
+	settings!: CustomReplaceSettings;
 
 	/**
 	 * Called when the plugin is enabled and loaded.
@@ -21,46 +21,35 @@ export default class CustomReplacePlugin extends Plugin {
 
 		// Register the editor context menu event
 		this.registerEvent(
-			this.app.workspace.on(
-				'editor-menu',
-				(menu: Menu, editor: Editor, view: MarkdownView) => {
-					// Filter actions that should be in the context menu
-					const contextMenuActions = this.settings.actions.filter(
-						(action) => action.showInContextMenu,
-					);
+			this.app.workspace.on('editor-menu', (menu, editor) => {
+				// Filter actions that should be in the context menu
+				const contextMenuActions = this.settings.actions.filter(
+					(action) => action.showInContextMenu,
+				);
 
-					if (contextMenuActions.length > 0) {
-						menu.addItem((item: MenuItem) => {
-							item.setTitle('Custom replace').setIcon('search');
+				if (contextMenuActions.length > 0) {
+					menu.addItem((item: MenuItem) => {
+						item.setTitle('Custom replace').setIcon('search');
 
-							interface SubmenuItem extends MenuItem {
-								setSubmenu(): Menu;
-							}
-							const submenu = (item as SubmenuItem).setSubmenu();
+						interface SubmenuItem extends MenuItem {
+							setSubmenu(): Menu;
+						}
+						const submenu = (item as SubmenuItem).setSubmenu();
 
-							// Add each enabled action to the returned submenu
-							contextMenuActions.forEach((action) => {
-								submenu.addItem((subItem: MenuItem) => {
-									subItem.setTitle(action.name).onClick(() => {
-										applyReplaceAction(editor, action);
-									});
+						contextMenuActions.forEach((action) => {
+							submenu.addItem((subItem: MenuItem) => {
+								subItem.setTitle(action.name).onClick(() => {
+									applyReplaceAction(editor, action);
 								});
 							});
 						});
-					}
-				},
-			),
+					});
+				}
+			}),
 		);
 
 		// Register the dynamic commands for the palette
 		this.registerActionCommands();
-	}
-
-	/**
-	 * Called when the plugin is disabled and unloaded.
-	 */
-	onunload() {
-		// Cleanup is handled automatically by Obsidian (registerEvent, etc.)
 	}
 
 	/**
