@@ -12,9 +12,6 @@ export interface ReplaceRule {
 	regexFlags?: string;
 }
 
-/**
- * Grouped set of rules for a named action.
- */
 export interface ReplaceAction {
 	/** Unique action ID. */
 	id: string;
@@ -24,6 +21,10 @@ export interface ReplaceAction {
 	rules: ReplaceRule[];
 	/** Display in editor context menu. */
 	showInContextMenu: boolean;
+	/** Sample text for testing rules. */
+	testText?: string;
+	/** Display live preview test bench. */
+	showTestBench?: boolean;
 }
 
 /**

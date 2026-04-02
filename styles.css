@@ -1,0 +1,212 @@
+/**
+ * CUSTOM REPLACE PLUGIN STYLES
+ */
+
+:root {
+	--replace-commands-border-width: 1px;
+	--replace-commands-border-style: solid;
+	--replace-commands-border-color: var(--background-modifier-border);
+	--replace-commands-border-hover-color: var(--background-modifier-border-hover);
+
+	--replace-commands-spacing-xs: 4px;
+	--replace-commands-spacing-sm: 8px;
+	--replace-commands-spacing-md: 10px;
+	--replace-commands-spacing-lg: 15px;
+	--replace-commands-spacing-xl: 20px;
+
+	--replace-commands-radius-sm: 4px;
+	--replace-commands-radius-md: 5px;
+	--replace-commands-radius-lg: 6px;
+
+	--replace-commands-indicator-width: 4px;
+	--replace-commands-indicator-color: var(--interactive-accent);
+
+	--replace-commands-col-min-width: 100px;
+	--replace-commands-flags-width: 60px;
+
+	--replace-commands-font-size-small: 0.8em;
+}
+
+/* Action Block */
+.custom-replace-action-block {
+	margin-top: var(--replace-commands-spacing-lg);
+	border: var(--replace-commands-border-width) var(--replace-commands-border-style)
+		var(--replace-commands-border-color);
+	border-radius: var(--replace-commands-radius-md);
+	padding: var(--replace-commands-spacing-md);
+}
+
+.custom-replace-action-header.setting-item {
+	border: none;
+}
+
+.custom-replace-action-header .setting-item-control {
+	flex-grow: 1;
+	justify-content: flex-start;
+}
+
+.custom-replace-action-header .setting-item-info {
+	flex: none;
+	margin-right: var(--replace-commands-spacing-lg);
+}
+
+.custom-replace-action-header .search-input-container,
+.custom-replace-action-header .setting-item-control > *:first-child {
+	flex-grow: 1;
+	margin-right: var(--replace-commands-spacing-lg);
+}
+
+/* Header Text Input tweak */
+.custom-replace-action-header .setting-item-control input[type='text'] {
+	width: 100%;
+}
+
+.custom-replace-collapse-btn {
+	box-shadow: none;
+	background: transparent;
+}
+
+.custom-replace-rules-container {
+	margin-top: var(--replace-commands-spacing-md);
+	border-top: var(--replace-commands-border-width) var(--replace-commands-border-style)
+		var(--replace-commands-border-hover-color);
+	padding-top: var(--replace-commands-spacing-lg);
+}
+
+/* Test Bench Controls */
+.custom-replace-test-toggle.setting-item {
+	border: none;
+	background-color: transparent;
+	padding-top: 0;
+	padding-bottom: var(--replace-commands-spacing-lg);
+}
+
+.custom-replace-test-input-container {
+	margin-bottom: var(--replace-commands-spacing-xl);
+	border-bottom: var(--replace-commands-border-width) var(--replace-commands-border-style)
+		var(--replace-commands-border-color);
+	padding-bottom: var(--replace-commands-spacing-lg);
+}
+
+.custom-replace-label {
+	display: block;
+	margin-bottom: var(--replace-commands-spacing-sm);
+	font-weight: bold;
+}
+
+/* Textareas Shared Styles */
+.custom-replace-textarea {
+	border-radius: var(--replace-commands-radius-sm);
+	background-color: var(--background-secondary);
+	padding: var(--replace-commands-spacing-md);
+	width: 100%;
+	overflow: hidden;
+	resize: none;
+	font-family: var(--font-monospace);
+	white-space: pre-wrap;
+}
+
+.custom-replace-test-input-textarea {
+	min-height: 80px;
+}
+
+.custom-replace-output-textarea {
+	min-height: 40px;
+}
+
+/* Rule Row Layout */
+.custom-replace-rule-row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	gap: var(--replace-commands-spacing-lg);
+	margin-bottom: var(--replace-commands-spacing-xl);
+	border: var(--replace-commands-border-width) var(--replace-commands-border-style)
+		var(--replace-commands-border-color);
+	border-left: var(--replace-commands-indicator-width) var(--replace-commands-border-style)
+		var(--replace-commands-indicator-color);
+	border-radius: var(--replace-commands-radius-lg);
+	background-color: var(--background-primary-alt);
+	padding: var(--replace-commands-spacing-lg);
+}
+
+.custom-replace-rule-inputs {
+	display: flex;
+	flex-basis: 100%;
+	align-items: flex-start;
+	gap: var(--replace-commands-spacing-md);
+	width: 100%;
+}
+
+.custom-replace-input-column {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	min-width: var(--replace-commands-col-min-width);
+}
+
+.custom-replace-column-label {
+	margin-bottom: var(--replace-commands-spacing-xs);
+	font-weight: bold;
+	font-size: var(--replace-commands-font-size-small);
+}
+
+.custom-replace-regex-col {
+	display: flex;
+	flex-shrink: 0;
+	flex-direction: column;
+	align-items: center;
+}
+
+.custom-replace-flags-col {
+	display: flex;
+	flex-shrink: 0;
+	flex-direction: column;
+	width: var(--replace-commands-flags-width);
+}
+
+.custom-replace-toggle-inner.setting-item {
+	border: none;
+	background: none;
+	padding: 0;
+}
+
+.custom-replace-remove-col {
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+	padding-top: var(--replace-commands-spacing-xl);
+}
+
+/* Rule Output/Error */
+.custom-replace-output-col {
+	flex-basis: 100%;
+	margin-top: var(--replace-commands-spacing-md);
+	width: 100%;
+}
+
+.custom-replace-step-label {
+	display: block;
+	margin-bottom: var(--replace-commands-spacing-xs);
+	color: var(--text-muted);
+	font-weight: bold;
+	font-size: var(--replace-commands-font-size-small);
+}
+
+.custom-replace-final-label {
+	color: var(--text-accent);
+}
+
+.custom-replace-error {
+	margin-bottom: var(--replace-commands-spacing-xs);
+	color: var(--text-error);
+	font-size: var(--replace-commands-font-size-small);
+}
+
+/* Rule Actions */
+.custom-replace-add-rule-btn-row {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: var(--replace-commands-spacing-md);
+	margin-bottom: var(--replace-commands-spacing-md);
+}
