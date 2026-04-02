@@ -1,42 +1,42 @@
 name: CI & Validation
 permissions:
-  contents: read
+    contents: read
 
 on:
-  push:
-    branches: [main, dev]
-  pull_request:
-    branches: [main, dev]
+    push:
+        branches: [main, dev]
+    pull_request:
+        branches: [main, dev]
 
 jobs:
-  build-and-validate:
-    runs-on: ubuntu-latest
+    build-and-validate:
+        runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [20.x, 22.x, 24.x]
+        strategy:
+            matrix:
+                node-version: [20.x, 22.x, 24.x]
 
-    steps:
-      - name: Checkout Code
-      uses: actions/checkout@v6
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v6
 
-      - name: Setup Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v6
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+            - name: Setup Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v6
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  cache: 'npm'
 
-      - name: Install Dependencies
-      run: npm install
+            - name: Install Dependencies
+              run: npm install
 
-      - name: Check Code Style
-      run: npm run check-format
+            - name: Check Code Style
+              run: npm run check-format
 
-      - name: Lint Code
-      run: npm run lint
+            - name: Lint Code
+              run: npm run lint
 
-      - name: Build Plugin
-      run: npm run build
+            - name: Build Plugin
+              run: npm run build
 
-      - name: Run Tests
-      run: npm test
+            - name: Run Tests
+              run: npm test

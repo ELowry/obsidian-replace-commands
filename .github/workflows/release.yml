@@ -1,69 +1,69 @@
 name: Release Obsidian Plugin
 
 on:
-  push:
-    tags:
-      - '*.*.*'
+    push:
+        tags:
+            - '*.*.*'
 
 jobs:
-  build-and-release:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    build-and-release:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
 
-    steps:
-      - name: Checkout Code
-      uses: actions/checkout@v6
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v6
 
-      - name: Setup Node.js
-      uses: actions/setup-node@v6
+            - name: Setup Node.js
+              uses: actions/setup-node@v6
 
-      - name: Verify Version Integrity (manifest.json & versions.json)
-      run: |
-        # Remove the refs/tags/ part to get the raw tag
-        TAG_VERSION=${GITHUB_REF#refs/tags/}
+            - name: Verify Version Integrity (manifest.json & versions.json)
+              run: |
+                  # Remove the refs/tags/ part to get the raw tag
+                  TAG_VERSION=${GITHUB_REF#refs/tags/}
 
-        # Read version from manifest.json
-        MANIFEST_VERSION=$(node -p "require('./manifest.json').version")
+                  # Read version from manifest.json
+                  MANIFEST_VERSION=$(node -p "require('./manifest.json').version")
 
-        echo "Git Tag Version: $TAG_VERSION"
-        echo "Manifest Version: $MANIFEST_VERSION"
+                  echo "Git Tag Version: $TAG_VERSION"
+                  echo "Manifest Version: $MANIFEST_VERSION"
 
-        if [ "$TAG_VERSION" != "$MANIFEST_VERSION" ]; then
-          echo "::error::Version mismatch! Git tag ($TAG_VERSION) does not match manifest.json ($MANIFEST_VERSION)."
-          exit 1
-        fi
+                  if [ "$TAG_VERSION" != "$MANIFEST_VERSION" ]; then
+                    echo "::error::Version mismatch! Git tag ($TAG_VERSION) does not match manifest.json ($MANIFEST_VERSION)."
+                    exit 1
+                  fi
 
-        # Verify the version exists in versions.json
-        VERSION_EXISTS=$(node -p "!!require('./versions.json')['$TAG_VERSION']")
-        if [ "$VERSION_EXISTS" != "true" ]; then
-          echo "::error::versions.json does not contain an entry for $TAG_VERSION!"
-          exit 1
-        fi
+                  # Verify the version exists in versions.json
+                  VERSION_EXISTS=$(node -p "!!require('./versions.json')['$TAG_VERSION']")
+                  if [ "$VERSION_EXISTS" != "true" ]; then
+                    echo "::error::versions.json does not contain an entry for $TAG_VERSION!"
+                    exit 1
+                  fi
 
-        echo "Versions match and are registered. Proceeding with release."
+                  echo "Versions match and are registered. Proceeding with release."
 
-      - name: Install Dependencies
-      run: npm install
+            - name: Install Dependencies
+              run: npm install
 
-      - name: Lint Code
-      run: npm run lint
+            - name: Lint Code
+              run: npm run lint
 
-      - name: Build Plugin
-      run: npm run build
+            - name: Build Plugin
+              run: npm run build
 
-      - name: Prepare Release Assets
-      run: |
-        mkdir -p release-assets
-        cp main.js release-assets/main.js
-        cp manifest.json release-assets/manifest.json
-        cp styles.css release-assets/styles.css
+            - name: Prepare Release Assets
+              run: |
+                  mkdir -p release-assets
+                  cp main.js release-assets/main.js
+                  cp manifest.json release-assets/manifest.json
+                  cp styles.css release-assets/styles.css
 
-      - name: Create GitHub Release
-      uses: softprops/action-gh-release@v2
-      with:
-        files: release-assets/*
-        draft: false
-        generate_release_notes: true
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Create GitHub Release
+              uses: softprops/action-gh-release@v2
+              with:
+                  files: release-assets/*
+                  draft: false
+                  generate_release_notes: true
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
