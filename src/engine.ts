@@ -3,9 +3,11 @@ import { ReplaceAction } from './types';
 import { processText } from './processor';
 
 /**
- * Helper to ensure the 'from' position comes before the 'to' position.
- * CodeMirror selections have 'anchor' (start of drag) and 'head' (end of drag),
- * which can be reversed if the user highlighted text upwards or to the left.
+ * Reorders selection bounds to ensure from <= to.
+ *
+ * @param anchor - Start of the selection drag.
+ * @param head - End of the selection drag.
+ * @returns Ordered bounds.
  */
 function getOrderedBounds(
 	anchor: EditorPosition,
@@ -17,12 +19,14 @@ function getOrderedBounds(
 }
 
 /**
- * Core engine logic to apply a replace action to the current editor.
+ * Applies search and replace rules to selection or document.
+ *
+ * @param editor - Editor instance.
+ * @param action - Replace rules to apply.
  */
 export function applyReplaceAction(editor: Editor, action: ReplaceAction) {
 	const selections = editor.listSelections();
 
-	// Check multi-cursor selection
 	const hasSelection = selections.some(
 		(selection) =>
 			selection.anchor.line !== selection.head.line
@@ -51,7 +55,6 @@ export function applyReplaceAction(editor: Editor, action: ReplaceAction) {
 				editor.transaction({ changes });
 			}
 		} else {
-			// Entire document
 			const textToProcess = editor.getValue();
 			const finalText = processText(textToProcess, action.rules);
 
@@ -72,6 +75,8 @@ export function applyReplaceAction(editor: Editor, action: ReplaceAction) {
 		new Notice(`Applied "${action.name}"`);
 	} catch (error) {
 		console.error(error);
-		new Notice(`Custom replace: Invalid regex in "${action.name}"`);
+		new Notice(
+			`Custom replace error: ${error instanceof Error ? error.message : 'Invalid regex'}`,
+		);
 	}
 }

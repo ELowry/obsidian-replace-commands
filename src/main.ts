@@ -1,28 +1,29 @@
-import { Editor, MarkdownView, Plugin, Menu, MenuItem } from 'obsidian';
+import { Editor, Plugin, MenuItem, Menu } from 'obsidian';
 import { CustomReplaceSettings, DEFAULT_SETTINGS } from './types';
 import { CustomReplaceSettingTab } from './settings';
 import { applyReplaceAction } from './engine';
 
 /**
- * Main Obsidian plugin class that manages settings, commands, and context menus.
+ * Main plugin class for Custom Replace.
+ * Manages lifecycle, commands, and context menus.
  */
 export default class CustomReplacePlugin extends Plugin {
-	/** Stores the plugin configuration. */
+	/** Current plugin settings. */
 	settings!: CustomReplaceSettings;
 
+	/** Set of currently registered action command IDs for manual cleanup. */
+	private registeredActionIds: Set<string> = new Set();
+
 	/**
-	 * Called when the plugin is enabled and loaded.
+	 * Initializes settings, UI, and commands.
 	 */
 	async onload() {
 		await this.loadSettings();
 
-		// Add the settings tab
 		this.addSettingTab(new CustomReplaceSettingTab(this.app, this));
 
-		// Register the editor context menu event
 		this.registerEvent(
 			this.app.workspace.on('editor-menu', (menu, editor) => {
-				// Filter actions that should be in the context menu
 				const contextMenuActions = this.settings.actions.filter(
 					(action) => action.showInContextMenu,
 				);
@@ -48,12 +49,11 @@ export default class CustomReplacePlugin extends Plugin {
 			}),
 		);
 
-		// Register the dynamic commands for the palette
 		this.registerActionCommands();
 	}
 
 	/**
-	 * Loads plugin settings from disk.
+	 * Loads data from disk and merges with defaults.
 	 */
 	async loadSettings() {
 		this.settings = Object.assign(
@@ -64,21 +64,17 @@ export default class CustomReplacePlugin extends Plugin {
 	}
 
 	/**
-	 * Persists settings to disk and refreshes commands.
+	 * Persists settings and updates registered commands.
 	 */
 	async saveSettings() {
 		await this.saveData(this.settings);
 		this.registerActionCommands();
 	}
 
-	/** Set to keep track of currently registered action command IDs. */
-	private registeredActionIds: Set<string> = new Set();
-
 	/**
-	 * Registers (or refreshes) search/replace actions as commands in the Command Palette.
+	 * Refreshes command palette entries based on current settings.
 	 */
 	registerActionCommands() {
-		// Remove existing action commands to avoid clones
 		this.registeredActionIds.forEach((id) => {
 			try {
 				// @ts-ignore: removeCommand is a modern Obsidian API
@@ -91,7 +87,6 @@ export default class CustomReplacePlugin extends Plugin {
 		});
 		this.registeredActionIds.clear();
 
-		// Register new commands for each configured action
 		this.settings.actions.forEach((action) => {
 			this.addCommand({
 				id: action.id,

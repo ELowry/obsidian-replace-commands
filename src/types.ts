@@ -1,41 +1,41 @@
 /**
- * Represents a single search and replace rule.
+ * Search and replace rule definition.
  */
 export interface ReplaceRule {
-	/** The text or regex pattern to search for. */
+	/** Search term or regex pattern. */
 	search: string;
-	/** The text to replace the search pattern with. */
+	/** Replacement string. */
 	replace: string;
-	/** Whether the search pattern should be treated as a regular expression. */
+	/** Treat search as regular expression. */
 	useRegex: boolean;
-	/** Optional flags for the regular expression (e.g., 'i', 'm'). */
+	/** Regex evaluation flags. */
 	regexFlags?: string;
 }
 
 /**
- * Represents a collection of rules grouped under a single named action.
+ * Grouped set of rules for a named action.
  */
 export interface ReplaceAction {
-	/** Unique identifier for the action. */
+	/** Unique action ID. */
 	id: string;
-	/** User-friendly name for the action. */
+	/** Action display name. */
 	name: string;
-	/** Sequential list of rules to apply. */
+	/** Sequential rules to apply. */
 	rules: ReplaceRule[];
-	/** Whether this action should appear in the editor's right-click context menu. */
+	/** Display in editor context menu. */
 	showInContextMenu: boolean;
 }
 
 /**
- * Plugin-wide settings structure.
+ * Plugin configuration schema.
  */
 export interface CustomReplaceSettings {
-	/** List of all configured replace actions. */
+	/** All defined replace actions. */
 	actions: ReplaceAction[];
 }
 
 /**
- * Default settings used when the plugin is first loaded.
+ * Default configuration.
  */
 export const DEFAULT_SETTINGS: CustomReplaceSettings = {
 	actions: [],

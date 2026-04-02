@@ -2,15 +2,18 @@ import { App, PluginSettingTab, Setting, ButtonComponent, TextComponent } from '
 import CustomReplacePlugin from './main';
 
 /**
- * Settings tab UI for configuring search/replace actions.
+ * Settings tab for configuring Custom Replace actions and rules.
  */
 export class CustomReplaceSettingTab extends PluginSettingTab {
-	/** Reference to the plugin instance. */
+	/** Plugin instance reference. */
 	plugin: CustomReplacePlugin;
 
+	/** Set of action IDs currently expanded in the UI. */
+	expandedActions: Set<string> = new Set();
+
 	/**
-	 * @param app - The Obsidian App instance.
-	 * @param plugin - A reference to the CustomReplacePlugin.
+	 * @param app - Obsidian App instance.
+	 * @param plugin - Plugin instance.
 	 */
 	constructor(app: App, plugin: CustomReplacePlugin) {
 		super(app, plugin);
@@ -18,7 +21,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 	}
 
 	/**
-	 * Renders the settings UI.
+	 * Renders the settings view.
 	 */
 	display(): void {
 		const { containerEl } = this;
@@ -26,14 +29,15 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName('Custom replace actions')
-			.setDesc('Create and manage your preset find-and-replace actions.')
+			.setDesc('Manage preset find-and-replace actions.')
 			.addButton((button: ButtonComponent) => {
 				button
 					.setButtonText('Add new action')
 					.setCta()
 					.onClick(async () => {
+						const newId = `replace-action-${Date.now()}`;
 						this.plugin.settings.actions.push({
-							id: `replace-action-${Date.now()}`,
+							id: newId,
 							name: 'New action',
 							showInContextMenu: true,
 							rules: [
@@ -45,13 +49,15 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 								},
 							],
 						});
+						this.expandedActions.add(newId);
 						await this.plugin.saveSettings();
-						this.display(); // Force a re-render to show the new action
+						this.display();
 					});
 			});
 
-		// Render each action
 		this.plugin.settings.actions.forEach((action, actionIndex) => {
+			const isExpanded = this.expandedActions.has(action.id);
+
 			const actionContainer = containerEl.createDiv({
 				cls: 'custom-replace-action-block',
 				attr: {
@@ -59,8 +65,15 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 				},
 			});
 
-			// Action Header and Name
-			new Setting(actionContainer)
+			const headerContainer = actionContainer.createDiv();
+
+			const rulesContainer = actionContainer.createDiv({
+				attr: {
+					style: `display: ${isExpanded ? 'block' : 'none'}; padding-top: 15px; margin-top: 10px; border-top: 1px solid var(--background-modifier-border-hover);`,
+				},
+			});
+
+			const headerSetting = new Setting(headerContainer)
 				.setName('Action name')
 				.addText((text: TextComponent) => {
 					text.setPlaceholder('Example: remove extra spaces')
@@ -69,6 +82,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 							action.name = value;
 							await this.plugin.saveSettings();
 						});
+					text.inputEl.setCssProps({ width: '100%' });
 				})
 				.addToggle((toggle) => {
 					toggle
@@ -86,20 +100,54 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 						.setTooltip('Delete action')
 						.onClick(async () => {
 							this.plugin.settings.actions.splice(actionIndex, 1);
+							this.expandedActions.delete(action.id);
 							await this.plugin.saveSettings();
 							this.display();
 						});
+				})
+				.addButton((button: ButtonComponent) => {
+					button
+						.setIcon(isExpanded ? 'chevron-down' : 'chevron-right')
+						.setTooltip(isExpanded ? 'Collapse rules' : 'Expand rules')
+						.onClick(() => {
+							if (this.expandedActions.has(action.id)) {
+								this.expandedActions.delete(action.id);
+								rulesContainer.hide();
+								button.setIcon('chevron-right').setTooltip('Expand rules');
+							} else {
+								this.expandedActions.add(action.id);
+								rulesContainer.show();
+								button.setIcon('chevron-down').setTooltip('Collapse rules');
+							}
+						});
+					button.buttonEl.setCssProps({ boxShadow: 'none', background: 'transparent' });
 				});
 
-			// --- Rules Loop ---
+			headerSetting.controlEl.setCssProps({
+				flexGrow: '1',
+				justifyContent: 'flex-start',
+			});
+			headerSetting.infoEl.setCssProps({
+				flex: 'none',
+				marginRight: '15px',
+			});
+			const textWrapper =
+				headerSetting.controlEl.querySelector('.search-input-container')
+				|| headerSetting.controlEl.firstElementChild;
+			if (textWrapper) {
+				(textWrapper as HTMLElement).setCssProps({
+					flexGrow: '1',
+					marginRight: '15px',
+				});
+			}
+
 			action.rules.forEach((rule, ruleIndex) => {
-				const ruleRow = actionContainer.createDiv({
+				const ruleRow = rulesContainer.createDiv({
 					attr: {
 						style: 'display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; flex-wrap: wrap; background-color: var(--background-secondary-alt); padding: 10px; border-radius: 4px;',
 					},
 				});
 
-				// Search Field
 				const searchContainer = ruleRow.createDiv({
 					attr: {
 						style: 'display: flex; flex-direction: column; flex: 1; min-width: 150px;',
@@ -119,7 +167,6 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 						await this.plugin.saveSettings();
 					});
 
-				// Replace Field
 				const replaceContainer = ruleRow.createDiv({
 					attr: {
 						style: 'display: flex; flex-direction: column; flex: 1; min-width: 150px;',
@@ -139,7 +186,6 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 						await this.plugin.saveSettings();
 					});
 
-				// Regex Target Toggle
 				const regexToggleContainer = ruleRow.createDiv({
 					attr: {
 						style: 'display: flex; flex-direction: column; align-items: center;',
@@ -157,12 +203,11 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 						.setValue(rule.useRegex)
 						.onChange(async (value) => {
 							rule.useRegex = value;
-							// Show/hide flags field
-							flagsContainer.setCssProps({ display: value ? 'flex' : 'none' });
+							if (value) flagsContainer.show();
+							else flagsContainer.hide();
 							await this.plugin.saveSettings();
 						});
 				});
-				// Remove the extra margin/padding that 'Setting' adds by default
 				regexToggle.settingEl.setCssProps({
 					border: 'none',
 					padding: '0',
@@ -170,12 +215,9 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 				});
 				regexToggle.infoEl.setCssProps({ display: 'none' });
 
-				// Flags Field (Conditional)
 				const flagsContainer = ruleRow.createDiv({
 					attr: {
-						style: `display: ${
-							rule.useRegex ? 'flex' : 'none'
-						}; flex-direction: column; width: 80px;`,
+						style: `display: ${rule.useRegex ? 'flex' : 'none'}; flex-direction: column; width: 80px;`,
 					},
 				});
 				flagsContainer.createEl('label', {
@@ -185,14 +227,13 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 					},
 				});
 				new TextComponent(flagsContainer)
-					.setPlaceholder('Example: g, i, m')
+					.setPlaceholder('Flags')
 					.setValue(rule.regexFlags || 'g')
 					.onChange(async (value) => {
 						rule.regexFlags = value;
 						await this.plugin.saveSettings();
 					});
 
-				// Remove Button
 				const removeBtnContainer = ruleRow.createDiv({
 					attr: {
 						style: 'display: flex; align-items: center; padding-top: 18px;',
@@ -208,8 +249,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 					});
 			});
 
-			// Add Rule Button
-			const addRuleSetting = new Setting(actionContainer).addButton((button) => {
+			const addRuleSetting = new Setting(rulesContainer).addButton((button) => {
 				button
 					.setIcon('plus')
 					.setButtonText('Add rule')
@@ -224,7 +264,6 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 						this.display();
 					});
 			});
-			// Clean up the background of the Add Rule section
 			addRuleSetting.settingEl.setCssProps({ border: 'none', background: 'none' });
 		});
 	}

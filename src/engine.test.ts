@@ -3,13 +3,11 @@ import { processText } from './processor';
 import { ReplaceRule } from './types';
 
 /**
- * Unit tests for the core text processing engine of the Custom Replace plugin.
- * These tests focus on the logical transformation of text based on user-defined rules,
- * ensuring both plain text and regex-based replacements are handled correctly.
+ * Unit tests for text processing logic.
  */
 describe('Custom Replace Engine', () => {
 	/**
-	 * Tests basic string replacement without special characters or regex.
+	 * Plain text replacement.
 	 */
 	it('should replace basic plain text', () => {
 		const text = 'Hello world';
@@ -18,8 +16,7 @@ describe('Custom Replace Engine', () => {
 	});
 
 	/**
-	 * Tests that escaped newlines in plain text mode (e.g., \n) are correctly unescaped
-	 * and replaced as actual newline characters.
+	 * Plain text newline unescaping (\n).
 	 */
 	it('should parse plaintext escaped newlines (\\n)', () => {
 		const text = 'Line 1\nLine 2';
@@ -28,7 +25,7 @@ describe('Custom Replace Engine', () => {
 	});
 
 	/**
-	 * Tests regex replacements with capture groups and flags.
+	 * Regex with capture groups.
 	 */
 	it('should handle regex capture groups', () => {
 		const text = 'Lastname, Firstname';
@@ -39,7 +36,7 @@ describe('Custom Replace Engine', () => {
 	});
 
 	/**
-	 * Tests the safety mechanism for invalid user-provided regex patterns.
+	 * Error handling for invalid patterns.
 	 */
 	it('should throw an error on invalid regex', () => {
 		const text = 'Test string';
