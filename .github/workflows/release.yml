@@ -60,10 +60,7 @@ jobs:
                   mkdir -p release-assets
                   cp main.js release-assets/main.js
                   cp manifest.json release-assets/manifest.json
-                  # Only copy styles.css if it exists
-                  if [ -f "styles.css" ]; then
-                    cp styles.css release-assets/styles.css
-                  fi
+                  cp styles.css release-assets/styles.css
 
             - name: Create GitHub Release
               uses: softprops/action-gh-release@v2

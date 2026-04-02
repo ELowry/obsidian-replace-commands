@@ -1,6 +1,6 @@
 {
 	"name": "replace-commands",
-	"version": "0.1.1",
+	"version": "0.2.0",
 	"description": "Preconfigure custom search and replace actions using plain text or regex to quickly modify selections or documents.",
 	"main": "main.js",
 	"type": "module",
@@ -9,8 +9,8 @@
 		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
 		"version": "node version-bump.mjs && git add manifest.json versions.json",
 		"lint": "eslint .",
-		"format": "prettier --write \"src/**/*.{ts,js,css}\"",
-		"check-format": "prettier --check \"src/**/*.{ts,js,css}\"",
+		"format": "prettier --write \"src/**/*.{ts,js,css}\" styles.css --config .prettierrc",
+		"check-format": "prettier --check \"src/**/*.{ts,js,css}\" styles.css --config .prettierrc",
 		"test": "vitest run"
 	},
 	"keywords": [],
