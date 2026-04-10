@@ -89,12 +89,12 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 		});
 
 		// Restore scroll position after DOM is rebuilt.
-		// We use multiple attempts to account for the asynchronous nature of 
+		// We use multiple attempts to account for the asynchronous nature of
 		// TextArea resizing which might affect the total height of the container.
 		if (scrollEl && scrollTop > 0) {
 			const targetScrollEl = scrollEl; // Capture for timeout closure
 			targetScrollEl.scrollTop = scrollTop;
-			
+
 			setTimeout(() => {
 				targetScrollEl.scrollTop = scrollTop;
 			}, 10);
@@ -275,7 +275,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 			});
 		};
 
-		const testBenchToggle = new Setting(rulesContainer)
+		new Setting(rulesContainer)
 			.setName('Live preview test bench')
 			.setClass('custom-replace-test-toggle')
 			.addToggle((toggle) => {
@@ -458,6 +458,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 			text: 'Flags',
 		});
 		new TextComponent(flagsContainer)
+			// eslint-disable-next-line obsidianmd/ui/sentence-case
 			.setPlaceholder('g, i')
 			.setValue(rule.regexFlags || 'g')
 			.onChange(async (value) => {
