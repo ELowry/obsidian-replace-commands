@@ -9,11 +9,12 @@ Whether you need to quickly clean up messy OCR text, standardize markdown format
 ## Features
 
 - **Custom Actions:** Create named actions (e.g., "Clean OCR", "Format Tables") that contain one or more search/replace rules.
-- **Sequential Processing:** Chain multiple rules together. They execute in order from top to bottom.
+- **Live Preview Test Bench:** Instantly test your rules in settings using a real-time preview. Each rule shows its step-by-step intermediate output before giving the final result.
+- **Sequential Processing & Reordering:** Chain multiple rules perfectly and easily rearrange their execution order directly in the UI.
 - **Smart Targeting:** If you highlight text, the action only applies to your selection. If nothing is selected, it applies to the entire document.
 - **Single-Step Undo:** No matter how many rules are in your action, they are applied as a single atomic transaction. One press of `Ctrl+Z` undoes the entire operation.
 - **Regex & Capture Groups:** Full support for JavaScript Regular Expressions. Use capture groups (e.g., `$1`, `$2`) in your replacement strings.
-- **Custom Regex Flags:** easily add flags like `i` (case-insensitive) or `m` (multiline) to your regex rules.
+- **Custom Regex Flags:** Easily add flags like `i` (case-insensitive) or `m` (multiline) to your regex rules.
 - **Plaintext Escapes:** If you turn regex off, you can still search for `\n` (newlines) and `\t` (tabs) in plaintext mode.
 - **Easy Access:** Run your actions directly from the Obsidian Command Palette (`Ctrl/Cmd + P`), or add them to the right-click Editor Context Menu.
 
@@ -46,7 +47,7 @@ Whether you need to quickly clean up messy OCR text, standardize markdown format
 To install the plugin manually from GitHub:
 
 1. Download the latest release from the [GitHub Releases page](https://github.com/ELowry/obsidian-replace-commands/releases).
-2. Extract the files and copy `main.js`, `manifest.json`, and `styles.css` (if applicable) to your vault at `YourVaultFolder/.obsidian/plugins/replace-commands/`.
+2. Extract the files and copy `main.js`, `manifest.json`, and `styles.css` to your vault at `YourVaultFolder/.obsidian/plugins/replace-commands/`.
 3. Open Obsidian, go to **Settings → Community plugins**, and toggle on **Replace Commands**.
 
 ## Development
