@@ -72,17 +72,18 @@ export default class CustomReplacePlugin extends Plugin {
 	}
 
 	/**
-	 * Refreshes command palette entries based on current settings.
+	 * Scans current settings and registers each action as a command.
+	 * Cleans up previously registered commands to avoid duplicates.
 	 */
 	registerActionCommands() {
 		this.registeredActionIds.forEach((id) => {
 			try {
-				// @ts-ignore: removeCommand is a modern Obsidian API
+				// @ts-ignore - removeCommand is available in modern Obsidian but not in all type definitions
 				if (typeof this.removeCommand === 'function') {
 					this.removeCommand(id);
 				}
 			} catch (e) {
-				console.error('Failed to remove command', id, e);
+				console.error(`Failed to remove command: ${id}`, e);
 			}
 		});
 		this.registeredActionIds.clear();

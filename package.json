@@ -1,6 +1,6 @@
 {
 	"name": "replace-commands",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"description": "Preconfigure custom search and replace actions using plain text or regex to quickly modify selections or documents.",
 	"main": "main.js",
 	"type": "module",

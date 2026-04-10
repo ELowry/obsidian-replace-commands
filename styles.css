@@ -210,3 +210,34 @@
 	margin-top: var(--replace-commands-spacing-md);
 	margin-bottom: var(--replace-commands-spacing-md);
 }
+
+/* Position Swap Animations */
+@keyframes custom-replace-slide-up {
+	0% {
+		transform: translateY(30px);
+		opacity: 0;
+	}
+	100% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@keyframes custom-replace-slide-down {
+	0% {
+		transform: translateY(-30px);
+		opacity: 0;
+	}
+	100% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+.custom-replace-moved-up {
+	animation: custom-replace-slide-up 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+.custom-replace-moved-down {
+	animation: custom-replace-slide-down 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}

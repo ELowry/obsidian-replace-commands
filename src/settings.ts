@@ -20,6 +20,12 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 	/** Set of action IDs currently expanded in the UI. */
 	private expandedActions: Set<string> = new Set();
 
+	/** Targets of the last actions that were moved (visual feedback). */
+	private recentlyMovedActions: { id: string; dir: 'up' | 'down' }[] = [];
+
+	/** Targets of the last rules that were moved (visual feedback). */
+	private recentlyMovedRules: { actionId: string; index: number; dir: 'up' | 'down' }[] = [];
+
 	/**
 	 * @param app - Obsidian App instance.
 	 * @param plugin - Plugin instance.
@@ -34,6 +40,19 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 	 */
 	display(): void {
 		const { containerEl } = this;
+
+		// Capture the closest scrolling container and its position to prevent bad UX jumps
+		// when the settings view is completely emptied and rebuilt.
+		let scrollEl: HTMLElement | null = containerEl;
+		let scrollTop = 0;
+		while (scrollEl && scrollEl !== document.body) {
+			if (scrollEl.scrollTop > 0) {
+				scrollTop = scrollEl.scrollTop;
+				break;
+			}
+			scrollEl = scrollEl.parentElement as HTMLElement;
+		}
+
 		containerEl.empty();
 
 		new Setting(containerEl)
@@ -68,6 +87,21 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 		this.plugin.settings.actions.forEach((action, index) => {
 			this.renderAction(containerEl, action, index);
 		});
+
+		// Restore scroll position after DOM is rebuilt.
+		// We use multiple attempts to account for the asynchronous nature of 
+		// TextArea resizing which might affect the total height of the container.
+		if (scrollEl && scrollTop > 0) {
+			const targetScrollEl = scrollEl; // Capture for timeout closure
+			targetScrollEl.scrollTop = scrollTop;
+			
+			setTimeout(() => {
+				targetScrollEl.scrollTop = scrollTop;
+			}, 10);
+			setTimeout(() => {
+				targetScrollEl.scrollTop = scrollTop;
+			}, 50);
+		}
 	}
 
 	/**
@@ -83,6 +117,10 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 		const actionContainer = containerEl.createDiv({
 			cls: 'custom-replace-action-block',
 		});
+		const recentlyMoved = this.recentlyMovedActions.find((m) => m.id === action.id);
+		if (recentlyMoved) {
+			actionContainer.addClass(`custom-replace-moved-${recentlyMoved.dir}`);
+		}
 
 		const headerContainer = actionContainer.createDiv();
 		const rulesContainer = actionContainer.createDiv({
@@ -93,7 +131,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 			rulesContainer.hide();
 		}
 
-		const headerSetting = new Setting(headerContainer)
+		new Setting(headerContainer)
 			.setName('Action name')
 			.setClass('custom-replace-action-header')
 			.addText((text: TextComponent) => {
@@ -111,6 +149,52 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 					.onChange(async (value) => {
 						action.showInContextMenu = value;
 						await this.plugin.saveSettings();
+					});
+			})
+			.addButton((button: ButtonComponent) => {
+				button
+					.setIcon('arrow-up')
+					.setTooltip('Move action up')
+					.setDisabled(index === 0)
+					.onClick(async () => {
+						const actions = this.plugin.settings.actions;
+						const current = actions[index];
+						const previous = actions[index - 1];
+						if (current && previous) {
+							actions[index - 1] = current;
+							actions[index] = previous;
+							this.recentlyMovedActions = [
+								{ id: current.id, dir: 'up' },
+								{ id: previous.id, dir: 'down' },
+							];
+							this.recentlyMovedRules = [];
+							await this.plugin.saveSettings();
+							this.display();
+							this.recentlyMovedActions = [];
+						}
+					});
+			})
+			.addButton((button: ButtonComponent) => {
+				button
+					.setIcon('arrow-down')
+					.setTooltip('Move action down')
+					.setDisabled(index === this.plugin.settings.actions.length - 1)
+					.onClick(async () => {
+						const actions = this.plugin.settings.actions;
+						const current = actions[index];
+						const next = actions[index + 1];
+						if (current && next) {
+							actions[index + 1] = current;
+							actions[index] = next;
+							this.recentlyMovedActions = [
+								{ id: current.id, dir: 'down' },
+								{ id: next.id, dir: 'up' },
+							];
+							this.recentlyMovedRules = [];
+							await this.plugin.saveSettings();
+							this.display();
+							this.recentlyMovedActions = [];
+						}
 					});
 			})
 			.addButton((button: ButtonComponent) => {
@@ -158,6 +242,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 
 		/**
 		 * Updates previews based on test input.
+		 * Applies each rule sequentially to simulate the replacement pipeline.
 		 */
 		const updatePreviews = () => {
 			let currentText = action.testText || '';
@@ -294,6 +379,12 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 		const ruleRow = rulesContainer.createDiv({
 			cls: 'custom-replace-rule-row',
 		});
+		const recentlyMoved = this.recentlyMovedRules.find(
+			(m) => m.actionId === action.id && m.index === index,
+		);
+		if (recentlyMoved) {
+			ruleRow.addClass(`custom-replace-moved-${recentlyMoved.dir}`);
+		}
 
 		const inputsRow = ruleRow.createDiv({
 			cls: 'custom-replace-rule-inputs',
@@ -367,8 +458,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 			text: 'Flags',
 		});
 		new TextComponent(flagsContainer)
-			// eslint-disable-next-line obsidianmd/ui/sentence-case
-			.setPlaceholder('G, i')
+			.setPlaceholder('g, i')
 			.setValue(rule.regexFlags || 'g')
 			.onChange(async (value) => {
 				rule.regexFlags = value;
@@ -376,11 +466,61 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 				await this.plugin.saveSettings();
 			});
 
-		// Remove button
-		const removeBtnContainer = inputsRow.createDiv({
+		// Reorder & Remove buttons
+		const ruleActionsContainer = inputsRow.createDiv({
 			cls: 'custom-replace-remove-col',
 		});
-		new ButtonComponent(removeBtnContainer)
+
+		// Move up
+		new ButtonComponent(ruleActionsContainer)
+			.setIcon('arrow-up')
+			.setTooltip('Move rule up')
+			.setDisabled(index === 0)
+			.onClick(async () => {
+				const rules = action.rules;
+				const current = rules[index];
+				const previous = rules[index - 1];
+
+				if (current && previous) {
+					rules[index - 1] = current;
+					rules[index] = previous;
+					this.recentlyMovedRules = [
+						{ actionId: action.id, index: index - 1, dir: 'up' },
+						{ actionId: action.id, index: index, dir: 'down' },
+					];
+					this.recentlyMovedActions = [];
+					await this.plugin.saveSettings();
+					this.display();
+					this.recentlyMovedRules = [];
+				}
+			});
+
+		// Move down
+		new ButtonComponent(ruleActionsContainer)
+			.setIcon('arrow-down')
+			.setTooltip('Move rule down')
+			.setDisabled(index === action.rules.length - 1)
+			.onClick(async () => {
+				const rules = action.rules;
+				const current = rules[index];
+				const next = rules[index + 1];
+
+				if (current && next) {
+					rules[index + 1] = current;
+					rules[index] = next;
+					this.recentlyMovedRules = [
+						{ actionId: action.id, index: index + 1, dir: 'down' },
+						{ actionId: action.id, index: index, dir: 'up' },
+					];
+					this.recentlyMovedActions = [];
+					await this.plugin.saveSettings();
+					this.display();
+					this.recentlyMovedRules = [];
+				}
+			});
+
+		// Remove button
+		new ButtonComponent(ruleActionsContainer)
 			.setIcon('trash')
 			.setTooltip('Remove rule')
 			.onClick(async () => {
