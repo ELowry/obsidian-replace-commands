@@ -178,6 +178,42 @@
 	padding-top: var(--replace-commands-spacing-xl);
 }
 
+/* Force lowercase for regex flags */
+.custom-replace-flags-input,
+.custom-replace-flags-input::placeholder,
+.custom-replace-flags-list {
+	text-transform: lowercase;
+}
+
+.custom-replace-flags-input:invalid {
+	border-color: var(--text-error);
+	color: var(--text-error);
+}
+
+.custom-replace-flags-error-msg {
+	display: none;
+	position: absolute;
+	top: calc(anchor(bottom) + var(--replace-commands-spacing-xs));
+	left: anchor(center);
+	transform: translateX(-50%);
+	z-index: 10;
+	margin-top: var(--replace-commands-spacing-xs);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	border: var(--replace-commands-border-width) solid var(--text-error);
+	border-radius: var(--replace-commands-radius-sm);
+	background-color: var(--background-primary);
+	padding: var(--replace-commands-spacing-xs) var(--replace-commands-spacing-sm);
+	pointer-events: none;
+	color: var(--text-error);
+	font-weight: bold;
+	font-size: var(--replace-commands-font-size-small);
+	white-space: nowrap;
+}
+
+.custom-replace-flags-input:invalid + .custom-replace-flags-error-msg {
+	display: block;
+}
+
 /* Rule Output/Error */
 .custom-replace-output-col {
 	flex-basis: 100%;

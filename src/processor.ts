@@ -17,10 +17,10 @@ export function processText(text: string, rules: ReplaceRule[]): string {
 		if (rule.useRegex) {
 			try {
 				const flags = rule.regexFlags || 'g';
-				const regex = new RegExp(rule.search, flags);
+				const regex = new RegExp(rule.search, flags.replace(/[\s,]/g, '').toLowerCase());
 				processedText = processedText.replace(regex, rule.replace);
 			} catch {
-				throw new Error(`Invalid Regex: ${rule.search}`);
+				throw new Error(`Invalid Regex: /${rule.search}/${rule.regexFlags || 'g'}`);
 			}
 		} else {
 			const search = rule.search.replace(/\\n/g, '\n').replace(/\\t/g, '\t');

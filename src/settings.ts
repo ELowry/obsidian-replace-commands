@@ -268,7 +268,17 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 				} catch (e) {
 					pipelineBroken = true;
 					box.component.setValue('');
-					box.errorEl.setText(e instanceof Error ? e.message : 'Invalid regex');
+					box.errorEl.empty();
+					const message = e instanceof Error ? e.message : 'Invalid regex';
+					if (message.includes(': ')) {
+						const splitIdx = message.indexOf(': ') + 2;
+						const label = message.substring(0, splitIdx);
+						const pattern = message.substring(splitIdx);
+						box.errorEl.createSpan({ text: label });
+						box.errorEl.createEl('code', { text: pattern });
+					} else {
+						box.errorEl.setText(message);
+					}
 					box.errorEl.show();
 					this.autoResize(box.component.inputEl);
 				}
@@ -457,15 +467,28 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 			cls: 'custom-replace-column-label',
 			text: 'Flags',
 		});
-		new TextComponent(flagsContainer)
-			// eslint-disable-next-line obsidianmd/ui/sentence-case
-			.setPlaceholder('g, i')
+		const flagsText = new TextComponent(flagsContainer)
+			.setPlaceholder('G, i')
 			.setValue(rule.regexFlags || 'g')
 			.onChange(async (value) => {
 				rule.regexFlags = value;
 				updatePreviews();
 				await this.plugin.saveSettings();
 			});
+		const uniqueAnchorId = `--flags-anchor-${action.id}-${index}`;
+		flagsText.inputEl.addClass('custom-replace-flags-input');
+		flagsText.inputEl.setAttr('pattern', '^[gimsuyvdGIMSUYVD\\s,]*$');
+		flagsText.inputEl.style.setProperty('anchor-name', uniqueAnchorId);
+
+		const errorMsg = flagsContainer.createDiv({
+			cls: 'custom-replace-flags-error-msg',
+		});
+		errorMsg.createSpan({ text: 'Can include: ' });
+		errorMsg.createEl('code', {
+			text: 'G, i, m, s, u, y, d, v',
+			cls: 'custom-replace-flags-list',
+		});
+		errorMsg.style.setProperty('position-anchor', uniqueAnchorId);
 
 		// Reorder & Remove buttons
 		const ruleActionsContainer = inputsRow.createDiv({
