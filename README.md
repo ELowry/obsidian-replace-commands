@@ -1,6 +1,6 @@
 # Replace Commands
 
-![License: 0-BSD](https://img.shields.io/badge/License-0--BSD-blue.svg)
+![License: 0-BSD](https://img.shields.io/badge/License-0--BSD-blue.svg) [![Latest GitHub release](https://img.shields.io/github/v/release/ELowry/obsidian-replace-commands?logo=GitHub&color=a4785e)](https://github.com/ELowry/obsidian-replace-commands/releases/latest)
 
 An Obsidian plugin that lets you preconfigure custom search and replace actions using plain text or regex to quickly modify selections or documents.
 
