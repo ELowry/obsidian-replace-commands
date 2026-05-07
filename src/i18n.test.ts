@@ -15,10 +15,10 @@ describe('i18n Translation Helper', () => {
 	});
 
 	it('should return French strings when locale is fr', () => {
-		expect(t('SETTINGS_TITLE')).toBe('Actions de remplacement personnalisé');
+		expect(t('SETTINGS_TITLE')).toBe('Groupes de remplacements personnalisés');
 	});
 
 	it('should properly format dynamic strings', () => {
-		expect(t('NOTICE__ERROR')('Test')).toBe('Erreur de remplacement personnalisé : Test');
+		expect(t('NOTICE__ERROR')('Test')).toBe('Erreur de remplacement: Test');
 	});
 });
