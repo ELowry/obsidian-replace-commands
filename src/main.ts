@@ -2,6 +2,7 @@ import { Editor, Plugin, MenuItem, Menu } from 'obsidian';
 import { CustomReplaceSettings, DEFAULT_SETTINGS } from './types';
 import { CustomReplaceSettingTab } from './settings';
 import { applyReplaceAction } from './engine';
+import { t } from './locales/i18n';
 
 /**
  * Main plugin class for Custom Replace.
@@ -30,7 +31,7 @@ export default class CustomReplacePlugin extends Plugin {
 
 				if (contextMenuActions.length > 0) {
 					menu.addItem((item: MenuItem) => {
-						item.setTitle('Custom replace').setIcon('search');
+						item.setTitle(t('CONTEXT_MENU_TITLE')).setIcon('search');
 
 						interface SubmenuItem extends MenuItem {
 							setSubmenu(): Menu;

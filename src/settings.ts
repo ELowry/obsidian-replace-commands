@@ -9,6 +9,7 @@ import {
 import CustomReplacePlugin from './main';
 import { processText } from './processor';
 import { ReplaceRule, ReplaceAction } from './types';
+import { t } from './locales/i18n';
 
 /**
  * Settings tab for configuring Custom Replace actions and rules.
@@ -56,17 +57,17 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 		containerEl.empty();
 
 		new Setting(containerEl)
-			.setName('Custom replace actions')
-			.setDesc('Manage preset find-and-replace actions.')
+			.setName(t('SETTINGS_TITLE'))
+			.setDesc(t('SETTINGS_DESCRIPTION'))
 			.addButton((button: ButtonComponent) => {
 				button
-					.setButtonText('Add new action')
+					.setButtonText(t('BUTTON_ADD_ACTION'))
 					.setCta()
 					.onClick(async () => {
 						const newId = `replace-action-${Date.now()}`;
 						this.plugin.settings.actions.push({
 							id: newId,
-							name: 'New action',
+							name: t('NEW_ACTION_DEFAULT_NAME'),
 							showInContextMenu: true,
 							showTestBench: true,
 							rules: [
@@ -132,10 +133,10 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 		}
 
 		new Setting(headerContainer)
-			.setName('Action name')
+			.setName(t('ACTION_NAME_LABEL'))
 			.setClass('custom-replace-action-header')
 			.addText((text: TextComponent) => {
-				text.setPlaceholder('Example: remove extra spaces')
+				text.setPlaceholder(t('ACTION_NAME_PLACEHOLDER'))
 					.setValue(action.name)
 					.onChange(async (value) => {
 						action.name = value;
@@ -144,7 +145,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 			})
 			.addToggle((toggle) => {
 				toggle
-					.setTooltip('Show in right-click context menu')
+					.setTooltip(t('ACTION_CONTEXT_MENU_TOOLTIP'))
 					.setValue(action.showInContextMenu)
 					.onChange(async (value) => {
 						action.showInContextMenu = value;
@@ -154,7 +155,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 			.addButton((button: ButtonComponent) => {
 				button
 					.setIcon('arrow-up')
-					.setTooltip('Move action up')
+					.setTooltip(t('BUTTON_MOVE_ACTION_UP'))
 					.setDisabled(index === 0)
 					.onClick(async () => {
 						const actions = this.plugin.settings.actions;
@@ -177,7 +178,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 			.addButton((button: ButtonComponent) => {
 				button
 					.setIcon('arrow-down')
-					.setTooltip('Move action down')
+					.setTooltip(t('BUTTON_MOVE_ACTION_DOWN'))
 					.setDisabled(index === this.plugin.settings.actions.length - 1)
 					.onClick(async () => {
 						const actions = this.plugin.settings.actions;
@@ -201,7 +202,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 				button
 					.setIcon('trash')
 					.setWarning()
-					.setTooltip('Delete action')
+					.setTooltip(t('BUTTON_DELETE_ACTION'))
 					.onClick(async () => {
 						this.plugin.settings.actions.splice(index, 1);
 						this.expandedActions.delete(action.id);
@@ -212,16 +213,16 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 			.addButton((button: ButtonComponent) => {
 				button
 					.setIcon(isExpanded ? 'chevron-down' : 'chevron-right')
-					.setTooltip(isExpanded ? 'Collapse rules' : 'Expand rules')
+					.setTooltip(isExpanded ? t('BUTTON_COLLAPSE_RULES') : t('BUTTON_EXPAND_RULES'))
 					.onClick(() => {
 						if (this.expandedActions.has(action.id)) {
 							this.expandedActions.delete(action.id);
 							rulesContainer.hide();
-							button.setIcon('chevron-right').setTooltip('Expand rules');
+							button.setIcon('chevron-right').setTooltip(t('BUTTON_EXPAND_RULES'));
 						} else {
 							this.expandedActions.add(action.id);
 							rulesContainer.show();
-							button.setIcon('chevron-down').setTooltip('Collapse rules');
+							button.setIcon('chevron-down').setTooltip(t('BUTTON_COLLAPSE_RULES'));
 						}
 					});
 				button.buttonEl.addClass('custom-replace-collapse-btn');
@@ -254,14 +255,14 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 
 				if (pipelineBroken) {
 					box.component.setValue('');
-					box.errorEl.setText('A previous step failed');
+					box.errorEl.setText(t('ERROR_PREVIOUS_STEP_FAILED'));
 					box.errorEl.show();
 					this.autoResize(box.component.inputEl);
 					return;
 				}
 
 				try {
-					currentText = processText(currentText, [rule]);
+					currentText = processText(currentText, [rule]).text;
 					box.component.setValue(currentText);
 					box.errorEl.hide();
 					this.autoResize(box.component.inputEl);
@@ -269,7 +270,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 					pipelineBroken = true;
 					box.component.setValue('');
 					box.errorEl.empty();
-					const message = e instanceof Error ? e.message : 'Invalid regex';
+					const message = e instanceof Error ? e.message : t('ERROR_INVALID_REGEX');
 					if (message.includes(': ')) {
 						const splitIdx = message.indexOf(': ') + 2;
 						const label = message.substring(0, splitIdx);
@@ -286,7 +287,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 		};
 
 		new Setting(rulesContainer)
-			.setName('Live preview test bench')
+			.setName(t('TEST_BENCH_LABEL'))
 			.setClass('custom-replace-test-toggle')
 			.addToggle((toggle) => {
 				toggle.setValue(action.showTestBench ?? true).onChange(async (value) => {
@@ -315,11 +316,11 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 
 		testInputContainer.createEl('label', {
 			cls: 'custom-replace-label',
-			text: 'Test input',
+			text: t('TEST_INPUT_LABEL'),
 		});
 
 		const testInput = new TextAreaComponent(testInputContainer)
-			.setPlaceholder('Paste sample text here to test your rules...')
+			.setPlaceholder(t('TEST_INPUT_PLACEHOLDER'))
 			.setValue(action.testText || '');
 
 		testInput.inputEl.addClass('custom-replace-textarea');
@@ -353,7 +354,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 
 		new ButtonComponent(addRuleContainer)
 			.setIcon('plus')
-			.setButtonText('Add new rule')
+			.setButtonText(t('BUTTON_ADD_RULE'))
 			.onClick(async () => {
 				action.rules.push({
 					search: '',
@@ -406,10 +407,10 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 		});
 		searchContainer.createEl('label', {
 			cls: 'custom-replace-column-label',
-			text: 'Search',
+			text: t('RULE_SEARCH_LABEL'),
 		});
 		new TextComponent(searchContainer)
-			.setPlaceholder('Search...')
+			.setPlaceholder(t('RULE_SEARCH_PLACEHOLDER'))
 			.setValue(rule.search)
 			.onChange(async (value) => {
 				rule.search = value;
@@ -423,10 +424,10 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 		});
 		replaceContainer.createEl('label', {
 			cls: 'custom-replace-column-label',
-			text: 'Replace',
+			text: t('RULE_REPLACE_LABEL'),
 		});
 		new TextComponent(replaceContainer)
-			.setPlaceholder('Replace with...')
+			.setPlaceholder(t('RULE_REPLACE_PLACEHOLDER'))
 			.setValue(rule.replace)
 			.onChange(async (value) => {
 				rule.replace = value;
@@ -440,7 +441,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 		});
 		regexToggleContainer.createEl('label', {
 			cls: 'custom-replace-column-label',
-			text: 'Regex',
+			text: t('RULE_REGEX_LABEL'),
 		});
 
 		const flagsContainer = inputsRow.createDiv({
@@ -465,7 +466,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 		// Flags
 		flagsContainer.createEl('label', {
 			cls: 'custom-replace-column-label',
-			text: 'Flags',
+			text: t('RULE_FLAGS_LABEL'),
 		});
 		const flagsText = new TextComponent(flagsContainer)
 			.setPlaceholder('G, i')
@@ -483,7 +484,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 		const errorMsg = flagsContainer.createDiv({
 			cls: 'custom-replace-flags-error-msg',
 		});
-		errorMsg.createSpan({ text: 'Can include: ' });
+		errorMsg.createSpan({ text: t('RULE_FLAGS_INFO') });
 		errorMsg.createEl('code', {
 			text: 'G, i, m, s, u, y, d, v',
 			cls: 'custom-replace-flags-list',
@@ -498,7 +499,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 		// Move up
 		new ButtonComponent(ruleActionsContainer)
 			.setIcon('arrow-up')
-			.setTooltip('Move rule up')
+			.setTooltip(t('BUTTON_MOVE_RULE_UP'))
 			.setDisabled(index === 0)
 			.onClick(async () => {
 				const rules = action.rules;
@@ -522,7 +523,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 		// Move down
 		new ButtonComponent(ruleActionsContainer)
 			.setIcon('arrow-down')
-			.setTooltip('Move rule down')
+			.setTooltip(t('BUTTON_MOVE_RULE_DOWN'))
 			.setDisabled(index === action.rules.length - 1)
 			.onClick(async () => {
 				const rules = action.rules;
@@ -546,7 +547,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 		// Remove button
 		new ButtonComponent(ruleActionsContainer)
 			.setIcon('trash')
-			.setTooltip('Remove rule')
+			.setTooltip(t('BUTTON_REMOVE_RULE'))
 			.onClick(async () => {
 				action.rules.splice(index, 1);
 				await this.plugin.saveSettings();
@@ -565,7 +566,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 		const isLastRule = index === action.rules.length - 1;
 		const outputLabel = outputContainer.createEl('label', {
 			cls: 'custom-replace-step-label',
-			text: isLastRule ? 'Final output' : 'Step output',
+			text: isLastRule ? t('FINAL_OUTPUT_LABEL') : t('STEP_OUTPUT_LABEL'),
 		});
 		if (isLastRule) {
 			outputLabel.addClass('custom-replace-final-label');

@@ -12,7 +12,7 @@ describe('Custom Replace Engine', () => {
 	it('should replace basic plain text', () => {
 		const text = 'Hello world';
 		const rules: ReplaceRule[] = [{ search: 'world', replace: 'Obsidian', useRegex: false }];
-		expect(processText(text, rules)).toBe('Hello Obsidian');
+		expect(processText(text, rules).text).toBe('Hello Obsidian');
 	});
 
 	/**
@@ -21,7 +21,7 @@ describe('Custom Replace Engine', () => {
 	it('should parse plaintext escaped newlines (\\n)', () => {
 		const text = 'Line 1\nLine 2';
 		const rules: ReplaceRule[] = [{ search: '\\n', replace: ' - ', useRegex: false }];
-		expect(processText(text, rules)).toBe('Line 1 - Line 2');
+		expect(processText(text, rules).text).toBe('Line 1 - Line 2');
 	});
 
 	/**
@@ -32,7 +32,7 @@ describe('Custom Replace Engine', () => {
 		const rules: ReplaceRule[] = [
 			{ search: '(\\w+), (\\w+)', replace: '$2 $1', useRegex: true, regexFlags: 'g' },
 		];
-		expect(processText(text, rules)).toBe('Firstname Lastname');
+		expect(processText(text, rules).text).toBe('Firstname Lastname');
 	});
 
 	/**

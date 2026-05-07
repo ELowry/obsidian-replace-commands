@@ -1,6 +1,7 @@
 import { Editor, Notice, EditorPosition } from 'obsidian';
 import { ReplaceAction } from './types';
 import { processText } from './processor';
+import { t } from './locales/i18n';
 
 /**
  * Reorders selection bounds to ensure from <= to.
@@ -33,6 +34,8 @@ export function applyReplaceAction(editor: Editor, action: ReplaceAction) {
 			|| selection.anchor.ch !== selection.head.ch,
 	);
 
+	let totalMatchCount = 0;
+
 	try {
 		if (hasSelection) {
 			const changes = selections
@@ -41,10 +44,12 @@ export function applyReplaceAction(editor: Editor, action: ReplaceAction) {
 					const text = editor.getRange(from, to);
 
 					if (text.length > 0) {
+						const processed = processText(text, action.rules);
+						totalMatchCount += processed.matchCount;
 						return {
 							from,
 							to,
-							text: processText(text, action.rules),
+							text: processed.text,
 						};
 					}
 					return null;
@@ -56,7 +61,9 @@ export function applyReplaceAction(editor: Editor, action: ReplaceAction) {
 			}
 		} else {
 			const textToProcess = editor.getValue();
-			const finalText = processText(textToProcess, action.rules);
+			const processed = processText(textToProcess, action.rules);
+			const finalText = processed.text;
+			totalMatchCount += processed.matchCount;
 
 			editor.transaction({
 				changes: [
@@ -72,11 +79,11 @@ export function applyReplaceAction(editor: Editor, action: ReplaceAction) {
 			});
 		}
 
-		new Notice(`Applied "${action.name}"`);
+		new Notice(t('NOTICE__APPLIED_CHANGES')(action.name, totalMatchCount));
 	} catch (error) {
 		console.error(error);
 		new Notice(
-			`Custom replace error: ${error instanceof Error ? error.message : 'Invalid regex'}`,
+			t('NOTICE__ERROR')(error instanceof Error ? error.message : t('ERROR_INVALID_REGEX')),
 		);
 	}
 }
