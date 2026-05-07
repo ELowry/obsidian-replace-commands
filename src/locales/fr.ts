@@ -7,19 +7,19 @@ export default {
 
 	// Settings: Action Block
 	NEW_ACTION_DEFAULT_NAME: 'Nouveau groupe de remplacements',
-	ACTION_NAME_LABEL: "Nom du groupe de remplacements",
+	ACTION_NAME_LABEL: 'Nom du groupe de remplacements',
 	ACTION_NAME_PLACEHOLDER: 'Exemple: supprimer les espaces en trop',
 	ACTION_CONTEXT_MENU_TOOLTIP: 'Afficher dans le menu contextuel (clic droit)',
-	BUTTON_MOVE_ACTION_UP: "Déplacer le groupe vers le haut",
-	BUTTON_MOVE_ACTION_DOWN: "Déplacer le groupe vers le bas",
-	BUTTON_DELETE_ACTION: "Supprimer le groupe",
+	BUTTON_MOVE_ACTION_UP: 'Déplacer le groupe vers le haut',
+	BUTTON_MOVE_ACTION_DOWN: 'Déplacer le groupe vers le bas',
+	BUTTON_DELETE_ACTION: 'Supprimer le groupe',
 	BUTTON_COLLAPSE_RULES: 'Masquer les règles',
 	BUTTON_EXPAND_RULES: 'Afficher les règles',
 
 	// Settings: Test Bench
-	TEST_BENCH_LABEL: "Zone de prévisualisation",
+	TEST_BENCH_LABEL: 'Zone de prévisualisation',
 	TEST_INPUT_LABEL: 'Texte à modifier',
-	TEST_INPUT_PLACEHOLDER: "Collez votre texte ici pour prévisualiser les remplacements...",
+	TEST_INPUT_PLACEHOLDER: 'Collez votre texte ici pour prévisualiser les remplacements...',
 	BUTTON_ADD_RULE: 'Ajouter une règle',
 	ERROR_PREVIOUS_STEP_FAILED: 'Étape précédente invalide',
 	ERROR_INVALID_REGEX: 'Regex invalide',
