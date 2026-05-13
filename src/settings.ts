@@ -1,3 +1,5 @@
+/* global activeDocument, activeWindow */
+
 import {
 	App,
 	PluginSettingTab,
@@ -46,7 +48,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 		// when the settings view is completely emptied and rebuilt.
 		let scrollEl: HTMLElement | null = containerEl;
 		let scrollTop = 0;
-		while (scrollEl && scrollEl !== document.body) {
+		while (scrollEl && scrollEl !== activeDocument.body) {
 			if (scrollEl.scrollTop > 0) {
 				scrollTop = scrollEl.scrollTop;
 				break;
@@ -96,10 +98,10 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 			const targetScrollEl = scrollEl; // Capture for timeout closure
 			targetScrollEl.scrollTop = scrollTop;
 
-			setTimeout(() => {
+			activeWindow.setTimeout(() => {
 				targetScrollEl.scrollTop = scrollTop;
 			}, 10);
-			setTimeout(() => {
+			activeWindow.setTimeout(() => {
 				targetScrollEl.scrollTop = scrollTop;
 			}, 50);
 		}
@@ -295,7 +297,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 					if (value) {
 						testInputContainer.show();
 						outputContainers.forEach((c) => c.show());
-						setTimeout(() => {
+						activeWindow.setTimeout(() => {
 							this.autoResize(testInput.inputEl);
 							outputBoxes.forEach((box) => this.autoResize(box.component.inputEl));
 						}, 10);
@@ -592,7 +594,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 	 */
 	private autoResize(el: HTMLTextAreaElement | HTMLElement): void {
 		if (el.style.display === 'none' || el.offsetParent === null) return;
-		setTimeout(() => {
+		activeWindow.setTimeout(() => {
 			el.setCssProps({ height: 'auto' });
 			el.setCssProps({ height: `${el.scrollHeight}px` });
 		}, 0);
