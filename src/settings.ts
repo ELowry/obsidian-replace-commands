@@ -1,4 +1,4 @@
-/* global activeDocument, activeWindow */
+/* global activeDocument -- Provided by Obsidian environment */
 
 import {
 	App,
@@ -98,10 +98,10 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 			const targetScrollEl = scrollEl; // Capture for timeout closure
 			targetScrollEl.scrollTop = scrollTop;
 
-			activeWindow.setTimeout(() => {
+			window.setTimeout(() => {
 				targetScrollEl.scrollTop = scrollTop;
 			}, 10);
-			activeWindow.setTimeout(() => {
+			window.setTimeout(() => {
 				targetScrollEl.scrollTop = scrollTop;
 			}, 50);
 		}
@@ -297,7 +297,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 					if (value) {
 						testInputContainer.show();
 						outputContainers.forEach((c) => c.show());
-						activeWindow.setTimeout(() => {
+						window.setTimeout(() => {
 							this.autoResize(testInput.inputEl);
 							outputBoxes.forEach((box) => this.autoResize(box.component.inputEl));
 						}, 10);
@@ -594,7 +594,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 	 */
 	private autoResize(el: HTMLTextAreaElement | HTMLElement): void {
 		if (el.style.display === 'none' || el.offsetParent === null) return;
-		activeWindow.setTimeout(() => {
+		window.setTimeout(() => {
 			el.setCssProps({ height: 'auto' });
 			el.setCssProps({ height: `${el.scrollHeight}px` });
 		}, 0);
