@@ -50,12 +50,6 @@ To install the plugin manually from GitHub:
 2. Extract the files and copy `main.js`, `manifest.json`, and `styles.css` to your vault at `YourVaultFolder/.obsidian/plugins/replace-commands/`.
 3. Open Obsidian, go to **Settings → Community plugins**, and toggle on **Replace Commands**.
 
-## Development
+## Contributing
 
-If you want to build this plugin locally or contribute:
-
-1. Clone this repo.
-2. Make sure your NodeJS is at least v16 (`node --version`).
-3. Run `npm i` or `yarn` to install dependencies.
-4. Run `npm run dev` to start compilation in watch mode.
-5. Place the project folder inside your `.obsidian/plugins/` directory to test it live in Obsidian.
+Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to set up the development environment and the contribution guidelines.
