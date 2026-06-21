@@ -173,6 +173,7 @@
 
 .custom-replace-remove-col {
 	display: flex;
+	position: relative;
 	flex-shrink: 0;
 	align-items: center;
 	padding-top: var(--replace-commands-spacing-xl);
@@ -193,8 +194,8 @@
 .custom-replace-flags-error-msg {
 	display: none;
 	position: absolute;
-	top: calc(anchor(bottom) + var(--replace-commands-spacing-xs));
-	left: anchor(center);
+	top: calc(100% + var(--replace-commands-spacing-xs));
+	left: 50%;
 	transform: translateX(-50%);
 	z-index: 10;
 	margin-top: var(--replace-commands-spacing-xs);
@@ -208,6 +209,12 @@
 	font-weight: bold;
 	font-size: var(--replace-commands-font-size-small);
 	white-space: nowrap;
+}
+@supports (top: anchor(bottom)) {
+	.custom-replace-flags-error-msg {
+		top: calc(anchor(bottom) + var(--replace-commands-spacing-xs));
+		left: anchor(center);
+	}
 }
 
 .custom-replace-flags-input:invalid + .custom-replace-flags-error-msg {

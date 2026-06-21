@@ -24,7 +24,7 @@ export function processText(
 				const cleanedFlags = flags.replace(/[\s,]/g, '').toLowerCase();
 				const regex = new RegExp(rule.search, cleanedFlags);
 
-				const matches = processedText.match(new RegExp(rule.search, cleanedFlags));
+				const matches = processedText.match(regex);
 				if (matches) {
 					matchCount += cleanedFlags.includes('g') ? matches.length : 1;
 				}
@@ -40,7 +40,7 @@ export function processText(
 			if (search.length > 0) {
 				matchCount += processedText.split(search).length - 1;
 			}
-			processedText = processedText.replaceAll(search, replace);
+			processedText = processedText.split(search).join(replace);
 		}
 	}
 

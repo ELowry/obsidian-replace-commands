@@ -53,7 +53,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 				scrollTop = scrollEl.scrollTop;
 				break;
 			}
-			scrollEl = scrollEl.parentElement as HTMLElement;
+			scrollEl = scrollEl.parentElement;
 		}
 
 		containerEl.empty();
