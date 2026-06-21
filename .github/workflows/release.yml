@@ -67,11 +67,32 @@ jobs:
               with:
                   subject-path: 'release-assets/*'
 
+            - name: Generate Release Notes
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  gh api \
+                    --method POST \
+                    -H "Accept: application/vnd.github+json" \
+                    -H "X-GitHub-Api-Version: 2026-03-10" \
+                    /repos/${{ github.repository }}/releases/generate-notes \
+                    -f tag_name="${{ github.ref_name }}" \
+                    -q .body > generated_notes.txt
+
             - name: Create GitHub Release
+              id: create_release
               uses: softprops/action-gh-release@v3
               with:
                   files: release-assets/*
-                  draft: false
-                  generate_release_notes: true
+                  draft: true
+                  body_path: generated_notes.txt
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Notify Discord
+              uses: ELowry/discord-draft-notifier@v1
+              with:
+                  webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+                  version: ${{ github.ref_name }}
+                  release_url: ${{ steps.create_release.outputs.url }}
+                  notes_file_path: generated_notes.txt
