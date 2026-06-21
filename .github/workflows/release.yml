@@ -17,6 +17,8 @@ jobs:
         steps:
             - name: Checkout Code
               uses: actions/checkout@v6
+              with:
+                  fetch-depth: 0
 
             - name: Setup Node.js
               uses: actions/setup-node@v6
@@ -68,16 +70,21 @@ jobs:
                   subject-path: 'release-assets/*'
 
             - name: Generate Release Notes
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
-                  gh api \
-                    --method POST \
-                    -H "Accept: application/vnd.github+json" \
-                    -H "X-GitHub-Api-Version: 2026-03-10" \
-                    /repos/${{ github.repository }}/releases/generate-notes \
-                    -f tag_name="${{ github.ref_name }}" \
-                    -q .body > generated_notes.txt
+                  # Find the second most recent tag (the previous release)
+                  PREV_TAG=$(git tag --sort=-creatordate | sed -n '2p')
+
+                  # If a previous tag exists, log commits between then and now
+                  if [ -n "$PREV_TAG" ]; then
+                    git log ${PREV_TAG}..${{ github.ref_name }} --pretty=format:"- %s" > generated_notes.txt
+                  else
+                    # Fallback for the very first release
+                    git log -5 --pretty=format:"- %s" > generated_notes.txt
+                  fi
+
+                  # Optional: Append the comparison link at the bottom
+                  echo "" >> generated_notes.txt
+                  echo "**Full Changelog:** https://github.com/${{ github.repository }}/compare/${PREV_TAG}...${{ github.ref_name }}" >> generated_notes.txt
 
             - name: Create GitHub Release
               id: create_release
