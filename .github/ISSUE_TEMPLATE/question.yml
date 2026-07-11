@@ -1,0 +1,21 @@
+name: Question
+description: You have a question about the Replace Commands plugin or how to use it.
+title: '[Question] '
+labels: ['question']
+assignees:
+    - ELowry
+body:
+    - type: markdown
+      attributes:
+          value: |
+              > [!IMPORTANT]  
+              > This template is for asking questions about the plugin or how to use it.
+              > 
+              > If you are describing a bug, or a new feature you would like to see implemented, please use the [Bug Report](https://github.com/ELowry/obsidian-replace-commands/issues/new?template=bug-report.yml) or [Feature Request](https://github.com/ELowry/obsidian-replace-commands/issues/new?template=feature-request.yml) templates instead.
+    - type: textarea
+      id: question-details
+      attributes:
+          label: Your Question
+          description: Describe what your question is. If it is about a specific search/replace regex pattern you are trying to build, feel free to include the text you are working with!
+      validations:
+          required: true

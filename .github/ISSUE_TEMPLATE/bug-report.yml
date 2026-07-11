@@ -1,0 +1,73 @@
+name: Bug Report
+description: Report any bugs or issues with the Replace Commands plugin.
+title: '[Bug]: '
+labels: ['bug']
+assignees:
+    - ELowry
+body:
+    - type: markdown
+      attributes:
+          value: |
+              > [!IMPORTANT]  
+              > This template is for reporting bugs or issues encountered while using Replace Commands.
+              > 
+              > Please use the [Feature Requests template](https://github.com/ELowry/obsidian-replace-commands/issues/new?template=feature-request.yml) for suggesting new features or improvements.
+
+    - type: input
+      id: plugin-version
+      attributes:
+          label: Plugin Version
+          description: What version of Replace Commands are you using? (Found in Settings -> Community plugins)
+          placeholder: e.g. 1.0.0
+      validations:
+          required: true
+
+    - type: input
+      id: obsidian-version
+      attributes:
+          label: Obsidian Version
+          description: What version of Obsidian are you running? (Found in Settings -> About)
+          placeholder: e.g. 1.5.12
+      validations:
+          required: true
+
+    - type: input
+      id: os-version
+      attributes:
+          label: Operating System
+          description: What OS are you using?
+          placeholder: e.g. Windows 11, macOS Sonoma, Android 16
+      validations:
+          required: true
+
+    - type: textarea
+      id: problem-rules
+      attributes:
+          label: Search/Replace Rules Used (If applicable)
+          description: If the bug happened while running a specific action, please paste your exact search and replace terms here. Indicate whether "Use regex" was toggled on or off, and which flags were enabled.
+      validations:
+          required: false
+
+    - type: textarea
+      id: issue-description
+      attributes:
+          label: Describe the issue
+          description: Please describe the issue you encountered as clearly as possible. Did it happen using the command palette, context menu, or in the live preview test bench?
+      validations:
+          required: true
+
+    - type: textarea
+      id: expected-behavior
+      attributes:
+          label: Expected behavior
+          description: How should the plugin have behaved?
+      validations:
+          required: true
+
+    - type: textarea
+      id: screenshots
+      attributes:
+          label: Screenshots or Developer Console Logs
+          description: If you have screenshots of the issue, or error logs from the Obsidian Developer Console (Ctrl+Shift+I / Cmd+Option+I), please paste them here.
+      validations:
+          required: false
