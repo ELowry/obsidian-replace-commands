@@ -41,7 +41,14 @@ If you want to build this plugin locally or contribute code, follow these steps:
 
 ### Reporting Bugs & Requesting Features
 
-Please [open an issue on GitHub](https://github.com/elowry/obsidian-replace-commands/issues/new/choose), and select the appropriate template to use (bug report, feature request, or general question).
+Please [open an issue on GitHub](https://github.com/ELowry/obsidian-replace-commands/issues/new/choose), and select the appropriate template to use (bug report, feature request, or general question).
+
+### Translation
+
+You can help translate Obsidian Replace Commands [using Weblate](https://hosted.weblate.org/engage/elowry/) (or a pull request if you prefer).  
+_Please note that the weblate page includes other projects I work on so please pay attention to which one you are contributing to._
+
+[![Translation status](https://hosted.weblate.org/widget/elowry/obsidian-replace-commands/multi-auto.svg)](https://hosted.weblate.org/engage/elowry/)
 
 ### Submitting Pull Requests
 
