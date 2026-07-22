@@ -84,6 +84,7 @@ jobs:
 
                   # Optional: Append the comparison link at the bottom
                   echo "" >> generated_notes.txt
+                  echo "" >> generated_notes.txt
                   echo "**Full Changelog:** https://github.com/${{ github.repository }}/compare/${PREV_TAG}...${{ github.ref_name }}" >> generated_notes.txt
 
             - name: Create GitHub Release
