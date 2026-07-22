@@ -13,22 +13,25 @@
     "check-format": "prettier --check \"src/**/*.{ts,js,css}\" styles.css --config .prettierrc",
     "test": "vitest run"
   },
-  "keywords": [],
+  "keywords": [
+    "Obsidian plugin",
+    "Prettier"
+  ],
   "license": "0-BSD",
   "devDependencies": {
-    "@eslint/js": "^9.39.4",
+    "@eslint/js": "^9.39.5",
     "@types/node": "^20.19.43",
     "esbuild": "^0.28.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-obsidianmd": "^0.3.0",
     "globals": "^17.7.0",
     "jiti": "^2.7.0",
-    "prettier": "^3.9.4",
+    "prettier": "^3.9.6",
     "prettier-plugin-css-order": "^2.2.0",
     "tslib": "^2.8.1",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.62.1",
-    "vitest": "^4.1.9"
+    "typescript-eslint": "^8.65.0",
+    "vitest": "^4.1.10"
   },
   "dependencies": {
     "obsidian": "1.7.2"
