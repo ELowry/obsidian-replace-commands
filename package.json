@@ -34,7 +34,7 @@
     "vitest": "^4.1.10"
   },
   "dependencies": {
-    "obsidian": "1.7.2"
+    "obsidian": "1.13.1"
   },
   "allowScripts": {
     "esbuild@0.28.1": true
