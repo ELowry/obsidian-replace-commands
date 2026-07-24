@@ -19,7 +19,7 @@
   ],
   "license": "0-BSD",
   "devDependencies": {
-    "@eslint/js": "^10.0.0",
+    "@eslint/js": "^10.0.1",
     "@types/node": "^26.1.1",
     "esbuild": "^0.28.1",
     "eslint-config-prettier": "^10.1.8",
