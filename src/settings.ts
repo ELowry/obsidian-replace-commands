@@ -42,17 +42,9 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 	 * Renders the settings view.
 	 */
 	display(): void {
-		this.renderCustomUI(this.containerEl);
-	}
+		const { containerEl } = this;
+		containerEl.empty();
 
-	/**
-	 * Core UI builder for the settings tab.
-	 *
-	 * @private
-	 * @param {HTMLElement} containerEl - The DOM element where the settings UI should be injected.
-	 * @returns {void}
-	 */
-	private renderCustomUI(containerEl: HTMLElement): void {
 		// Capture the closest scrolling container and its position to prevent bad UX jumps
 		// when the settings view is completely emptied and rebuilt.
 		let scrollEl: HTMLElement | null = containerEl;
@@ -101,8 +93,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 		});
 
 		// Restore scroll position after DOM is rebuilt.
-		// We use multiple attempts to account for the asynchronous nature of
-		// TextArea resizing which might affect the total height of the container.
+		// Multiple attempts account for the asynchronous nature of TextArea resizing which might affect the total height of the container.
 		if (scrollEl && scrollTop > 0) {
 			const targetScrollEl = scrollEl; // Capture for timeout closure
 			targetScrollEl.scrollTop = scrollTop;
@@ -114,30 +105,6 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 				targetScrollEl.scrollTop = scrollTop;
 			}, 50);
 		}
-	}
-
-	/**
-	 * Declarative settings for Obsidian 1.13.0+.
-	 *
-	 * @public
-	 * @returns {Array<any>} An array of setting definitions.
-	 */
-	public getSettingDefinitions() {
-		return [
-			{
-				name: t('SETTINGS_TITLE'),
-				desc: t('SETTINGS_DESCRIPTION'),
-
-				/**
-				 * Custom render callback to bypass standard controls.
-				 * @param {HTMLElement} settingItemEl - The container element for this setting row.
-				 */
-				render: (settingItemEl: HTMLElement) => {
-					settingItemEl.empty();
-					this.renderCustomUI(settingItemEl);
-				},
-			},
-		];
 	}
 
 	/**
