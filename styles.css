@@ -68,15 +68,19 @@ body {
 }
 
 /* Test Bench Controls */
-.custom-replace-test-toggle.setting-item {
+.modal.custom-replace-wide-modal
+	.modal-content
+	.custom-replace-test-toggle.setting-item.setting-item {
 	position: relative;
 	margin-bottom: var(--replace-commands-spacing-md);
-	padding-top: var(--replace-commands-spacing-lg) !important;
-	padding-bottom: var(--replace-commands-spacing-lg) !important;
+	padding-top: var(--replace-commands-spacing-lg);
+	padding-bottom: var(--replace-commands-spacing-lg);
 }
 
 @media (min-width: 600px) and (min-height: 500px) {
-	.custom-replace-test-toggle.setting-item {
+	.modal.custom-replace-wide-modal
+		.modal-content
+		.custom-replace-test-toggle.setting-item.setting-item {
 		position: sticky;
 		top: calc(0px - var(--size-4-4));
 		z-index: 10;
@@ -86,13 +90,17 @@ body {
 	}
 
 	@supports (container-type: scroll-state) {
-		.custom-replace-test-toggle.setting-item {
+		.modal.custom-replace-wide-modal
+			.modal-content
+			.custom-replace-test-toggle.setting-item.setting-item {
 			container-type: scroll-state;
 			border-bottom: none;
 			background-color: transparent;
 		}
 
-		.custom-replace-test-toggle.setting-item::before {
+		.modal.custom-replace-wide-modal
+			.modal-content
+			.custom-replace-test-toggle.setting-item.setting-item::before {
 			position: absolute;
 			z-index: -1;
 			transition:
@@ -106,7 +114,9 @@ body {
 		}
 
 		@container scroll-state(stuck: top) {
-			.custom-replace-test-toggle.setting-item::before {
+			.modal.custom-replace-wide-modal
+				.modal-content
+				.custom-replace-test-toggle.setting-item.setting-item::before {
 				box-shadow: var(--replace-commands-box-shadow-bottom);
 				border-bottom-color: var(--replace-commands-border-color);
 				background-color: var(--background-primary);
@@ -134,8 +144,9 @@ body {
 	margin-bottom: var(--replace-commands-spacing-lg);
 }
 
-.custom-replace-input-error {
-	border-color: var(--text-error) !important;
+input[type='text'].custom-replace-input-error,
+textarea.custom-replace-input-error {
+	border-color: var(--text-error);
 }
 
 /* Action Configuration Grid */
@@ -155,9 +166,12 @@ body {
 	border-top: none;
 }
 
-.custom-replace-config-grid .setting-item {
+.modal.custom-replace-wide-modal
+	.modal-content
+	.custom-replace-config-grid
+	.setting-item.setting-item {
 	align-items: center;
-	border-top: none !important;
+	border-top: none;
 }
 
 .custom-replace-config-grid .custom-replace-name-error-msg {
@@ -171,8 +185,11 @@ body {
 		background-color: var(--background-primary-alt);
 	}
 
-	.custom-replace-config-grid .setting-item {
-		padding: var(--replace-commands-spacing-sm) !important;
+	.modal.custom-replace-wide-modal
+		.modal-content
+		.custom-replace-config-grid
+		.setting-item.setting-item {
+		padding: var(--replace-commands-spacing-sm);
 	}
 }
 
@@ -273,11 +290,13 @@ body {
 	align-items: center;
 }
 
-.custom-replace-toggle-inner.setting-item {
+.modal.custom-replace-wide-modal
+	.modal-content
+	.custom-replace-toggle-inner.setting-item.setting-item {
 	border: none;
-	border-top: unset !important;
+	border-top: unset;
 	background: none;
-	padding: 0 !important;
+	padding: 0;
 }
 
 /* Force lowercase for regex flags */
