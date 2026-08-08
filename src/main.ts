@@ -79,7 +79,6 @@ export default class CustomReplacePlugin extends Plugin {
 	registerActionCommands() {
 		this.registeredActionIds.forEach((id) => {
 			try {
-				// @ts-ignore - removeCommand is available in modern Obsidian but not in all type definitions
 				if (typeof this.removeCommand === 'function') {
 					this.removeCommand(id);
 				}

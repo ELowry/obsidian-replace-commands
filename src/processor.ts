@@ -4,9 +4,9 @@ import { ReplaceRule } from './types';
  * Applies search and replace rules to text in sequence.
  *
  * @param text - The input string to transform.
- * @param rules - Array of rules to apply sequentially.
+ * @param rules - Array of {@link ReplaceRule} objects to apply.
  * @returns An object containing the transformed string and the number of matches replaced.
- * @throws Error if a regex pattern is invalid.
+ * @throws {Error} If a regex pattern is invalid.
  */
 export function processText(
 	text: string,
@@ -16,7 +16,9 @@ export function processText(
 	let matchCount = 0;
 
 	for (const rule of rules) {
-		if (!rule.search) continue;
+		if (!rule.search) {
+			continue;
+		}
 
 		if (rule.useRegex) {
 			try {

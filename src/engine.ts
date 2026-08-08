@@ -14,8 +14,14 @@ function getOrderedBounds(
 	anchor: EditorPosition,
 	head: EditorPosition,
 ): { from: EditorPosition; to: EditorPosition } {
-	if (anchor.line < head.line) return { from: anchor, to: head };
-	if (anchor.line > head.line) return { from: head, to: anchor };
+	if (anchor.line < head.line) {
+		return { from: anchor, to: head };
+	}
+
+	if (anchor.line > head.line) {
+		return { from: head, to: anchor };
+	}
+
 	return anchor.ch < head.ch ? { from: anchor, to: head } : { from: head, to: anchor };
 }
 

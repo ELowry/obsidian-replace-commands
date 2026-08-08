@@ -7,6 +7,9 @@ import fr from './fr.json';
 // import tr from './tr.json';
 // import zh_Hans from './zh_Hans.json';
 
+/**
+ * Map of language codes mapped to translations.
+ */
 const localeMap: Record<string, Partial<typeof en>> = {
 	en,
 	es,
@@ -16,6 +19,13 @@ const localeMap: Record<string, Partial<typeof en>> = {
 	// "zh-cn": zh_Hans,
 };
 
+/**
+ * Retrieves and formats a localized string based on the active Obsidian application language.
+ *
+ * @param key - The translation key.
+ * @param args - Optional dynamic values injected into placeholders.
+ * @returns The formatted translation string.
+ */
 export function t(key: keyof typeof en, ...args: (string | number)[]): string {
 	const currentLanguage = moment.locale();
 

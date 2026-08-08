@@ -12,6 +12,9 @@ export interface ReplaceRule {
 	regexFlags?: string;
 }
 
+/**
+ * Custom replace action definition.
+ */
 export interface ReplaceAction {
 	/** Unique action ID. */
 	id: string;

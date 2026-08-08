@@ -1,48 +1,107 @@
-import { describe, expect, it } from 'vitest';
-import { processText } from './processor';
-import { ReplaceRule } from './types';
+import { vi, describe, it, expect, beforeEach, Mock } from 'vitest';
+import { Editor } from 'obsidian';
+import { applyReplaceAction } from './engine';
+import { ReplaceAction } from './types';
 
-/**
- * Unit tests for text processing logic.
- */
-describe('Custom Replace Engine', () => {
-	/**
-	 * Plain text replacement.
-	 */
-	it('should replace basic plain text', () => {
-		const text = 'Hello world';
-		const rules: ReplaceRule[] = [{ search: 'world', replace: 'Obsidian', useRegex: false }];
-		expect(processText(text, rules).text).toBe('Hello Obsidian');
+// Mock Obsidian's Notice and moment classes so the tests don't crash when called
+vi.mock('obsidian', () => {
+	return {
+		Notice: vi.fn(),
+		moment: {
+			locale: vi.fn(() => 'en'),
+		},
+	};
+});
+interface MockEditor {
+	listSelections: Mock;
+	getRange: Mock;
+	getValue: Mock;
+	lastLine: Mock;
+	getLine: Mock;
+	transaction: Mock;
+}
+
+describe('Engine (applyReplaceAction)', () => {
+	let mockEditor: MockEditor;
+	let mockAction: ReplaceAction;
+
+	beforeEach(() => {
+		// Reset the mocked editor before each test to ensure a clean slate
+		mockEditor = {
+			listSelections: vi.fn(),
+			getRange: vi.fn(),
+			getValue: vi.fn(),
+			lastLine: vi.fn(),
+			getLine: vi.fn(),
+			transaction: vi.fn(),
+		};
+
+		mockAction = {
+			id: 'test-action',
+			name: 'Test Action',
+			showInContextMenu: true,
+			rules: [{ search: 'apple', replace: 'orange', useRegex: false }],
+		};
 	});
 
-	/**
-	 * Plain text newline unescaping (\n).
-	 */
-	it('should parse plaintext escaped newlines (\\n)', () => {
-		const text = 'Line 1\nLine 2';
-		const rules: ReplaceRule[] = [{ search: '\\n', replace: ' - ', useRegex: false }];
-		expect(processText(text, rules).text).toBe('Line 1 - Line 2');
+	it('should process the entire document when nothing is selected', () => {
+		mockEditor.listSelections.mockReturnValue([
+			{ anchor: { line: 0, ch: 0 }, head: { line: 0, ch: 0 } },
+		]);
+		mockEditor.getValue.mockReturnValue('I have an apple.');
+		mockEditor.lastLine.mockReturnValue(0);
+		mockEditor.getLine.mockReturnValue('I have an apple.');
+
+		// Cast the mock to unknown, then Editor, to satisfy the parameter type safely
+		applyReplaceAction(mockEditor as unknown as Editor, mockAction);
+
+		expect(mockEditor.transaction).toHaveBeenCalledWith({
+			changes: [
+				{
+					from: { line: 0, ch: 0 },
+					to: { line: 0, ch: 16 },
+					text: 'I have an orange.',
+				},
+			],
+		});
 	});
 
-	/**
-	 * Regex with capture groups.
-	 */
-	it('should handle regex capture groups', () => {
-		const text = 'Lastname, Firstname';
-		const rules: ReplaceRule[] = [
-			{ search: '(\\w+), (\\w+)', replace: '$2 $1', useRegex: true, regexFlags: 'g' },
-		];
-		expect(processText(text, rules).text).toBe('Firstname Lastname');
+	it('should process only the selected text when a selection exists', () => {
+		mockEditor.listSelections.mockReturnValue([
+			{ anchor: { line: 0, ch: 0 }, head: { line: 0, ch: 5 } },
+		]);
+		mockEditor.getRange.mockReturnValue('apple');
+
+		applyReplaceAction(mockEditor as unknown as Editor, mockAction);
+
+		expect(mockEditor.transaction).toHaveBeenCalledWith({
+			changes: [
+				{
+					from: { line: 0, ch: 0 },
+					to: { line: 0, ch: 5 },
+					text: 'orange',
+				},
+			],
+		});
 	});
 
-	/**
-	 * Error handling for invalid patterns.
-	 */
-	it('should throw an error on invalid regex', () => {
-		const text = 'Test string';
-		const rules: ReplaceRule[] = [
-			{ search: '[Unclosed bracket', replace: 'Oops', useRegex: true, regexFlags: 'g' },
-		];
-		expect(() => processText(text, rules)).toThrow(/Invalid Regex/);
+	it('should reorder backwards selections (head before anchor)', () => {
+		// Simulating mouse text select
+		mockEditor.listSelections.mockReturnValue([
+			{ anchor: { line: 0, ch: 10 }, head: { line: 0, ch: 5 } },
+		]);
+		mockEditor.getRange.mockReturnValue('apple');
+
+		applyReplaceAction(mockEditor as unknown as Editor, mockAction);
+
+		expect(mockEditor.transaction).toHaveBeenCalledWith({
+			changes: [
+				{
+					from: { line: 0, ch: 5 },
+					to: { line: 0, ch: 10 },
+					text: 'orange',
+				},
+			],
+		});
 	});
 });
