@@ -29,8 +29,9 @@ Whether you need to quickly clean up messy OCR text, standardize markdown format
 
 ## How to Use
 
-1. **Configure an Action:** - Go to **Settings -> Replace Commands**.
-    - Click **Add new action** and give it a name (Example: "Fix spacing").
+1. **Configure an Action:**
+    - Go to **Settings -> Replace Commands**.
+    - Click the **`+`** button to create a new action and give it a name (e.g., "Fix spacing").
     - Add your search and replace terms. Toggle "Use regex" if you are using regular expressions.
 2. **Apply to Text:**
     - Open any note in Obsidian.
