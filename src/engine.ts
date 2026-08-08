@@ -79,11 +79,16 @@ export function applyReplaceAction(editor: Editor, action: ReplaceAction) {
 			});
 		}
 
-		new Notice(t('NOTICE__APPLIED_CHANGES')(action.name, totalMatchCount));
-	} catch (error) {
-		console.error(error);
 		new Notice(
-			t('NOTICE__ERROR')(error instanceof Error ? error.message : t('ERROR_INVALID_REGEX')),
+			t(
+				'NOTICE__APPLIED_CHANGES',
+				action.name,
+				totalMatchCount,
+				totalMatchCount === 1 ? '' : 's',
+			),
 		);
+	} catch (error) {
+		new Notice(t('NOTICE__ERROR', error instanceof Error ? error.message : String(error)));
+		console.error(error);
 	}
 }

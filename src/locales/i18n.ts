@@ -1,14 +1,37 @@
-// locales/i18n.ts
-import en from './en';
-import fr from './fr';
+import { moment } from 'obsidian';
 
-const frDict = fr as Partial<typeof en>;
+import en from './en.json';
+import es from './es.json';
+import fr from './fr.json';
+// import de from './de.json';
+// import tr from './tr.json';
+// import zh_Hans from './zh_Hans.json';
 
-export function t<K extends keyof typeof en>(key: K): (typeof en)[K] {
-	const locale = typeof window !== 'undefined' ? window.moment?.locale() : 'en';
+const localeMap: Record<string, Partial<typeof en>> = {
+	en,
+	es,
+	fr,
+	// de,
+	// tr,
+	// "zh-cn": zh_Hans,
+};
 
-	if (locale === 'fr' && frDict[key]) {
-		return frDict[key];
+export function t(key: keyof typeof en, ...args: (string | number)[]): string {
+	const currentLanguage = moment.locale();
+
+	let rawString = localeMap[currentLanguage]?.[key];
+
+	if (rawString === undefined || rawString === '') {
+		rawString = en[key];
 	}
-	return en[key];
+
+	let finalString: string = rawString;
+
+	if (args.length > 0) {
+		args.forEach((argument, index) => {
+			finalString = finalString.replace(`{${index}}`, String(argument));
+		});
+	}
+
+	return finalString;
 }
