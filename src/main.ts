@@ -1,14 +1,15 @@
 import { Editor, Plugin, MenuItem, Menu } from 'obsidian';
-import { CustomReplaceSettings, DEFAULT_SETTINGS } from './types';
+import { CustomReplaceSettings, DEFAULT_SETTINGS, CustomReplacePluginInstance } from './types';
 import { CustomReplaceSettingTab } from './settings';
 import { applyReplaceAction } from './engine';
+import { ActionSuggestModal } from './ui/action-suggest-modal';
 import { t } from './locales/i18n';
 
 /**
- * Main plugin class for Custom Replace.
+ * Main plugin class for Custom Replace.  
  * Manages lifecycle, commands, and context menus.
  */
-export default class CustomReplacePlugin extends Plugin {
+export default class CustomReplacePlugin extends Plugin implements CustomReplacePluginInstance {
 	/** Current plugin settings. */
 	settings!: CustomReplaceSettings;
 
@@ -50,7 +51,13 @@ export default class CustomReplacePlugin extends Plugin {
 			}),
 		);
 
-		this.registerActionCommands();
+		this.addCommand({
+			id: 'run-custom-replace',
+			name: 'Run replace action',
+			editorCallback: (editor: Editor) => {
+				new ActionSuggestModal(this.app, this, editor).open();
+			},
+		});
 	}
 
 	/**
@@ -69,11 +76,10 @@ export default class CustomReplacePlugin extends Plugin {
 	 */
 	async saveSettings() {
 		await this.saveData(this.settings);
-		this.registerActionCommands();
 	}
 
 	/**
-	 * Scans current settings and registers each action as a command.
+	 * Scans current settings and registers each action as a command.  
 	 * Cleans up previously registered commands to avoid duplicates.
 	 */
 	registerActionCommands() {

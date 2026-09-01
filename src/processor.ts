@@ -33,8 +33,8 @@ export function processText(
 				}
 
 				processedText = processedText.replace(regex, rule.replace);
-			} catch {
-				throw new Error(`Invalid Regex: /${rule.search}/${rule.regexFlags || 'g'}`);
+			} catch (e) {
+				throw e instanceof Error ? e : new Error(String(e));
 			}
 		} else {
 			const search = rule.search.replace(/\\n/g, '\n').replace(/\\t/g, '\t');

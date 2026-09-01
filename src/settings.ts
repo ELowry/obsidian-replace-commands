@@ -1,5 +1,5 @@
 import { App, PluginSettingTab } from 'obsidian';
-import CustomReplacePlugin from './main';
+import { CustomReplacePluginInstance } from './types';
 import { t } from './locales/i18n';
 import { ActionDetailModal } from './ui/action-detail-modal';
 import { ConfirmModal } from './ui/confirm-modal';
@@ -9,7 +9,7 @@ import { ConfirmModal } from './ui/confirm-modal';
  */
 export class CustomReplaceSettingTab extends PluginSettingTab {
 	/** The main plugin instance. */
-	plugin: CustomReplacePlugin;
+	plugin: CustomReplacePluginInstance;
 
 	/**
 	 * Creates a new CustomReplaceSettingTab.
@@ -17,7 +17,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 	 * @param app - The Obsidian App instance.
 	 * @param plugin - The CustomReplacePlugin instance.
 	 */
-	constructor(app: App, plugin: CustomReplacePlugin) {
+	constructor(app: App, plugin: CustomReplacePluginInstance) {
 		super(app, plugin);
 		this.plugin = plugin;
 	}

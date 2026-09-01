@@ -43,7 +43,7 @@ describe('Custom Replace Processor', () => {
 		const rules: ReplaceRule[] = [
 			{ search: '[Unclosed bracket', replace: 'Oops', useRegex: true, regexFlags: 'g' },
 		];
-		expect(() => processText(text, rules)).toThrow(/Invalid Regex/);
+		expect(() => processText(text, rules)).toThrow(SyntaxError);
 	});
 
 	/**

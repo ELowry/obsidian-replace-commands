@@ -1,3 +1,5 @@
+import { Plugin } from 'obsidian';
+
 /**
  * Search and replace rule definition.
  */
@@ -44,3 +46,11 @@ export interface CustomReplaceSettings {
 export const DEFAULT_SETTINGS: CustomReplaceSettings = {
 	actions: [],
 };
+
+/**
+ * Interface representing the plugin instance to break circular dependencies.
+ */
+export interface CustomReplacePluginInstance extends Plugin {
+	settings: CustomReplaceSettings;
+	saveSettings(): Promise<void>;
+}

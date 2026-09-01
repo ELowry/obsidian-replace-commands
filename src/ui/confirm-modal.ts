@@ -30,7 +30,7 @@ export class ConfirmModal extends Modal {
 	}
 
 	/**
-	 * Called when the modal is opened.
+	 * Called when the modal is opened.  
 	 * Renders the title, message, and action buttons.
 	 */
 	onOpen() {
@@ -58,7 +58,7 @@ export class ConfirmModal extends Modal {
 	}
 
 	/**
-	 * Called when the modal is closed.
+	 * Called when the modal is closed.  
 	 * Cleans up the DOM and fires the cancellation callback if the action was not confirmed.
 	 */
 	onClose() {

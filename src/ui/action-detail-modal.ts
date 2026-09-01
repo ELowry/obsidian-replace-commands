@@ -1,7 +1,6 @@
 import { Modal, App, Setting, ButtonComponent, TextComponent, TextAreaComponent } from 'obsidian';
-import CustomReplacePlugin from '../main';
 import { processText } from '../processor';
-import { ReplaceRule, ReplaceAction } from '../types';
+import { ReplaceRule, ReplaceAction, CustomReplacePluginInstance } from '../types';
 import { t } from '../locales/i18n';
 import { ConfirmModal } from './confirm-modal';
 
@@ -10,7 +9,7 @@ import { ConfirmModal } from './confirm-modal';
  */
 export class ActionDetailModal extends Modal {
 	/** The main plugin instance. */
-	private plugin: CustomReplacePlugin;
+	private plugin: CustomReplacePluginInstance;
 	/** The specific replacement action being edited. */
 	private action: ReplaceAction;
 	/** Tracks rules that were just reordered to trigger CSS animations. */
@@ -36,7 +35,7 @@ export class ActionDetailModal extends Modal {
 	 */
 	constructor(
 		app: App,
-		plugin: CustomReplacePlugin,
+		plugin: CustomReplacePluginInstance,
 		action: ReplaceAction,
 		onUpdate: () => void,
 	) {
@@ -56,7 +55,7 @@ export class ActionDetailModal extends Modal {
 	}
 
 	/**
-	 * Called when the modal is closed.
+	 * Called when the modal is closed.  
 	 * Cleans up and refreshes the parent list view.
 	 */
 	onClose() {
