@@ -19,6 +19,10 @@ export class ActionDetailModal extends Modal {
 	private onUpdate: () => void;
 	/** Debounces live preview text processing. */
 	private debounceTimer: number | null = null;
+	/** Text input element for the test bench. */
+	private testInputEl: HTMLTextAreaElement | null = null;
+	/** Bound event handler for auto-resizing the test input element. */
+	private boundAutoResize: (() => void) | null = null;
 
 	/**
 	 * Creates a new ActionDetailModal.
@@ -58,6 +62,13 @@ export class ActionDetailModal extends Modal {
 		if (this.debounceTimer) {
 			window.clearTimeout(this.debounceTimer);
 		}
+
+		if (this.testInputEl && this.boundAutoResize) {
+			this.testInputEl.removeEventListener('input', this.boundAutoResize);
+			this.testInputEl = null;
+			this.boundAutoResize = null;
+		}
+
 		this.onUpdate();
 	}
 
@@ -243,7 +254,9 @@ export class ActionDetailModal extends Modal {
 		testInput.inputEl.addClass('custom-replace-textarea');
 		testInput.inputEl.addClass('custom-replace-test-input-textarea');
 
-		testInput.inputEl.addEventListener('input', () => this.autoResize(testInput.inputEl));
+		this.testInputEl = testInput.inputEl;
+		this.boundAutoResize = () => this.autoResize(this.testInputEl!);
+		this.testInputEl.addEventListener('input', this.boundAutoResize);
 
 		testInput.onChange(async (value: string) => {
 			action.testText = value;
