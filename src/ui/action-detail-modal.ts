@@ -19,10 +19,12 @@ export class ActionDetailModal extends Modal {
 	private onUpdate: () => void;
 	/** Debounces live preview text processing. */
 	private debounceTimer: number | null = null;
-	/** Text input element for the test bench. */
+	/** The tracked input element for safe event listener cleanup. */
 	private testInputEl: HTMLTextAreaElement | null = null;
-	/** Bound event handler for auto-resizing the test input element. */
+	/** The bound auto-resize function reference. */
 	private boundAutoResize: (() => void) | null = null;
+	/** Tracks active timeouts to prevent memory leaks or DOM manipulation after the modal closes. */
+	private activeTimeouts: number[] = [];
 
 	/**
 	 * Creates a new ActionDetailModal.
@@ -62,6 +64,9 @@ export class ActionDetailModal extends Modal {
 		if (this.debounceTimer) {
 			window.clearTimeout(this.debounceTimer);
 		}
+
+		this.activeTimeouts.forEach((timer) => window.clearTimeout(timer));
+		this.activeTimeouts = [];
 
 		if (this.testInputEl && this.boundAutoResize) {
 			this.testInputEl.removeEventListener('input', this.boundAutoResize);
@@ -132,10 +137,12 @@ export class ActionDetailModal extends Modal {
 					await this.plugin.saveSettings();
 				});
 
-			window.setTimeout(() => {
-				text.inputEl.focus();
-				text.inputEl.select();
-			}, 50);
+			this.activeTimeouts.push(
+				window.setTimeout(() => {
+					text.inputEl.focus();
+					text.inputEl.select();
+				}, 50),
+			);
 		});
 
 		const toggleCol = configGrid.createDiv({
@@ -218,10 +225,14 @@ export class ActionDetailModal extends Modal {
 					if (value) {
 						testInputContainer.show();
 						outputContainers.forEach((c) => c.show());
-						window.setTimeout(() => {
-							this.autoResize(testInput.inputEl);
-							outputBoxes.forEach((box) => this.autoResize(box.component.inputEl));
-						}, 10);
+						this.activeTimeouts.push(
+							window.setTimeout(() => {
+								this.autoResize(testInput.inputEl);
+								outputBoxes.forEach((box) =>
+									this.autoResize(box.component.inputEl),
+								);
+							}, 10),
+						);
 					} else {
 						testInputContainer.hide();
 						outputContainers.forEach((c) => c.hide());
@@ -555,9 +566,11 @@ export class ActionDetailModal extends Modal {
 	private autoResize(el: HTMLTextAreaElement | HTMLElement): void {
 		if (el.style.display === 'none' || el.offsetParent === null) return;
 
-		window.setTimeout(() => {
-			el.setCssProps({ height: 'auto' });
-			el.setCssProps({ height: `${el.scrollHeight}px` });
-		}, 0);
+		this.activeTimeouts.push(
+			window.setTimeout(() => {
+				el.setCssProps({ height: 'auto' });
+				el.setCssProps({ height: `${el.scrollHeight}px` });
+			}, 0),
+		);
 	}
 }
