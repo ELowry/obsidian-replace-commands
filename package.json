@@ -1,44 +1,51 @@
 {
-  "name": "replace-commands",
-  "version": "1.0.1",
-  "description": "Preconfigure custom search and replace actions using plain text or regex to quickly modify selections or documents.",
-  "main": "main.js",
-  "type": "module",
-  "scripts": {
-    "validate": "npm run check-format && npm run lint && npm run test",
-    "dev": "npm run validate && node esbuild.config.mjs",
-    "build": "npm run validate && tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
-    "version": "node version-bump.mjs && git add manifest.json versions.json && npm i",
-    "lint": "eslint .",
-    "format": "prettier --write \"src/**/*.{ts,js,css}\" styles.css --config .prettierrc",
-    "check-format": "prettier --check \"src/**/*.{ts,js,css}\" styles.css --config .prettierrc",
-    "test": "vitest run",
-    "update": "npm update && npm ci && npm i",
-    "upgrade": "npx npm-check-updates -u && npm i"
-  },
-  "keywords": [
-    "Obsidian plugin",
-    "Prettier"
-  ],
-  "license": "0-BSD",
-  "dependencies": {
-    "jiti": "^2.7.0",
-    "obsidian": "1.13.0"
-  },
-  "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "@types/node": "^26.4.0",
-    "esbuild": "^0.28.2",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-obsidianmd": "^0.4.2",
-    "globals": "^17.11.0",
-    "prettier": "^3.9.6",
-    "prettier-plugin-css-order": "^2.2.0",
-    "typescript": "^6.0.3",
-    "typescript-eslint": "^8.69.0",
-    "vitest": "^4.1.11"
-  },
-  "allowScripts": {
-    "esbuild@0.28.2": true
-  }
+	"name": "replace-commands",
+	"version": "1.0.2",
+	"description": "Preconfigure custom search and replace actions using plain text or regex to quickly modify selections or documents.",
+	"main": "main.js",
+	"type": "module",
+	"scripts": {
+		"validate": "npm run check-format && npm run lint && npm run test",
+		"dev": "npm run validate && node esbuild.config.mjs",
+		"build": "npm run validate && tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+		"version": "node version-bump.mjs && git add manifest.json versions.json && npm i",
+		"lint": "eslint .",
+		"format": "prettier --write \"src/**/*.{ts,js,css}\" styles.css --config .prettierrc",
+		"check-format": "prettier --check \"src/**/*.{ts,js,css}\" styles.css --config .prettierrc",
+		"test": "vitest run",
+		"update": "npm update && npm ci && npm i",
+		"upgrade": "npx npm-check-updates -u && npm i"
+	},
+	"keywords": [
+		"Obsidian plugin",
+		"obsidian-plugin",
+		"obsidian-plugins",
+		"obsidian",
+		"obsidian-md",
+		"regex-tester",
+		"regexp",
+		"replace",
+		"replace-in-files"
+	],
+	"license": "0-BSD",
+	"dependencies": {
+		"jiti": "^2.7.0",
+		"obsidian": "1.13.0"
+	},
+	"devDependencies": {
+		"@eslint/js": "^10.0.1",
+		"@types/node": "^26.4.0",
+		"esbuild": "^0.28.2",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-obsidianmd": "^0.4.2",
+		"globals": "^17.11.0",
+		"prettier": "^3.9.6",
+		"prettier-plugin-css-order": "^2.2.0",
+		"typescript": "^6.0.3",
+		"typescript-eslint": "^8.69.0",
+		"vitest": "^4.1.11"
+	},
+	"allowScripts": {
+		"esbuild@0.28.2": true
+	}
 }
