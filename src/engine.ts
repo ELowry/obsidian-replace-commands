@@ -1,7 +1,8 @@
-import { Editor, Notice, EditorPosition } from 'obsidian';
-import { ReplaceAction } from './types';
-import { processText } from './processor';
+import { Editor, EditorPosition, Notice } from 'obsidian';
+
 import { t } from './locales/i18n';
+import { processText } from './processor';
+import { ReplaceAction } from './types';
 
 /**
  * Reorders selection bounds to ensure from <= to.
@@ -12,7 +13,7 @@ import { t } from './locales/i18n';
  */
 function getOrderedBounds(
 	anchor: EditorPosition,
-	head: EditorPosition,
+	head: EditorPosition
 ): { from: EditorPosition; to: EditorPosition } {
 	if (anchor.line < head.line) {
 		return { from: anchor, to: head };
@@ -37,7 +38,7 @@ export function applyReplaceAction(editor: Editor, action: ReplaceAction) {
 	const hasSelection = selections.some(
 		(selection) =>
 			selection.anchor.line !== selection.head.line
-			|| selection.anchor.ch !== selection.head.ch,
+			|| selection.anchor.ch !== selection.head.ch
 	);
 
 	let totalMatchCount = 0;
@@ -90,8 +91,8 @@ export function applyReplaceAction(editor: Editor, action: ReplaceAction) {
 				'NOTICE__APPLIED_CHANGES',
 				action.name,
 				totalMatchCount,
-				totalMatchCount === 1 ? '' : 's',
-			),
+				totalMatchCount === 1 ? '' : 's'
+			)
 		);
 	} catch (error) {
 		new Notice(t('NOTICE__ERROR', error instanceof Error ? error.message : String(error)));

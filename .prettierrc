@@ -1,9 +1,13 @@
 {
-	"plugins": ["prettier-plugin-css-order"],
+	"plugins": ["prettier-plugin-css-order", "@trivago/prettier-plugin-sort-imports"],
 	"experimentalOperatorPosition": "start",
 	"singleQuote": true,
 	"useTabs": true,
 	"tabWidth": 4,
 	"printWidth": 100,
-	"htmlWhitespaceSensitivity": "strict"
+	"htmlWhitespaceSensitivity": "strict",
+	"trailingComma": "es5",
+	"importOrder": ["^react$", "^@core/(.*)$", "^[./]"],
+	"importOrderSeparation": true,
+	"importOrderSortSpecifiers": true
 }

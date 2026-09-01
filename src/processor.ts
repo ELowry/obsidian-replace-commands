@@ -10,7 +10,7 @@ import { ReplaceRule } from './types';
  */
 export function processText(
 	text: string,
-	rules: ReplaceRule[],
+	rules: ReplaceRule[]
 ): { text: string; matchCount: number } {
 	let processedText = text;
 	let matchCount = 0;
@@ -24,7 +24,7 @@ export function processText(
 			try {
 				const flags = rule.regexFlags || 'g';
 				const cleanedFlags = [...new Set(flags.replace(/[\s,]/g, '').toLowerCase())].join(
-					'',
+					''
 				);
 				const regex = new RegExp(rule.search, cleanedFlags);
 				const matches = processedText.match(regex);

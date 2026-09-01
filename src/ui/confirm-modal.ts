@@ -1,4 +1,5 @@
 import { App, Modal, Setting } from 'obsidian';
+
 import { t } from '../locales/i18n';
 
 /**
@@ -24,7 +25,7 @@ export class ConfirmModal extends Modal {
 		private message: string,
 		private ctaLabel: string,
 		private onConfirm: () => Promise<void> | void,
-		private onCancel?: () => void,
+		private onCancel?: () => void
 	) {
 		super(app);
 	}
@@ -42,7 +43,7 @@ export class ConfirmModal extends Modal {
 			.addButton((btn) =>
 				btn.setButtonText(t('BUTTON_CANCEL')).onClick(() => {
 					this.close();
-				}),
+				})
 			)
 			.addButton((btn) =>
 				btn
@@ -53,7 +54,7 @@ export class ConfirmModal extends Modal {
 						this.isConfirmed = true;
 						await this.onConfirm();
 						this.close();
-					}),
+					})
 			);
 	}
 

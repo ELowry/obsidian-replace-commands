@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { processText } from './processor';
 import { ReplaceRule } from './types';
 

@@ -1,7 +1,8 @@
-import { Modal, App, Setting, ButtonComponent, TextComponent, TextAreaComponent } from 'obsidian';
-import { processText } from '../processor';
-import { ReplaceRule, ReplaceAction, CustomReplacePluginInstance } from '../types';
+import { App, ButtonComponent, Modal, Setting, TextAreaComponent, TextComponent } from 'obsidian';
+
 import { t } from '../locales/i18n';
+import { processText } from '../processor';
+import { CustomReplacePluginInstance, ReplaceAction, ReplaceRule } from '../types';
 import { ConfirmModal } from './confirm-modal';
 
 /**
@@ -37,7 +38,7 @@ export class ActionDetailModal extends Modal {
 		app: App,
 		plugin: CustomReplacePluginInstance,
 		action: ReplaceAction,
-		onUpdate: () => void,
+		onUpdate: () => void
 	) {
 		super(app);
 		this.plugin = plugin;
@@ -118,7 +119,7 @@ export class ActionDetailModal extends Modal {
 					const isDuplicate = this.plugin.settings.actions.some(
 						(a) =>
 							a.id !== this.action.id
-							&& a.name.toLowerCase() === trimmed.toLowerCase(),
+							&& a.name.toLowerCase() === trimmed.toLowerCase()
 					);
 
 					if (isDuplicate) {
@@ -140,7 +141,7 @@ export class ActionDetailModal extends Modal {
 				window.setTimeout(() => {
 					text.inputEl.focus();
 					text.inputEl.select();
-				}, 50),
+				}, 50)
 			);
 		});
 
@@ -220,9 +221,9 @@ export class ActionDetailModal extends Modal {
 							window.setTimeout(() => {
 								this.autoResize(testInput.inputEl);
 								outputBoxes.forEach((box) =>
-									this.autoResize(box.component.inputEl),
+									this.autoResize(box.component.inputEl)
 								);
-							}, 10),
+							}, 10)
 						);
 					} else {
 						testInputContainer.hide();
@@ -280,7 +281,7 @@ export class ActionDetailModal extends Modal {
 				action,
 				updatePreviews,
 				outputBoxes,
-				outputContainers,
+				outputContainers
 			);
 		});
 
@@ -325,13 +326,13 @@ export class ActionDetailModal extends Modal {
 		action: ReplaceAction,
 		updatePreviews: () => void,
 		outputBoxes: { component: TextAreaComponent; errorEl: HTMLElement }[],
-		outputContainers: HTMLElement[],
+		outputContainers: HTMLElement[]
 	): void {
 		const ruleRow = rulesContainer.createDiv({
 			cls: 'custom-replace-rule-row',
 		});
 		const recentlyMoved = this.recentlyMovedRules.find(
-			(m) => m.actionId === action.id && m.index === index,
+			(m) => m.actionId === action.id && m.index === index
 		);
 		if (recentlyMoved) {
 			ruleRow.addClass(`custom-replace-moved-${recentlyMoved.dir}`);
@@ -404,7 +405,7 @@ export class ActionDetailModal extends Modal {
 						action.rules.splice(index, 1);
 						await this.plugin.saveSettings();
 						this.renderUI();
-					},
+					}
 				).open();
 			});
 
@@ -561,7 +562,7 @@ export class ActionDetailModal extends Modal {
 			window.setTimeout(() => {
 				el.setCssProps({ height: 'auto' });
 				el.setCssProps({ height: `${el.scrollHeight}px` });
-			}, 0),
+			}, 0)
 		);
 	}
 }

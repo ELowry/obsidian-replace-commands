@@ -1,5 +1,6 @@
-import { vi, describe, it, expect, beforeEach, Mock } from 'vitest';
 import { Editor } from 'obsidian';
+import { Mock, beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { applyReplaceAction } from './engine';
 import { ReplaceAction } from './types';
 

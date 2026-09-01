@@ -1,6 +1,7 @@
-import { App, SuggestModal, Editor } from 'obsidian';
-import { ReplaceAction, CustomReplacePluginInstance } from '../types';
+import { App, Editor, SuggestModal } from 'obsidian';
+
 import { applyReplaceAction } from '../engine';
+import { CustomReplacePluginInstance, ReplaceAction } from '../types';
 
 /**
  * A native modal allowing users to search and select a custom replace action.
@@ -9,7 +10,7 @@ export class ActionSuggestModal extends SuggestModal<ReplaceAction> {
 	constructor(
 		app: App,
 		private plugin: CustomReplacePluginInstance,
-		private editor: Editor,
+		private editor: Editor
 	) {
 		super(app);
 	}
@@ -17,7 +18,7 @@ export class ActionSuggestModal extends SuggestModal<ReplaceAction> {
 	getSuggestions(query: string): ReplaceAction[] {
 		const lowerQuery = query.toLowerCase();
 		return this.plugin.settings.actions.filter((action) =>
-			action.name.toLowerCase().includes(lowerQuery),
+			action.name.toLowerCase().includes(lowerQuery)
 		);
 	}
 

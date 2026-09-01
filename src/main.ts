@@ -1,9 +1,10 @@
-import { Editor, Plugin, MenuItem, Menu } from 'obsidian';
-import { CustomReplaceSettings, DEFAULT_SETTINGS, CustomReplacePluginInstance } from './types';
-import { CustomReplaceSettingTab } from './settings';
+import { Editor, Menu, MenuItem, Plugin } from 'obsidian';
+
 import { applyReplaceAction } from './engine';
-import { ActionSuggestModal } from './ui/action-suggest-modal';
 import { t } from './locales/i18n';
+import { CustomReplaceSettingTab } from './settings';
+import { CustomReplacePluginInstance, CustomReplaceSettings, DEFAULT_SETTINGS } from './types';
+import { ActionSuggestModal } from './ui/action-suggest-modal';
 
 /**
  * Main plugin class for Custom Replace.  
@@ -27,7 +28,7 @@ export default class CustomReplacePlugin extends Plugin implements CustomReplace
 		this.registerEvent(
 			this.app.workspace.on('editor-menu', (menu, editor) => {
 				const contextMenuActions = this.settings.actions.filter(
-					(action) => action.showInContextMenu,
+					(action) => action.showInContextMenu
 				);
 
 				if (contextMenuActions.length > 0) {
@@ -48,7 +49,7 @@ export default class CustomReplacePlugin extends Plugin implements CustomReplace
 						});
 					});
 				}
-			}),
+			})
 		);
 
 		this.addCommand({
@@ -67,7 +68,7 @@ export default class CustomReplacePlugin extends Plugin implements CustomReplace
 		this.settings = Object.assign(
 			{},
 			DEFAULT_SETTINGS,
-			(await this.loadData()) as Partial<CustomReplaceSettings>,
+			(await this.loadData()) as Partial<CustomReplaceSettings>
 		);
 	}
 

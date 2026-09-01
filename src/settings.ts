@@ -1,6 +1,7 @@
 import { App, PluginSettingTab } from 'obsidian';
-import { CustomReplacePluginInstance } from './types';
+
 import { t } from './locales/i18n';
+import { CustomReplacePluginInstance } from './types';
 import { ActionDetailModal } from './ui/action-detail-modal';
 import { ConfirmModal } from './ui/confirm-modal';
 
@@ -58,7 +59,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 						this.update();
 
 						new ActionDetailModal(this.app, this.plugin, newAction, () =>
-							this.update(),
+							this.update()
 						).open();
 					},
 				},
@@ -85,7 +86,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 						() => {
 							// Cancel: update to restore view
 							this.update();
-						},
+						}
 					).open();
 				},
 				items: this.plugin.settings.actions.map((action) => {
@@ -102,7 +103,7 @@ export class CustomReplaceSettingTab extends PluginSettingTab {
 						searchable: false,
 						action: () => {
 							new ActionDetailModal(this.app, this.plugin, action, () =>
-								this.update(),
+								this.update()
 							).open();
 						},
 					};

@@ -3,6 +3,7 @@ import { moment } from 'obsidian';
 import en from './en.json';
 import es from './es.json';
 import fr from './fr.json';
+
 // import de from './de.json';
 // import tr from './tr.json';
 // import zh_Hans from './zh_Hans.json';
