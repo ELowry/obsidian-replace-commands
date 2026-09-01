@@ -200,15 +200,7 @@ export class ActionDetailModal extends Modal {
 					box.component.setValue('');
 					box.errorEl.empty();
 					const message = e instanceof Error ? e.message : t('ERROR_INVALID_REGEX');
-					if (message.includes(': ')) {
-						const splitIdx = message.indexOf(': ') + 2;
-						const label = message.substring(0, splitIdx);
-						const pattern = message.substring(splitIdx);
-						box.errorEl.createSpan({ text: label });
-						box.errorEl.createEl('code', { text: pattern });
-					} else {
-						box.errorEl.setText(message);
-					}
+					box.errorEl.setText(message);
 					box.errorEl.show();
 					this.autoResize(box.component.inputEl);
 				}

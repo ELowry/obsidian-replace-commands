@@ -23,9 +23,10 @@ export function processText(
 		if (rule.useRegex) {
 			try {
 				const flags = rule.regexFlags || 'g';
-				const cleanedFlags = flags.replace(/[\s,]/g, '').toLowerCase();
+				const cleanedFlags = [...new Set(flags.replace(/[\s,]/g, '').toLowerCase())].join(
+					'',
+				);
 				const regex = new RegExp(rule.search, cleanedFlags);
-
 				const matches = processedText.match(regex);
 				if (matches) {
 					matchCount += cleanedFlags.includes('g') ? matches.length : 1;
