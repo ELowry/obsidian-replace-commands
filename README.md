@@ -1,4 +1,4 @@
-![License: 0-BSD](https://img.shields.io/badge/License-0--BSD-3d383b.svg) [![Latest GitHub release](https://img.shields.io/github/v/release/ELowry/obsidian-replace-commands?logo=GitHub&color=a4785e)](https://github.com/ELowry/obsidian-replace-commands/releases/latest) [![Translation status](https://hosted.weblate.org/widget/elowry/obsidian-replace-commands/svg-badge.svg)](https://hosted.weblate.org/engage/elowry/obsidian-replace-commands/)
+![License: 0-BSD](https://img.shields.io/badge/License-0--BSD-3d383b.svg) [![Latest GitHub release](https://img.shields.io/github/v/release/ELowry/obsidian-replace-commands?logo=GitHub&color=a4785e)](https://github.com/ELowry/obsidian-replace-commands/releases/latest) [![Translation status](https://hosted.weblate.org/widget/elowry/obsidian-replace-commands/svg-badge.svg)](https://hosted.weblate.org/engage/elowry/)
 
 # [![Replace Commands](ReplaceCommands.jpg)](#)
 
