@@ -42,5 +42,15 @@
 	"STEP_OUTPUT_LABEL": "Step output",
 	"CONTEXT_MENU_TITLE": "Custom replace",
 	"NOTICE__APPLIED_CHANGES": "Applied \"{0}\" ({1} change{2})",
-	"NOTICE__ERROR": "Custom replace error: {0}"
+	"NOTICE__ERROR": "Custom replace error: {0}",
+	"ERROR_NO_MARKDOWN_FILES": "No Markdown files found in selection.",
+	"BULK_REPLACE_WARNING_TITLE": "Bulk Replace Warning",
+	"BULK_REPLACE_WARNING_DESC_SINGLE": "You are about to modify {0} file using \"{1}\". This writes directly to disk and CANNOT be undone with Ctrl+Z. Are you sure you want to proceed?",
+	"BULK_REPLACE_WARNING_DESC_PLURAL": "You are about to modify {0} files using \"{1}\". This writes directly to disk and CANNOT be undone with Ctrl+Z. Are you sure you want to proceed?",
+	"BUTTON_REPLACE_ALL": "Replace all",
+	"NOTICE__PROCESSING_FILES_SINGLE": "Processing {0} file…",
+	"NOTICE__PROCESSING_FILES_PLURAL": "Processing {0} files…",
+	"NOTICE__BULK_REPLACE_COMPLETE": "Bulk replace complete: {0} matches replaced across {1} files.",
+	"CONTEXT_MENU_BULK_TITLE": "Bulk custom replace",
+	"CONTEXT_MENU_ALL_COMMANDS": "All commands"
 }

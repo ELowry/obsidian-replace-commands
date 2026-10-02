@@ -42,5 +42,15 @@
 	"STEP_OUTPUT_LABEL": "Résultat de l'étape",
 	"CONTEXT_MENU_TITLE": "Remplacements personnalisés",
 	"NOTICE__APPLIED_CHANGES": "\"{0}\" appliqué ({1} modification{2})",
-	"NOTICE__ERROR": "Erreur de remplacement: {0}"
+	"NOTICE__ERROR": "Erreur de remplacement: {0}",
+	"ERROR_NO_MARKDOWN_FILES": "Aucun fichier Markdown trouvé dans la sélection.",
+	"BULK_REPLACE_WARNING_TITLE": "Avertissement de remplacements multiples",
+	"BULK_REPLACE_WARNING_DESC_SINGLE": "Vous êtes sur le point de modifier {0} fichier avec \"{1}\". Cette action modifie directement le fichier et est IRRÉVERSIBLE (impossible de l'annuler avec Ctrl+Z). Voulez-vous vraiment continuer?",
+	"BULK_REPLACE_WARNING_DESC_PLURAL": "Vous êtes sur le point de modifier {0} fichiers avec \"{1}\". Cette action modifie directement les fichiers et est IRRÉVERSIBLE (impossible de l'annuler avec Ctrl+Z). Voulez-vous vraiment continuer?",
+	"BUTTON_REPLACE_ALL": "Tout remplacer",
+	"NOTICE__PROCESSING_FILES_SINGLE": "Traitement de {0} fichier en cours…",
+	"NOTICE__PROCESSING_FILES_PLURAL": "Traitement de {0} fichiers en cours…",
+	"NOTICE__BULK_REPLACE_COMPLETE": "Remplacements terminés: {0} correspondances remplacées dans {1} fichier(s).",
+	"CONTEXT_MENU_BULK_TITLE": "Remplacements multiples",
+	"CONTEXT_MENU_ALL_COMMANDS": "Toutes les commandes"
 }

@@ -1,6 +1,7 @@
 import { App, Editor, SuggestModal } from 'obsidian';
 
 import { applyReplaceAction } from '../engine';
+import { t } from '../locales/i18n';
 import { CustomReplacePluginInstance, ReplaceAction } from '../types';
 
 /**
@@ -24,8 +25,13 @@ export class ActionSuggestModal extends SuggestModal<ReplaceAction> {
 
 	renderSuggestion(action: ReplaceAction, el: HTMLElement) {
 		el.createDiv({ text: action.name });
+
+		const count = action.rules.length;
+		const countText =
+			count === 1 ? t('RULE_COUNT_SINGLE', count) : t('RULE_COUNT_PLURAL', count);
+
 		el.createEl('small', {
-			text: `${action.rules.length} rule(s)`,
+			text: countText,
 			cls: 'custom-replace-rule-badge',
 		});
 	}

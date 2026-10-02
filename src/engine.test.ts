@@ -4,15 +4,48 @@ import { Mock, beforeEach, describe, expect, it, vi } from 'vitest';
 import { applyReplaceAction } from './engine';
 import { ReplaceAction } from './types';
 
-// Mock Obsidian's Notice and moment classes so the tests don't crash when called
+// Mock Obsidian's classes so the tests don't crash when files are evaluated
 vi.mock('obsidian', () => {
+	class MockModal {
+		app: unknown;
+		contentEl: { createEl: Mock; empty: Mock };
+		titleEl: { setText: Mock };
+		constructor(app: unknown) {
+			this.app = app;
+			this.contentEl = { createEl: vi.fn(), empty: vi.fn() };
+			this.titleEl = { setText: vi.fn() };
+		}
+		open() {}
+		close() {}
+	}
+
+	class MockSetting {
+		addButton() {
+			return this;
+		}
+	}
+
+	class MockTFile {
+		extension = 'md';
+		path = '';
+	}
+
+	class MockTFolder {
+		path = '';
+	}
+
 	return {
 		Notice: vi.fn(),
+		Modal: MockModal,
+		Setting: MockSetting,
+		TFile: MockTFile,
+		TFolder: MockTFolder,
 		moment: {
 			locale: vi.fn(() => 'en'),
 		},
 	};
 });
+
 interface MockEditor {
 	listSelections: Mock;
 	getRange: Mock;

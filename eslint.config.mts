@@ -1,9 +1,9 @@
 /// <reference types="node" />
-import tseslint from 'typescript-eslint';
-import obsidianmd from 'eslint-plugin-obsidianmd';
-import globals from 'globals';
-import { globalIgnores } from 'eslint/config';
 import eslintConfigPrettier from 'eslint-config-prettier';
+import obsidianmd from 'eslint-plugin-obsidianmd';
+import { globalIgnores } from 'eslint/config';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
 	{
@@ -26,6 +26,7 @@ export default tseslint.config(
 	globalIgnores([
 		'node_modules',
 		'dist',
+		'.*/**',
 		'esbuild.config.mjs',
 		'eslint.config.mts',
 		'version-bump.mjs',
@@ -33,5 +34,5 @@ export default tseslint.config(
 		'main.js',
 		'package.json',
 		'tsconfig.json',
-	]),
+	])
 );

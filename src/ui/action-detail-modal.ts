@@ -160,16 +160,17 @@ export class ActionDetailModal extends Modal {
 			cls: 'custom-replace-rules-container',
 		});
 
-		this.renderTestBench(rulesContainer, this.action);
+		this.#renderTestBench(rulesContainer, this.action);
 	}
 
 	/**
 	 * Renders the interactive test bench, input fields, and sequential rule editors.
 	 *
+	 * @private
 	 * @param rulesContainer - The parent HTML element to append the test bench to.
 	 * @param action - The ReplaceAction containing the rules and test text.
 	 */
-	private renderTestBench(rulesContainer: HTMLElement, action: ReplaceAction): void {
+	#renderTestBench(rulesContainer: HTMLElement, action: ReplaceAction): void {
 		const outputContainers: HTMLElement[] = [];
 		const outputBoxes: { component: TextAreaComponent; errorEl: HTMLElement }[] = [];
 
@@ -186,7 +187,7 @@ export class ActionDetailModal extends Modal {
 					box.component.setValue('');
 					box.errorEl.setText(t('ERROR_PREVIOUS_STEP_FAILED'));
 					box.errorEl.show();
-					this.autoResize(box.component.inputEl);
+					this.#autoResize(box.component.inputEl);
 					return;
 				}
 
@@ -194,7 +195,7 @@ export class ActionDetailModal extends Modal {
 					currentText = processText(currentText, [rule]).text;
 					box.component.setValue(currentText);
 					box.errorEl.hide();
-					this.autoResize(box.component.inputEl);
+					this.#autoResize(box.component.inputEl);
 				} catch (e) {
 					pipelineBroken = true;
 					box.component.setValue('');
@@ -202,7 +203,7 @@ export class ActionDetailModal extends Modal {
 					const message = e instanceof Error ? e.message : t('ERROR_INVALID_REGEX');
 					box.errorEl.setText(message);
 					box.errorEl.show();
-					this.autoResize(box.component.inputEl);
+					this.#autoResize(box.component.inputEl);
 				}
 			});
 		};
@@ -219,9 +220,9 @@ export class ActionDetailModal extends Modal {
 						outputContainers.forEach((c) => c.show());
 						this.activeTimeouts.push(
 							window.setTimeout(() => {
-								this.autoResize(testInput.inputEl);
+								this.#autoResize(testInput.inputEl);
 								outputBoxes.forEach((box) =>
-									this.autoResize(box.component.inputEl)
+									this.#autoResize(box.component.inputEl)
 								);
 							}, 10)
 						);
@@ -258,7 +259,7 @@ export class ActionDetailModal extends Modal {
 		testInput.inputEl.addClass('custom-replace-test-input-textarea');
 
 		this.testInputEl = testInput.inputEl;
-		this.boundAutoResize = () => this.autoResize(this.testInputEl!);
+		this.boundAutoResize = () => this.#autoResize(this.testInputEl!);
 		this.testInputEl.addEventListener('input', this.boundAutoResize);
 
 		testInput.onChange(async (value: string) => {
@@ -274,7 +275,7 @@ export class ActionDetailModal extends Modal {
 		});
 
 		action.rules.forEach((rule, index) => {
-			this.renderRule(
+			this.#renderRule(
 				rulesContainer,
 				rule,
 				index,
@@ -285,7 +286,7 @@ export class ActionDetailModal extends Modal {
 			);
 		});
 
-		this.autoResize(testInput.inputEl);
+		this.#autoResize(testInput.inputEl);
 		updatePreviews();
 
 		const addRuleContainer = rulesContainer.createDiv({
@@ -311,6 +312,7 @@ export class ActionDetailModal extends Modal {
 	/**
 	 * Renders an individual rule's editor section.
 	 *
+	 * @private
 	 * @param rulesContainer - The parent HTML element.
 	 * @param rule - The ReplaceRule data object.
 	 * @param index - The index of the rule in the pipeline.
@@ -319,7 +321,7 @@ export class ActionDetailModal extends Modal {
 	 * @param outputBoxes - Array to store references to the output TextAreaComponents.
 	 * @param outputContainers - Array to store references to the parent containers of the output boxes.
 	 */
-	private renderRule(
+	#renderRule(
 		rulesContainer: HTMLElement,
 		rule: ReplaceRule,
 		index: number,
@@ -553,9 +555,10 @@ export class ActionDetailModal extends Modal {
 	/**
 	 * Adjusts the height of a textarea element to fit its content.
 	 *
+	 * @private
 	 * @param el - The target textarea/HTML element to resize.
 	 */
-	private autoResize(el: HTMLTextAreaElement | HTMLElement): void {
+	#autoResize(el: HTMLTextAreaElement | HTMLElement): void {
 		if (el.style.display === 'none' || el.offsetParent === null) return;
 
 		this.activeTimeouts.push(
