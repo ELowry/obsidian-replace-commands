@@ -1,6 +1,6 @@
 {
   "name": "replace-commands",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Preconfigure custom search and replace actions using plain text or regex to quickly modify selections or documents.",
   "main": "main.js",
   "type": "module",
@@ -28,18 +28,16 @@
     "replace-in-files"
   ],
   "license": "0-BSD",
-  "dependencies": {
-    "jiti": "^2.7.0",
-    "obsidian": "1.13.1"
-  },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
-    "@types/node": "^26.6.3",
+    "@types/node": "^26.6.4",
     "esbuild": "^0.28.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-obsidianmd": "^0.4.2",
     "globals": "^17.13.0",
+    "jiti": "^2.7.0",
+    "obsidian": "^1.13.1",
     "prettier": "^3.9.9",
     "prettier-plugin-css-order": "^2.2.0",
     "typescript": "^6.0.3",
