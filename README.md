@@ -16,6 +16,10 @@ Whether you need to quickly clean up messy OCR text, standardize markdown format
   Chain multiple rules perfectly and easily rearrange their execution order directly in the UI.
 - **Smart Targeting:**  
   If you highlight text, the action only applies to your selection. If nothing is selected, it applies to the entire document.
+- **Bulk Replacements:** 
+  Right-click files or folders directly in the Files tab to run a replace action on multiple markdown files at once.
+- **Quick Search Modal:**
+  Access all your configured actions quickly via a native search modal, available from the Command Palette or the "All commands" context menu option.
 - **Single-Step Undo:**  
   No matter how many rules are in your action, they are applied as a single atomic transaction. One press of `Ctrl+Z` undoes the entire operation.
 - **Regex & Capture Groups:**  
@@ -37,9 +41,11 @@ Whether you need to quickly clean up messy OCR text, standardize markdown format
     - Open any note in Obsidian.
     - **Targeted:** Highlight a specific block of text to only apply the replacement to your selection.
     - **Document-wide:** Leave your cursor unselected to apply the replacement to the entire note.
+	- **Bulk actions:** Select one or more files/folders in the Files tab to run the replacement on all included markdown files.
 3. **Execute:**
-    - Right-click the editor and select your action from the **Custom replace** context menu.
-    - _Alternatively:_ Open the Command Palette (`Ctrl/Cmd + P`), type your action's name, and hit Enter.
+	- **Editor:** Right-click the editor and select your action from the **Custom replace** context menu.
+    - **Files tab:** Right-click your selected files/folders and choose an action from the **Custom bulk replace** menu.
+    - **Modal/Palette:** Open the Command Palette (`Ctrl/Cmd + P`), type your action's name, and hit Enter.
 4. **Undo:**
     - Made a mistake? Press `Ctrl/Cmd + Z` once to undo the entire action instantly.
 
