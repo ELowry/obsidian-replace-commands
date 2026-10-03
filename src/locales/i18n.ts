@@ -3,48 +3,46 @@ import { moment } from 'obsidian';
 import en from './en.json';
 import es from './es.json';
 import fr from './fr.json';
+import ptBR from './pt_BR.json';
 
 // import de from './de.json';
+// import ja from './ja.json';
 // import tr from './tr.json';
-// import zh_Hans from './zh_Hans.json';
+// import zhHans from './zh_Hans.json';
 
 /**
- * Map of language codes mapped to translations.
+ * Type definition representing the expected structure of localized JSON files based on the WebExtension format.
  */
-const localeMap: Record<string, Partial<typeof en>> = {
+type TranslationType = {
+	[K in keyof typeof en]?: { message: string; description?: string };
+};
+
+/**
+ * Registry mapping Obsidian's language codes to their respective imported translation objects.
+ */
+const localeMap: Record<string, TranslationType> = {
 	en,
 	es,
 	fr,
+	'pt-br': ptBR,
 	// de,
+	// ja,
 	// tr,
-	// "zh-cn": zh_Hans,
+	// 'zh-cn': zhHans,
 };
 
 /**
  * Retrieves and formats a localized string based on the active Obsidian application language.
  *
- * @param key - The translation key.
- * @param args - Optional dynamic values injected into placeholders.
+ * @param key - The translation key matching a valid property in the base English translation file.
+ * @param args - Optional dynamic values to be injected into positional placeholders (e.g., {0}, {1}).
  * @returns The formatted translation string.
  */
 export function t(key: keyof typeof en, ...args: (string | number)[]): string {
 	const currentLanguage = moment.locale();
 	const translation = localeMap[currentLanguage]?.[key];
 
-	let rawString =
-		typeof translation === 'object' && translation !== null
-			? (translation as { message: string }).message
-			: (translation as string | undefined);
-
-	if (rawString === undefined || rawString === '') {
-		const fallback = en[key];
-		rawString =
-			typeof fallback === 'object' && fallback !== null
-				? (fallback as { message: string }).message
-				: (fallback as string);
-	}
-
-	let finalString: string = rawString;
+	let finalString = translation?.message ?? en[key].message;
 
 	if (args.length > 0) {
 		args.forEach((argument, index) => {
