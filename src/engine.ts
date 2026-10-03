@@ -87,14 +87,11 @@ export function applyReplaceAction(editor: Editor, action: ReplaceAction) {
 			});
 		}
 
-		new Notice(
-			t(
-				'NOTICE__APPLIED_CHANGES',
-				action.name,
-				totalMatchCount,
-				totalMatchCount === 1 ? '' : 's'
-			)
-		);
+		const changesMsg =
+			totalMatchCount === 1
+				? t('NOTICE__APPLIED_CHANGES_SINGLE', action.name, totalMatchCount)
+				: t('NOTICE__APPLIED_CHANGES_PLURAL', action.name, totalMatchCount);
+		new Notice(changesMsg);
 	} catch (error) {
 		new Notice(t('NOTICE__ERROR', error instanceof Error ? error.message : String(error)));
 		console.error(error);

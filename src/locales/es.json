@@ -1,46 +1,137 @@
 {
-	"SETTINGS_TITLE": "Acciones de reemplazo personalizadas",
-	"SETTINGS_DESCRIPTION": "Administra las acciones predefinidas de búsqueda y reemplazo.",
-	"BUTTON_ADD_ACTION": "Agregar una nueva acción",
-	"NEW_ACTION_DEFAULT_NAME": "Nueva acción",
-	"RULE_COUNT_SINGLE": "{0} regla",
-	"RULE_COUNT_PLURAL": "{0} reglas",
-	"ACTION_CONFIGURATION_TITLE": "Configuración de la acción",
-	"ACTION_SUMMARY": "{0} — {1}",
-	"ACTION_NAME_LABEL": "Nombre de la acción",
-	"ACTION_NAME_PLACEHOLDER": "Ejemplo: eliminar espacios de más",
-	"ACTION_CONTEXT_MENU_TOOLTIP": "Mostrar en el menú contextual al hacer clic con el botón derecho",
-	"BUTTON_ADD_RULE": "Agregar una nueva regla",
-	"CONFIRM_DELETE_ACTION_TITLE": "¿Eliminar acción?",
-	"CONFIRM_DELETE_ACTION_DESC": "¿Estás seguro de que quieres eliminar esta acción? Esto no se puede deshacer.",
-	"CONFIRM_DELETE_RULE_TITLE": "¿Eliminar regla?",
-	"CONFIRM_DELETE_RULE_DESC": "¿Estás seguro de que quieres eliminar esta regla? Esto no se puede deshacer.",
-	"BUTTON_DELETE": "Eliminar",
-	"BUTTON_CANCEL": "Cancelar",
-	"CONTEXT_MENU_VISIBLE": "Visible en el menú contextual",
-	"CONTEXT_MENU_HIDDEN": "Oculto del menú contextual",
-	"TEST_BENCH_TITLE": "Reglas de reemplazo",
-	"TEST_BENCH_LABEL": "Banco de pruebas de vista previa en vivo",
-	"TEST_BENCH_DESC": "Obtén una vista previa de cómo tus reglas afectan el texto en tiempo real. Desactívalo para ocultar los paneles de vista previa y mejorar el rendimiento en páginas largas.",
-	"TEST_INPUT_LABEL": "Entrada de prueba",
-	"TEST_INPUT_PLACEHOLDER": "Pega aquí un texto de ejemplo para probar tus reglas…",
-	"ERROR_NAME_EMPTY": "El nombre de la acción no puede estar vacío.",
-	"ERROR_NAME_DUPLICATE": "Ya existe una acción con este nombre.",
-	"ERROR_PREVIOUS_STEP_FAILED": "Un paso anterior falló",
-	"ERROR_INVALID_REGEX": "Expresión regular no válida",
-	"RULE_SEARCH_LABEL": "Buscar",
-	"RULE_SEARCH_PLACEHOLDER": "Buscando…",
-	"RULE_REPLACE_LABEL": "Reemplazar",
-	"RULE_REPLACE_PLACEHOLDER": "Reemplazar por…",
-	"RULE_REGEX_LABEL": "Expresión regular",
-	"RULE_FLAGS_LABEL": "Banderas",
-	"RULE_FLAGS_INFO": "Puede incluir: ",
-	"BUTTON_MOVE_RULE_UP": "Subir la regla",
-	"BUTTON_MOVE_RULE_DOWN": "Bajar la regla",
-	"BUTTON_REMOVE_RULE": "Eliminar regla",
-	"FINAL_OUTPUT_LABEL": "Resultado final",
-	"STEP_OUTPUT_LABEL": "Salida de paso",
-	"CONTEXT_MENU_TITLE": "Reemplazo personalizado",
-	"NOTICE__APPLIED_CHANGES": "Se aplicó «{0}» ({1} cambio{2})",
-	"NOTICE__ERROR": "Error de reemplazo personalizado: {0}"
+	"SETTINGS_TITLE": {
+		"message": "Acciones de reemplazo personalizadas"
+	},
+	"SETTINGS_DESCRIPTION": {
+		"message": "Administra las acciones predefinidas de búsqueda y reemplazo."
+	},
+	"BUTTON_ADD_ACTION": {
+		"message": "Agregar una nueva acción"
+	},
+	"NEW_ACTION_DEFAULT_NAME": {
+		"message": "Nueva acción"
+	},
+	"RULE_COUNT_SINGLE": {
+		"message": "{0} regla"
+	},
+	"RULE_COUNT_PLURAL": {
+		"message": "{0} reglas"
+	},
+	"ACTION_CONFIGURATION_TITLE": {
+		"message": "Configuración de la acción"
+	},
+	"ACTION_SUMMARY": {
+		"message": "{0} — {1}"
+	},
+	"ACTION_NAME_LABEL": {
+		"message": "Nombre de la acción"
+	},
+	"ACTION_NAME_PLACEHOLDER": {
+		"message": "Ejemplo: eliminar espacios de más"
+	},
+	"ACTION_CONTEXT_MENU_TOOLTIP": {
+		"message": "Mostrar en el menú contextual al hacer clic con el botón derecho"
+	},
+	"BUTTON_ADD_RULE": {
+		"message": "Agregar una nueva regla"
+	},
+	"CONFIRM_DELETE_ACTION_TITLE": {
+		"message": "¿Eliminar acción?"
+	},
+	"CONFIRM_DELETE_ACTION_DESC": {
+		"message": "¿Estás seguro de que quieres eliminar esta acción? Esto no se puede deshacer."
+	},
+	"CONFIRM_DELETE_RULE_TITLE": {
+		"message": "¿Eliminar regla?"
+	},
+	"CONFIRM_DELETE_RULE_DESC": {
+		"message": "¿Estás seguro de que quieres eliminar esta regla? Esto no se puede deshacer."
+	},
+	"BUTTON_DELETE": {
+		"message": "Eliminar"
+	},
+	"BUTTON_CANCEL": {
+		"message": "Cancelar"
+	},
+	"CONTEXT_MENU_VISIBLE": {
+		"message": "Visible en el menú contextual"
+	},
+	"CONTEXT_MENU_HIDDEN": {
+		"message": "Oculto del menú contextual"
+	},
+	"TEST_BENCH_TITLE": {
+		"message": "Reglas de reemplazo"
+	},
+	"TEST_BENCH_LABEL": {
+		"message": "Banco de pruebas de vista previa en vivo"
+	},
+	"TEST_BENCH_DESC": {
+		"message": "Obtén una vista previa de cómo tus reglas afectan el texto en tiempo real. Desactívalo para ocultar los paneles de vista previa y mejorar el rendimiento en páginas largas."
+	},
+	"TEST_INPUT_LABEL": {
+		"message": "Entrada de prueba"
+	},
+	"TEST_INPUT_PLACEHOLDER": {
+		"message": "Pega aquí un texto de ejemplo para probar tus reglas…"
+	},
+	"ERROR_NAME_EMPTY": {
+		"message": "El nombre de la acción no puede estar vacío."
+	},
+	"ERROR_NAME_DUPLICATE": {
+		"message": "Ya existe una acción con este nombre."
+	},
+	"ERROR_PREVIOUS_STEP_FAILED": {
+		"message": "Un paso anterior falló"
+	},
+	"ERROR_INVALID_REGEX": {
+		"message": "Expresión regular no válida"
+	},
+	"RULE_SEARCH_LABEL": {
+		"message": "Buscar"
+	},
+	"RULE_SEARCH_PLACEHOLDER": {
+		"message": "Buscando…"
+	},
+	"RULE_REPLACE_LABEL": {
+		"message": "Reemplazar"
+	},
+	"RULE_REPLACE_PLACEHOLDER": {
+		"message": "Reemplazar por…"
+	},
+	"RULE_REGEX_LABEL": {
+		"message": "Expresión regular"
+	},
+	"RULE_FLAGS_LABEL": {
+		"message": "Banderas"
+	},
+	"RULE_FLAGS_INFO": {
+		"message": "Puede incluir: "
+	},
+	"BUTTON_MOVE_RULE_UP": {
+		"message": "Subir la regla"
+	},
+	"BUTTON_MOVE_RULE_DOWN": {
+		"message": "Bajar la regla"
+	},
+	"BUTTON_REMOVE_RULE": {
+		"message": "Eliminar regla"
+	},
+	"FINAL_OUTPUT_LABEL": {
+		"message": "Resultado final"
+	},
+	"STEP_OUTPUT_LABEL": {
+		"message": "Salida de paso"
+	},
+	"CONTEXT_MENU_TITLE": {
+		"message": "Reemplazo personalizado"
+	},
+	"NOTICE__APPLIED_CHANGES_SINGLE": {
+		"message": "Se aplicó «{0}» ({1} cambio)"
+	},
+	"NOTICE__APPLIED_CHANGES_PLURAL": {
+		"message": "Se aplicó «{0}» ({1} cambios)"
+	},
+	"NOTICE__ERROR": {
+		"message": "Error de reemplazo personalizado: {0}"
+	}
 }

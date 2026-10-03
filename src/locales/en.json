@@ -1,56 +1,222 @@
 {
-	"SETTINGS_TITLE": "Custom replace actions",
-	"SETTINGS_DESCRIPTION": "Manage preset find-and-replace actions.",
-	"BUTTON_ADD_ACTION": "Add new action",
-	"NEW_ACTION_DEFAULT_NAME": "New action",
-	"RULE_COUNT_SINGLE": "{0} rule",
-	"RULE_COUNT_PLURAL": "{0} rules",
-	"ACTION_CONFIGURATION_TITLE": "Action Configuration",
-	"ACTION_SUMMARY": "{0} — {1}",
-	"ACTION_NAME_LABEL": "Action name",
-	"ACTION_NAME_PLACEHOLDER": "Example: remove extra spaces",
-	"ACTION_CONTEXT_MENU_TOOLTIP": "Show in right-click context menu",
-	"BUTTON_ADD_RULE": "Add new rule",
-	"CONFIRM_DELETE_ACTION_TITLE": "Delete action?",
-	"CONFIRM_DELETE_ACTION_DESC": "Are you sure you want to delete this action? This cannot be undone.",
-	"CONFIRM_DELETE_RULE_TITLE": "Delete rule?",
-	"CONFIRM_DELETE_RULE_DESC": "Are you sure you want to delete this rule? This cannot be undone.",
-	"BUTTON_DELETE": "Delete",
-	"BUTTON_CANCEL": "Cancel",
-	"CONTEXT_MENU_VISIBLE": "Shown in context menu",
-	"CONTEXT_MENU_HIDDEN": "Hidden from the context menu",
-	"TEST_BENCH_TITLE": "Replacement Rules",
-	"TEST_BENCH_LABEL": "Live preview test bench",
-	"TEST_BENCH_DESC": "Preview how your rules affect text in real-time. Turn off to hide the preview panels and improve performance on long pages.",
-	"TEST_INPUT_LABEL": "Test input",
-	"TEST_INPUT_PLACEHOLDER": "Paste sample text here to test your rules…",
-	"ERROR_NAME_EMPTY": "Action name cannot be empty.",
-	"ERROR_NAME_DUPLICATE": "An action with this name already exists.",
-	"ERROR_PREVIOUS_STEP_FAILED": "A previous step failed",
-	"ERROR_INVALID_REGEX": "Invalid regex",
-	"RULE_SEARCH_LABEL": "Search",
-	"RULE_SEARCH_PLACEHOLDER": "Search…",
-	"RULE_REPLACE_LABEL": "Replace",
-	"RULE_REPLACE_PLACEHOLDER": "Replace with…",
-	"RULE_REGEX_LABEL": "Regex",
-	"RULE_FLAGS_LABEL": "Flags",
-	"RULE_FLAGS_INFO": "Can include: ",
-	"BUTTON_MOVE_RULE_UP": "Move rule up",
-	"BUTTON_MOVE_RULE_DOWN": "Move rule down",
-	"BUTTON_REMOVE_RULE": "Remove rule",
-	"FINAL_OUTPUT_LABEL": "Final output",
-	"STEP_OUTPUT_LABEL": "Step output",
-	"CONTEXT_MENU_TITLE": "Custom replace",
-	"NOTICE__APPLIED_CHANGES": "Applied \"{0}\" ({1} change{2})",
-	"NOTICE__ERROR": "Custom replace error: {0}",
-	"ERROR_NO_MARKDOWN_FILES": "No Markdown files found in selection.",
-	"BULK_REPLACE_WARNING_TITLE": "Bulk Replace Warning",
-	"BULK_REPLACE_WARNING_DESC_SINGLE": "You are about to modify {0} file using \"{1}\". This writes directly to disk and CANNOT be undone with Ctrl+Z. Are you sure you want to proceed?",
-	"BULK_REPLACE_WARNING_DESC_PLURAL": "You are about to modify {0} files using \"{1}\". This writes directly to disk and CANNOT be undone with Ctrl+Z. Are you sure you want to proceed?",
-	"BUTTON_REPLACE_ALL": "Replace all",
-	"NOTICE__PROCESSING_FILES_SINGLE": "Processing {0} file…",
-	"NOTICE__PROCESSING_FILES_PLURAL": "Processing {0} files…",
-	"NOTICE__BULK_REPLACE_COMPLETE": "Bulk replace complete: {0} matches replaced across {1} files.",
-	"CONTEXT_MENU_BULK_TITLE": "Bulk custom replace",
-	"CONTEXT_MENU_ALL_COMMANDS": "All commands"
+	"SETTINGS_TITLE": {
+		"message": "Custom replace actions",
+		"description": "UI: Main section heading. Context: Appears at the very top of the plugin's settings tab."
+	},
+	"SETTINGS_DESCRIPTION": {
+		"message": "Manage preset find-and-replace actions.",
+		"description": "UI: Subtitle text. Context: Appears directly below the main settings heading."
+	},
+	"BUTTON_ADD_ACTION": {
+		"message": "Add new action",
+		"description": "UI: Button label. Context: Used to create a new custom action in the settings list."
+	},
+	"NEW_ACTION_DEFAULT_NAME": {
+		"message": "New action",
+		"description": "UI: Default text input value. Context: The placeholder name assigned when a new action is first created."
+	},
+	"RULE_COUNT_SINGLE": {
+		"message": "{0} rule",
+		"description": "UI: Text badge in a list. Context: Shows a singular count of find/replace rules inside an action. {0} is the number (1)."
+	},
+	"RULE_COUNT_PLURAL": {
+		"message": "{0} rules",
+		"description": "UI: Text badge in a list. Context: Shows a plural count of find/replace rules inside an action. {0} is the number (>1)."
+	},
+	"ACTION_CONFIGURATION_TITLE": {
+		"message": "Action Configuration",
+		"description": "UI: Section heading. Context: Appears inside the modal window where users edit a specific action."
+	},
+	"ACTION_SUMMARY": {
+		"message": "{0} — {1}",
+		"description": "UI: List item description text. Context: Displays metadata below an action name. {0} is the rule count string, {1} is the context menu visibility string."
+	},
+	"ACTION_NAME_LABEL": {
+		"message": "Action name",
+		"description": "UI: Input field label. Context: Label for the text box where users name their action."
+	},
+	"ACTION_NAME_PLACEHOLDER": {
+		"message": "Example: remove extra spaces",
+		"description": "UI: Input field placeholder. Context: Example text shown inside an empty action name input box."
+	},
+	"ACTION_CONTEXT_MENU_TOOLTIP": {
+		"message": "Show in right-click context menu",
+		"description": "UI: Toggle switch label. Context: Allows users to pin this specific action to their native Obsidian right-click menu."
+	},
+	"BUTTON_ADD_RULE": {
+		"message": "Add new rule",
+		"description": "UI: Button label. Context: Adds a new blank find-and-replace row to the action's sequence."
+	},
+	"CONFIRM_DELETE_ACTION_TITLE": {
+		"message": "Delete action?",
+		"description": "UI: Modal dialog title. Context: Asks for confirmation before deleting an entire action."
+	},
+	"CONFIRM_DELETE_ACTION_DESC": {
+		"message": "Are you sure you want to delete this action? This cannot be undone.",
+		"description": "UI: Modal dialog body text. Context: Warns the user about permanent deletion of an action."
+	},
+	"CONFIRM_DELETE_RULE_TITLE": {
+		"message": "Delete rule?",
+		"description": "UI: Modal dialog title. Context: Asks for confirmation before deleting a single find-and-replace rule."
+	},
+	"CONFIRM_DELETE_RULE_DESC": {
+		"message": "Are you sure you want to delete this rule? This cannot be undone.",
+		"description": "UI: Modal dialog body text. Context: Warns the user about permanent deletion of a rule."
+	},
+	"BUTTON_DELETE": {
+		"message": "Delete",
+		"description": "UI: Destructive button label. Context: Confirms the deletion of an item."
+	},
+	"BUTTON_CANCEL": {
+		"message": "Cancel",
+		"description": "UI: Button label. Context: Closes a dialog without making changes."
+	},
+	"CONTEXT_MENU_VISIBLE": {
+		"message": "Shown in context menu",
+		"description": "UI: Status text. Context: Appears in the settings list to indicate this action is pinned to the right-click menu."
+	},
+	"CONTEXT_MENU_HIDDEN": {
+		"message": "Hidden from the context menu",
+		"description": "UI: Status text. Context: Appears in the settings list to indicate this action is NOT pinned to the right-click menu."
+	},
+	"TEST_BENCH_TITLE": {
+		"message": "Replacement Rules",
+		"description": "UI: Section heading. Context: Appears above the sequence of find/replace inputs in the editor modal."
+	},
+	"TEST_BENCH_LABEL": {
+		"message": "Live preview test bench",
+		"description": "UI: Toggle switch label. Context: Controls whether the live preview input/output text areas are visible."
+	},
+	"TEST_BENCH_DESC": {
+		"message": "Preview how your rules affect text in real-time. Turn off to hide the preview panels and improve performance on long pages.",
+		"description": "UI: Description text. Context: Explains the purpose of the test bench toggle switch."
+	},
+	"TEST_INPUT_LABEL": {
+		"message": "Test input",
+		"description": "UI: Label for a text area. Context: Marks the box where users can paste sample text to test their rules against."
+	},
+	"TEST_INPUT_PLACEHOLDER": {
+		"message": "Paste sample text here to test your rules…",
+		"description": "UI: Placeholder text. Context: Shown when the test input text area is empty."
+	},
+	"ERROR_NAME_EMPTY": {
+		"message": "Action name cannot be empty.",
+		"description": "UI: Error message. Context: Appears beneath the name input if the user deletes all text."
+	},
+	"ERROR_NAME_DUPLICATE": {
+		"message": "An action with this name already exists.",
+		"description": "UI: Error message. Context: Appears beneath the name input if the user enters a name used by another action."
+	},
+	"ERROR_PREVIOUS_STEP_FAILED": {
+		"message": "A previous step failed",
+		"description": "UI: Error message. Context: Appears in an output box if a preceding rule in the sequence crashed."
+	},
+	"ERROR_INVALID_REGEX": {
+		"message": "Invalid regex",
+		"description": "UI: Error message. Context: Appears when a user writes a broken regular expression."
+	},
+	"RULE_SEARCH_LABEL": {
+		"message": "Search",
+		"description": "UI: Input field label. Context: The target word or regex pattern the user wants to find."
+	},
+	"RULE_SEARCH_PLACEHOLDER": {
+		"message": "Search…",
+		"description": "UI: Input field placeholder. Context: Shown in the empty search input box."
+	},
+	"RULE_REPLACE_LABEL": {
+		"message": "Replace",
+		"description": "UI: Input field label. Context: The text the user wants to replace the search term with."
+	},
+	"RULE_REPLACE_PLACEHOLDER": {
+		"message": "Replace with…",
+		"description": "UI: Input field placeholder. Context: Shown in the empty replace input box."
+	},
+	"RULE_REGEX_LABEL": {
+		"message": "Regex",
+		"description": "UI: Toggle switch label. Context: Turns on Regular Expression parsing for a specific rule."
+	},
+	"RULE_FLAGS_LABEL": {
+		"message": "Flags",
+		"description": "UI: Input field label. Context: Regular Expression modifiers (like 'g' or 'i')."
+	},
+	"RULE_FLAGS_INFO": {
+		"message": "Can include: ",
+		"description": "UI: Tooltip text prefix. Context: Shown when a user enters invalid regex flags, preceding the list of allowed characters."
+	},
+	"BUTTON_MOVE_RULE_UP": {
+		"message": "Move rule up",
+		"description": "UI: Icon button tooltip. Context: Shifts a find/replace rule earlier in the execution sequence."
+	},
+	"BUTTON_MOVE_RULE_DOWN": {
+		"message": "Move rule down",
+		"description": "UI: Icon button tooltip. Context: Shifts a find/replace rule later in the execution sequence."
+	},
+	"BUTTON_REMOVE_RULE": {
+		"message": "Remove rule",
+		"description": "UI: Icon button tooltip. Context: Triggers the deletion of a specific rule row."
+	},
+	"FINAL_OUTPUT_LABEL": {
+		"message": "Final output",
+		"description": "UI: Text area label. Context: Marks the box showing the fully processed text at the end of the rule sequence."
+	},
+	"STEP_OUTPUT_LABEL": {
+		"message": "Step output",
+		"description": "UI: Text area label. Context: Marks the box showing intermediate processed text in the middle of a rule sequence."
+	},
+	"CONTEXT_MENU_TITLE": {
+		"message": "Custom replace",
+		"description": "UI: Context menu item label. Context: The main folder name inside Obsidian's right-click menu."
+	},
+	"NOTICE__APPLIED_CHANGES_SINGLE": {
+		"message": "Applied \"{0}\" ({1} change)",
+		"description": "UI: Toast notification. Context: Confirms successful execution for exactly 1 change. {0} is the action name, {1} is the number of changes (always 1)."
+	},
+	"NOTICE__APPLIED_CHANGES_PLURAL": {
+		"message": "Applied \"{0}\" ({1} changes)",
+		"description": "UI: Toast notification. Context: Confirms successful execution for multiple (or zero) changes. {0} is the action name, {1} is the number of changes."
+	},
+	"NOTICE__ERROR": {
+		"message": "Custom replace error: {0}",
+		"description": "UI: Toast notification. Context: Displays a caught error to the user. {0} is the technical error message."
+	},
+	"ERROR_NO_MARKDOWN_FILES": {
+		"message": "No Markdown files found in selection.",
+		"description": "UI: Toast notification. Context: Warns the user when they try to run a bulk replace on incompatible files (like images or PDFs)."
+	},
+	"BULK_REPLACE_WARNING_TITLE": {
+		"message": "Bulk Replace Warning",
+		"description": "UI: Modal dialog title. Context: Warns the user before running a destructive operation on multiple files."
+	},
+	"BULK_REPLACE_WARNING_DESC_SINGLE": {
+		"message": "You are about to modify {0} file using \"{1}\". This writes directly to disk and CANNOT be undone with Ctrl+Z. Are you sure you want to proceed?",
+		"description": "UI: Modal dialog body text. Context: Singular warning message. {0} is the file count (always 1), {1} is the action name."
+	},
+	"BULK_REPLACE_WARNING_DESC_PLURAL": {
+		"message": "You are about to modify {0} files using \"{1}\". This writes directly to disk and CANNOT be undone with Ctrl+Z. Are you sure you want to proceed?",
+		"description": "UI: Modal dialog body text. Context: Plural warning message. {0} is the file count (>1), {1} is the action name."
+	},
+	"BUTTON_REPLACE_ALL": {
+		"message": "Replace all",
+		"description": "UI: Destructive button label. Context: Confirms the bulk replacement operation."
+	},
+	"NOTICE__PROCESSING_FILES_SINGLE": {
+		"message": "Processing {0} file…",
+		"description": "UI: Toast notification. Context: Singular loading state message while a bulk operation runs. {0} is the file count (always 1)."
+	},
+	"NOTICE__PROCESSING_FILES_PLURAL": {
+		"message": "Processing {0} files…",
+		"description": "UI: Toast notification. Context: Plural loading state message while a bulk operation runs. {0} is the file count (>1)."
+	},
+	"NOTICE__BULK_REPLACE_COMPLETE": {
+		"message": "Bulk replace complete. Total matches: {0}. Files modified: {1}.",
+		"description": "UI: Toast notification. Context: Grammar-neutral success message after a bulk operation. {0} is the total number of text replacements, {1} is the number of files modified."
+	},
+	"CONTEXT_MENU_BULK_TITLE": {
+		"message": "Bulk custom replace",
+		"description": "UI: Context menu item label. Context: The main folder name inside the File Explorer's right-click menu."
+	},
+	"CONTEXT_MENU_ALL_COMMANDS": {
+		"message": "All commands",
+		"description": "UI: Context menu item label. Context: A shortcut at the bottom of the right-click submenu to open the main search modal."
+	}
 }

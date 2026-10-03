@@ -29,11 +29,19 @@ const localeMap: Record<string, Partial<typeof en>> = {
  */
 export function t(key: keyof typeof en, ...args: (string | number)[]): string {
 	const currentLanguage = moment.locale();
+	const translation = localeMap[currentLanguage]?.[key];
 
-	let rawString = localeMap[currentLanguage]?.[key];
+	let rawString =
+		typeof translation === 'object' && translation !== null
+			? (translation as { message: string }).message
+			: (translation as string | undefined);
 
 	if (rawString === undefined || rawString === '') {
-		rawString = en[key];
+		const fallback = en[key];
+		rawString =
+			typeof fallback === 'object' && fallback !== null
+				? (fallback as { message: string }).message
+				: (fallback as string);
 	}
 
 	let finalString: string = rawString;

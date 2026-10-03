@@ -1,56 +1,167 @@
 {
-	"SETTINGS_TITLE": "Groupes de remplacements personnalisés",
-	"SETTINGS_DESCRIPTION": "Gérez votre catalogue de groupes de remplacements prédéfinis.",
-	"BUTTON_ADD_ACTION": "Ajouter un groupe de remplacements",
-	"NEW_ACTION_DEFAULT_NAME": "Nouveau groupe de remplacements",
-	"RULE_COUNT_SINGLE": "{0} règle",
-	"RULE_COUNT_PLURAL": "{0} règles",
-	"ACTION_CONFIGURATION_TITLE": "Configuration du groupe",
-	"ACTION_SUMMARY": "{0} — {1}",
-	"ACTION_NAME_LABEL": "Nom du groupe de remplacements",
-	"ACTION_NAME_PLACEHOLDER": "Exemple: supprimer les espaces en trop",
-	"ACTION_CONTEXT_MENU_TOOLTIP": "Afficher dans le menu contextuel (clic droit)",
-	"BUTTON_ADD_RULE": "Ajouter une règle",
-	"CONFIRM_DELETE_ACTION_TITLE": "Supprimer le groupe?",
-	"CONFIRM_DELETE_ACTION_DESC": "Êtes-vous sûr de vouloir supprimer ce groupe de remplacements? Cette action est irréversible.",
-	"CONFIRM_DELETE_RULE_TITLE": "Supprimer la règle?",
-	"CONFIRM_DELETE_RULE_DESC": "Êtes-vous sûr de vouloir supprimer cette règle? Cette action est irréversible.",
-	"BUTTON_DELETE": "Supprimer",
-	"BUTTON_CANCEL": "Annuler",
-	"CONTEXT_MENU_VISIBLE": "Affiché dans le menu contextuel",
-	"CONTEXT_MENU_HIDDEN": "Masqué du menu contextuel",
-	"TEST_BENCH_TITLE": "Règles de remplacement",
-	"TEST_BENCH_LABEL": "Zone de prévisualisation",
-	"TEST_BENCH_DESC": "Prévisualisez en temps réel l'effet de vos règles sur le texte. Désactivez cette option pour masquer les panneaux de prévisualisation et améliorer les performances sur les groupes complexes.",
-	"TEST_INPUT_LABEL": "Texte à modifier",
-	"TEST_INPUT_PLACEHOLDER": "Collez votre texte ici pour prévisualiser les remplacements…",
-	"ERROR_NAME_EMPTY": "Le nom du groupe ne peut pas être vide.",
-	"ERROR_NAME_DUPLICATE": "Un groupe avec ce nom existe déjà.",
-	"ERROR_PREVIOUS_STEP_FAILED": "Étape précédente invalide",
-	"ERROR_INVALID_REGEX": "Regex invalide",
-	"RULE_SEARCH_LABEL": "Rechercher",
-	"RULE_SEARCH_PLACEHOLDER": "Rechercher…",
-	"RULE_REPLACE_LABEL": "Remplacer",
-	"RULE_REPLACE_PLACEHOLDER": "Remplacer par…",
-	"RULE_REGEX_LABEL": "Regex",
-	"RULE_FLAGS_LABEL": "Flags",
-	"RULE_FLAGS_INFO": "Peut inclure: ",
-	"BUTTON_MOVE_RULE_UP": "Déplacer la règle vers le haut",
-	"BUTTON_MOVE_RULE_DOWN": "Déplacer la règle vers le bas",
-	"BUTTON_REMOVE_RULE": "Supprimer la règle",
-	"FINAL_OUTPUT_LABEL": "Résultat final",
-	"STEP_OUTPUT_LABEL": "Résultat de l'étape",
-	"CONTEXT_MENU_TITLE": "Remplacements personnalisés",
-	"NOTICE__APPLIED_CHANGES": "\"{0}\" appliqué ({1} modification{2})",
-	"NOTICE__ERROR": "Erreur de remplacement: {0}",
-	"ERROR_NO_MARKDOWN_FILES": "Aucun fichier Markdown trouvé dans la sélection.",
-	"BULK_REPLACE_WARNING_TITLE": "Avertissement de remplacements multiples",
-	"BULK_REPLACE_WARNING_DESC_SINGLE": "Vous êtes sur le point de modifier {0} fichier avec \"{1}\". Cette action modifie directement le fichier et est IRRÉVERSIBLE (impossible de l'annuler avec Ctrl+Z). Voulez-vous vraiment continuer?",
-	"BULK_REPLACE_WARNING_DESC_PLURAL": "Vous êtes sur le point de modifier {0} fichiers avec \"{1}\". Cette action modifie directement les fichiers et est IRRÉVERSIBLE (impossible de l'annuler avec Ctrl+Z). Voulez-vous vraiment continuer?",
-	"BUTTON_REPLACE_ALL": "Tout remplacer",
-	"NOTICE__PROCESSING_FILES_SINGLE": "Traitement de {0} fichier en cours…",
-	"NOTICE__PROCESSING_FILES_PLURAL": "Traitement de {0} fichiers en cours…",
-	"NOTICE__BULK_REPLACE_COMPLETE": "Remplacements terminés: {0} correspondances remplacées dans {1} fichier(s).",
-	"CONTEXT_MENU_BULK_TITLE": "Remplacements multiples",
-	"CONTEXT_MENU_ALL_COMMANDS": "Toutes les commandes"
+	"SETTINGS_TITLE": {
+		"message": "Groupes de remplacements personnalisés"
+	},
+	"SETTINGS_DESCRIPTION": {
+		"message": "Gérez votre catalogue de groupes de remplacements prédéfinis."
+	},
+	"BUTTON_ADD_ACTION": {
+		"message": "Ajouter un groupe de remplacements"
+	},
+	"NEW_ACTION_DEFAULT_NAME": {
+		"message": "Nouveau groupe de remplacements"
+	},
+	"RULE_COUNT_SINGLE": {
+		"message": "{0} règle"
+	},
+	"RULE_COUNT_PLURAL": {
+		"message": "{0} règles"
+	},
+	"ACTION_CONFIGURATION_TITLE": {
+		"message": "Configuration du groupe"
+	},
+	"ACTION_SUMMARY": {
+		"message": "{0} — {1}"
+	},
+	"ACTION_NAME_LABEL": {
+		"message": "Nom du groupe de remplacements"
+	},
+	"ACTION_NAME_PLACEHOLDER": {
+		"message": "Exemple: supprimer les espaces en trop"
+	},
+	"ACTION_CONTEXT_MENU_TOOLTIP": {
+		"message": "Afficher dans le menu contextuel (clic droit)"
+	},
+	"BUTTON_ADD_RULE": {
+		"message": "Ajouter une règle"
+	},
+	"CONFIRM_DELETE_ACTION_TITLE": {
+		"message": "Supprimer le groupe?"
+	},
+	"CONFIRM_DELETE_ACTION_DESC": {
+		"message": "Êtes-vous sûr de vouloir supprimer ce groupe de remplacements? Cette action est irréversible."
+	},
+	"CONFIRM_DELETE_RULE_TITLE": {
+		"message": "Supprimer la règle?"
+	},
+	"CONFIRM_DELETE_RULE_DESC": {
+		"message": "Êtes-vous sûr de vouloir supprimer cette règle? Cette action est irréversible."
+	},
+	"BUTTON_DELETE": {
+		"message": "Supprimer"
+	},
+	"BUTTON_CANCEL": {
+		"message": "Annuler"
+	},
+	"CONTEXT_MENU_VISIBLE": {
+		"message": "Affiché dans le menu contextuel"
+	},
+	"CONTEXT_MENU_HIDDEN": {
+		"message": "Masqué du menu contextuel"
+	},
+	"TEST_BENCH_TITLE": {
+		"message": "Règles de remplacement"
+	},
+	"TEST_BENCH_LABEL": {
+		"message": "Zone de prévisualisation"
+	},
+	"TEST_BENCH_DESC": {
+		"message": "Prévisualisez en temps réel l'effet de vos règles sur le texte. Désactivez cette option pour masquer les panneaux de prévisualisation et améliorer les performances sur les groupes complexes."
+	},
+	"TEST_INPUT_LABEL": {
+		"message": "Texte à modifier"
+	},
+	"TEST_INPUT_PLACEHOLDER": {
+		"message": "Collez votre texte ici pour prévisualiser les remplacements…"
+	},
+	"ERROR_NAME_EMPTY": {
+		"message": "Le nom du groupe ne peut pas être vide."
+	},
+	"ERROR_NAME_DUPLICATE": {
+		"message": "Un groupe avec ce nom existe déjà."
+	},
+	"ERROR_PREVIOUS_STEP_FAILED": {
+		"message": "Étape précédente invalide"
+	},
+	"ERROR_INVALID_REGEX": {
+		"message": "Regex invalide"
+	},
+	"RULE_SEARCH_LABEL": {
+		"message": "Rechercher"
+	},
+	"RULE_SEARCH_PLACEHOLDER": {
+		"message": "Rechercher…"
+	},
+	"RULE_REPLACE_LABEL": {
+		"message": "Remplacer"
+	},
+	"RULE_REPLACE_PLACEHOLDER": {
+		"message": "Remplacer par…"
+	},
+	"RULE_REGEX_LABEL": {
+		"message": "Regex"
+	},
+	"RULE_FLAGS_LABEL": {
+		"message": "Flags"
+	},
+	"RULE_FLAGS_INFO": {
+		"message": "Peut inclure: "
+	},
+	"BUTTON_MOVE_RULE_UP": {
+		"message": "Déplacer la règle vers le haut"
+	},
+	"BUTTON_MOVE_RULE_DOWN": {
+		"message": "Déplacer la règle vers le bas"
+	},
+	"BUTTON_REMOVE_RULE": {
+		"message": "Supprimer la règle"
+	},
+	"FINAL_OUTPUT_LABEL": {
+		"message": "Résultat final"
+	},
+	"STEP_OUTPUT_LABEL": {
+		"message": "Résultat de l'étape"
+	},
+	"CONTEXT_MENU_TITLE": {
+		"message": "Remplacements personnalisés"
+	},
+	"NOTICE__APPLIED_CHANGES_SINGLE": {
+		"message": "\"{0}\" appliqué ({1} modification)"
+	},
+	"NOTICE__APPLIED_CHANGES_PLURAL": {
+		"message": "\"{0}\" appliqué ({1} modifications)"
+	},
+	"NOTICE__ERROR": {
+		"message": "Erreur de remplacement: {0}"
+	},
+	"ERROR_NO_MARKDOWN_FILES": {
+		"message": "Aucun fichier Markdown trouvé dans la sélection."
+	},
+	"BULK_REPLACE_WARNING_TITLE": {
+		"message": "Avertissement de remplacements multiples"
+	},
+	"BULK_REPLACE_WARNING_DESC_SINGLE": {
+		"message": "Vous êtes sur le point de modifier {0} fichier avec \"{1}\". Cette action modifie directement le fichier et est IRRÉVERSIBLE (impossible de l'annuler avec Ctrl+Z). Voulez-vous vraiment continuer?"
+	},
+	"BULK_REPLACE_WARNING_DESC_PLURAL": {
+		"message": "Vous êtes sur le point de modifier {0} fichiers avec \"{1}\". Cette action modifie directement les fichiers et est IRRÉVERSIBLE (impossible de l'annuler avec Ctrl+Z). Voulez-vous vraiment continuer?"
+	},
+	"BUTTON_REPLACE_ALL": {
+		"message": "Tout remplacer"
+	},
+	"NOTICE__PROCESSING_FILES_SINGLE": {
+		"message": "Traitement de {0} fichier en cours…"
+	},
+	"NOTICE__PROCESSING_FILES_PLURAL": {
+		"message": "Traitement de {0} fichiers en cours…"
+	},
+	"NOTICE__BULK_REPLACE_COMPLETE": {
+		"message": "Remplacements terminés. Correspondances totales: {0}. Fichiers modifiés: {1}."
+	},
+	"CONTEXT_MENU_BULK_TITLE": {
+		"message": "Remplacements multiples"
+	},
+	"CONTEXT_MENU_ALL_COMMANDS": {
+		"message": "Toutes les commandes"
+	}
 }

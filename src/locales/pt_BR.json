@@ -1,46 +1,137 @@
 {
-	"SETTINGS_TITLE": "Ações personalizadas",
-	"SETTINGS_DESCRIPTION": "Gerencie ações predefinidas de localizar e substituir.",
-	"BUTTON_ADD_ACTION": "Adicionar nova ação",
-	"NEW_ACTION_DEFAULT_NAME": "Nova ação",
-	"RULE_COUNT_SINGLE": "{0} regra",
-	"RULE_COUNT_PLURAL": "{0} regras",
-	"ACTION_CONFIGURATION_TITLE": "Configuração da ação",
-	"ACTION_SUMMARY": "{0} — {1}",
-	"ACTION_NAME_LABEL": "Nome da ação",
-	"ACTION_NAME_PLACEHOLDER": "Exemplo: remover espaços extras",
-	"ACTION_CONTEXT_MENU_TOOLTIP": "Mostrar no menu de contexto do botão direito",
-	"BUTTON_ADD_RULE": "Adicionar nova regra",
-	"CONFIRM_DELETE_ACTION_TITLE": "Excluir ação?",
-	"CONFIRM_DELETE_ACTION_DESC": "Tem certeza de que deseja excluir esta ação? Essa ação não pode ser desfeita.",
-	"CONFIRM_DELETE_RULE_TITLE": "Excluir regra?",
-	"CONFIRM_DELETE_RULE_DESC": "Tem certeza de que deseja excluir esta regra? Essa ação não pode ser desfeita.",
-	"BUTTON_DELETE": "Excluir",
-	"BUTTON_CANCEL": "Cancelar",
-	"CONTEXT_MENU_VISIBLE": "Exibido no menu de contexto",
-	"CONTEXT_MENU_HIDDEN": "Oculto no menu de contexto",
-	"TEST_BENCH_TITLE": "Regras de substituição",
-	"TEST_BENCH_LABEL": "Teste de visualização em tempo real",
-	"TEST_BENCH_DESC": "Veja em tempo real como suas regras afetam o texto. Desative para ocultar os painéis de visualização e melhorar o desempenho em páginas longas.",
-	"TEST_INPUT_LABEL": "Texto de teste",
-	"TEST_INPUT_PLACEHOLDER": "Cole um texto de exemplo aqui para testar suas regras…",
-	"ERROR_NAME_EMPTY": "O nome da ação não pode estar vazio.",
-	"ERROR_NAME_DUPLICATE": "Já existe uma ação com este nome.",
-	"ERROR_PREVIOUS_STEP_FAILED": "Uma etapa anterior falhou",
-	"ERROR_INVALID_REGEX": "Expressão regular inválida",
-	"RULE_SEARCH_LABEL": "Pesquisar",
-	"RULE_SEARCH_PLACEHOLDER": "Pesquisar…",
-	"RULE_REPLACE_LABEL": "Substituir",
-	"RULE_REPLACE_PLACEHOLDER": "Substituir por…",
-	"RULE_REGEX_LABEL": "Regex",
-	"RULE_FLAGS_LABEL": "Sinalizadores",
-	"RULE_FLAGS_INFO": "Pode incluir: ",
-	"BUTTON_MOVE_RULE_UP": "Mover regra para cima",
-	"BUTTON_MOVE_RULE_DOWN": "Mover regra para baixo",
-	"BUTTON_REMOVE_RULE": "Remover regra",
-	"FINAL_OUTPUT_LABEL": "Resultado final",
-	"STEP_OUTPUT_LABEL": "Resultado da etapa",
-	"CONTEXT_MENU_TITLE": "Substituição personalizada",
-	"NOTICE__APPLIED_CHANGES": "\"{0}\" aplicado ({1} alteração{2})",
-	"NOTICE__ERROR": "Erro na substituição personalizada: {0}"
+	"SETTINGS_TITLE": {
+		"message": "Ações personalizadas"
+	},
+	"SETTINGS_DESCRIPTION": {
+		"message": "Gerencie ações predefinidas de localizar e substituir."
+	},
+	"BUTTON_ADD_ACTION": {
+		"message": "Adicionar nova ação"
+	},
+	"NEW_ACTION_DEFAULT_NAME": {
+		"message": "Nova ação"
+	},
+	"RULE_COUNT_SINGLE": {
+		"message": "{0} regra"
+	},
+	"RULE_COUNT_PLURAL": {
+		"message": "{0} regras"
+	},
+	"ACTION_CONFIGURATION_TITLE": {
+		"message": "Configuração da ação"
+	},
+	"ACTION_SUMMARY": {
+		"message": "{0} — {1}"
+	},
+	"ACTION_NAME_LABEL": {
+		"message": "Nome da ação"
+	},
+	"ACTION_NAME_PLACEHOLDER": {
+		"message": "Exemplo: remover espaços extras"
+	},
+	"ACTION_CONTEXT_MENU_TOOLTIP": {
+		"message": "Mostrar no menu de contexto do botão direito"
+	},
+	"BUTTON_ADD_RULE": {
+		"message": "Adicionar nova regra"
+	},
+	"CONFIRM_DELETE_ACTION_TITLE": {
+		"message": "Excluir ação?"
+	},
+	"CONFIRM_DELETE_ACTION_DESC": {
+		"message": "Tem certeza de que deseja excluir esta ação? Essa ação não pode ser desfeita."
+	},
+	"CONFIRM_DELETE_RULE_TITLE": {
+		"message": "Excluir regra?"
+	},
+	"CONFIRM_DELETE_RULE_DESC": {
+		"message": "Tem certeza de que deseja excluir esta regra? Essa ação não pode ser desfeita."
+	},
+	"BUTTON_DELETE": {
+		"message": "Excluir"
+	},
+	"BUTTON_CANCEL": {
+		"message": "Cancelar"
+	},
+	"CONTEXT_MENU_VISIBLE": {
+		"message": "Exibido no menu de contexto"
+	},
+	"CONTEXT_MENU_HIDDEN": {
+		"message": "Oculto no menu de contexto"
+	},
+	"TEST_BENCH_TITLE": {
+		"message": "Regras de substituição"
+	},
+	"TEST_BENCH_LABEL": {
+		"message": "Teste de visualização em tempo real"
+	},
+	"TEST_BENCH_DESC": {
+		"message": "Veja em tempo real como suas regras afetam o texto. Desative para ocultar os painéis de visualização e melhorar o desempenho em páginas longas."
+	},
+	"TEST_INPUT_LABEL": {
+		"message": "Texto de teste"
+	},
+	"TEST_INPUT_PLACEHOLDER": {
+		"message": "Cole um texto de exemplo aqui para testar suas regras…"
+	},
+	"ERROR_NAME_EMPTY": {
+		"message": "O nome da ação não pode estar vazio."
+	},
+	"ERROR_NAME_DUPLICATE": {
+		"message": "Já existe uma ação com este nome."
+	},
+	"ERROR_PREVIOUS_STEP_FAILED": {
+		"message": "Uma etapa anterior falhou"
+	},
+	"ERROR_INVALID_REGEX": {
+		"message": "Expressão regular inválida"
+	},
+	"RULE_SEARCH_LABEL": {
+		"message": "Pesquisar"
+	},
+	"RULE_SEARCH_PLACEHOLDER": {
+		"message": "Pesquisar…"
+	},
+	"RULE_REPLACE_LABEL": {
+		"message": "Substituir"
+	},
+	"RULE_REPLACE_PLACEHOLDER": {
+		"message": "Substituir por…"
+	},
+	"RULE_REGEX_LABEL": {
+		"message": "Regex"
+	},
+	"RULE_FLAGS_LABEL": {
+		"message": "Sinalizadores"
+	},
+	"RULE_FLAGS_INFO": {
+		"message": "Pode incluir: "
+	},
+	"BUTTON_MOVE_RULE_UP": {
+		"message": "Mover regra para cima"
+	},
+	"BUTTON_MOVE_RULE_DOWN": {
+		"message": "Mover regra para baixo"
+	},
+	"BUTTON_REMOVE_RULE": {
+		"message": "Remover regra"
+	},
+	"FINAL_OUTPUT_LABEL": {
+		"message": "Resultado final"
+	},
+	"STEP_OUTPUT_LABEL": {
+		"message": "Resultado da etapa"
+	},
+	"CONTEXT_MENU_TITLE": {
+		"message": "Substituição personalizada"
+	},
+	"NOTICE__APPLIED_CHANGES_SINGLE": {
+		"message": "\"{0}\" aplicado ({1} alteração)"
+	},
+	"NOTICE__APPLIED_CHANGES_PLURAL": {
+		"message": "\"{0}\" aplicado ({1} alterações)"
+	},
+	"NOTICE__ERROR": {
+		"message": "Erro na substituição personalizada: {0}"
+	}
 }
