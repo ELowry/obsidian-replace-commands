@@ -133,5 +133,35 @@
 	},
 	"NOTICE__ERROR": {
 		"message": "Erro na substituição personalizada: {0}"
+	},
+	"ERROR_NO_MARKDOWN_FILES": {
+		"message": "Nenhum arquivo Markdown encontrado na seleção."
+	},
+	"BULK_REPLACE_WARNING_TITLE": {
+		"message": "Aviso de substituição em massa"
+	},
+	"BULK_REPLACE_WARNING_DESC_SINGLE": {
+		"message": "Você está prestes a modificar {0} arquivo usando \"{1}\". Isso grava diretamente no disco e NÃO pode ser desfeito com Ctrl+Z. Tem certeza de que deseja prosseguir?"
+	},
+	"BULK_REPLACE_WARNING_DESC_PLURAL": {
+		"message": "Você está prestes a modificar {0} arquivos usando \"{1}\". Isso grava diretamente no disco e NÃO pode ser desfeito com Ctrl+Z. Tem certeza de que deseja prosseguir?"
+	},
+	"BUTTON_REPLACE_ALL": {
+		"message": "Substituir tudo"
+	},
+	"NOTICE__PROCESSING_FILES_SINGLE": {
+		"message": "Processando {0} arquivo…"
+	},
+	"NOTICE__PROCESSING_FILES_PLURAL": {
+		"message": "Processando {0} arquivos…"
+	},
+	"NOTICE__BULK_REPLACE_COMPLETE": {
+		"message": "Substituição em massa concluída. Total de correspondências: {0}. Arquivos modificados: {1}."
+	},
+	"CONTEXT_MENU_BULK_TITLE": {
+		"message": "Substituição personalizada em massa"
+	},
+	"CONTEXT_MENU_ALL_COMMANDS": {
+		"message": "Todos os comandos"
 	}
 }
