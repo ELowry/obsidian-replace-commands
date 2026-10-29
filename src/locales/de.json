@@ -1,1 +1,104 @@
-{}
+{
+	"SETTINGS_TITLE": {
+		"message": "Benutzerdefinierte Ersetzungsaktionen"
+	},
+	"SETTINGS_DESCRIPTION": {
+		"message": "Voreingestellte Such- und Ersetzungsaktionen verwalten."
+	},
+	"BUTTON_ADD_ACTION": {
+		"message": "Neue Aktion hinzufügen"
+	},
+	"NEW_ACTION_DEFAULT_NAME": {
+		"message": "Neue Aktion"
+	},
+	"RULE_COUNT_SINGLE": {
+		"message": "{0} Regel"
+	},
+	"RULE_COUNT_PLURAL": {
+		"message": "{0} Regeln"
+	},
+	"ACTION_CONFIGURATION_TITLE": {
+		"message": "Aktionskonfiguration"
+	},
+	"ACTION_SUMMARY": {
+		"message": "{0} — {1}"
+	},
+	"ACTION_NAME_LABEL": {
+		"message": "Aktionsname"
+	},
+	"ACTION_NAME_PLACEHOLDER": {
+		"message": "Beispiel: Überflüssige Leerzeichen entfernen"
+	},
+	"ACTION_CONTEXT_MENU_TOOLTIP": {
+		"message": "Im Rechtsklick-Kontextmenü anzeigen"
+	},
+	"BUTTON_ADD_RULE": {
+		"message": "Neue Regel hinzufügen"
+	},
+	"CONFIRM_DELETE_ACTION_TITLE": {
+		"message": "Aktion löschen?"
+	},
+	"CONFIRM_DELETE_ACTION_DESC": {
+		"message": "Möchten Sie diese Aktion wirklich löschen? Dieser Vorgang kann nicht rückgängig gemacht werden."
+	},
+	"CONFIRM_DELETE_RULE_TITLE": {
+		"message": "Regel löschen?"
+	},
+	"CONFIRM_DELETE_RULE_DESC": {
+		"message": "Möchten Sie diese Regel wirklich löschen? Dieser Vorgang kann nicht rückgängig gemacht werden."
+	},
+	"BUTTON_DELETE": {
+		"message": "Löschen"
+	},
+	"BUTTON_CANCEL": {
+		"message": "Abbrechen"
+	},
+	"CONTEXT_MENU_VISIBLE": {
+		"message": "Im Kontextmenü anzeigen"
+	},
+	"CONTEXT_MENU_HIDDEN": {
+		"message": "Im Kontextmenü ausgeblendet"
+	},
+	"TEST_BENCH_TITLE": {
+		"message": "Ersatzregeln"
+	},
+	"TEST_BENCH_LABEL": {
+		"message": "Testumgebung für Live-Vorschau"
+	},
+	"TEST_BENCH_DESC": {
+		"message": "Sehen Sie in Echtzeit in der Vorschau, wie sich Ihre Regeln auf den Text auswirken. Deaktivieren Sie diese Funktion, um die Vorschaufenster auszublenden und die Leistung auf langen Seiten zu verbessern."
+	},
+	"TEST_INPUT_LABEL": {
+		"message": "Testeingabe"
+	},
+	"TEST_INPUT_PLACEHOLDER": {
+		"message": "Fügen Sie hier einen Beispieltext ein, um Ihre Regeln zu testen…"
+	},
+	"ERROR_NAME_EMPTY": {
+		"message": "Der Name der Aktion darf nicht leer sein."
+	},
+	"ERROR_NAME_DUPLICATE": {
+		"message": "Eine Aktion mit diesem Namen existiert bereits."
+	},
+	"ERROR_PREVIOUS_STEP_FAILED": {
+		"message": "Ein vorheriger Schritt ist fehlgeschlagen"
+	},
+	"ERROR_INVALID_REGEX": {
+		"message": "Ungültiger regulärer Ausdruck"
+	},
+	"RULE_SEARCH_LABEL": {
+		"message": "Suche"
+	},
+	"RULE_SEARCH_PLACEHOLDER": {
+		"message": "Suchen…"
+	},
+	"RULE_REPLACE_LABEL": {
+		"message": "Ersetzen"
+	},
+	"RULE_REPLACE_PLACEHOLDER": {
+		"message": "Ersetzen durch…"
+	},
+	"RULE_REGEX_LABEL": {
+		"message": "Regulärer Ausdruck"
+	}
+}
