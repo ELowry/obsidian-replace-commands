@@ -133,5 +133,8 @@
 	},
 	"NOTICE__ERROR": {
 		"message": "Error de reemplazo personalizado: {0}"
+	},
+	"ERROR_NO_MARKDOWN_FILES": {
+		"message": "No se encontraron archivos Markdown en la selección."
 	}
 }
