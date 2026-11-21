@@ -563,8 +563,8 @@ export class ActionDetailModal extends Modal {
 
 		this.activeTimeouts.push(
 			window.setTimeout(() => {
-				el.setCssProps({ height: 'auto' });
-				el.setCssProps({ height: `${el.scrollHeight}px` });
+				el.setCssStyles({ height: '' });
+				el.setCssStyles({ height: `${el.scrollHeight}px` });
 			}, 0)
 		);
 	}

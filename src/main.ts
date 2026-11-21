@@ -73,7 +73,7 @@ export default class CustomReplacePlugin extends Plugin implements CustomReplace
 
 		this.registerEvent(
 			this.app.workspace.on('file-menu', (menu, file) => {
-				const activeExplorer = document.querySelector(
+				const activeExplorer = activeDocument.querySelector(
 					'.workspace-leaf.mod-active .nav-files-container'
 				);
 				const selectedItemsCount =

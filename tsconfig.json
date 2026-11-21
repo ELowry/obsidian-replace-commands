@@ -10,7 +10,7 @@
 		"noImplicitThis": true,
 		"noImplicitReturns": true,
 		"moduleResolution": "bundler",
-		"importHelpers": true,
+		"importHelpers": false,
 		"noUncheckedIndexedAccess": true,
 		"isolatedModules": true,
 		"strictNullChecks": true,
